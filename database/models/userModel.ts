@@ -9,6 +9,7 @@ export interface IUser extends Document {
     picture: string;
     password?: string;
     joinedAt: Date;
+    isAdmin: boolean;
 }
 const UserSchema = new Schema({
     clerkId: {
@@ -37,6 +38,11 @@ const UserSchema = new Schema({
     joinedAt: {
         type: Date,
         default : Date.now()
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+        required: true
     }
 })
 
