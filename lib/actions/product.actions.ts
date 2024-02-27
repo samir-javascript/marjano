@@ -121,6 +121,22 @@ export async function addToCart(params: CreateCartParams) {
     const product = await ProductModel.findById(productId);
 
     if (product) {
+      let uploadedImages = [];
+      if (images.length > 0) {
+        // Use Promise.all to handle multiple image uploads concurrently
+        uploadedImages = await Promise.all(images.map(async (image) => {
+          const result = await cloudinary.uploader.upload(image, {
+            upload_preset: 'marjane-mall',
+            transformation: [
+              {crop: "scale"},
+              {quality: "auto"},
+              {fetch_format: "auto"},
+            ]
+          });
+          return result.secure_url;
+        }));
+      }
+
       // Update product properties
       product.name = name;
       product.description = description;
@@ -132,33 +148,10 @@ export async function addToCart(params: CreateCartParams) {
       product.prevPrice = prevPrice;
       product.productType = productType;
 
-      // Upload and update images one by one
-      const uploadedImages = [];
-
-      for (const image of images) {
-        try {
-          const result = await cloudinary.uploader.upload(image, {
-            upload_preset: 'marjane-mall',
-            transformation: [
-              { crop: "scale" },
-              { quality: "auto" },
-              { fetch_format: "auto" },
-            ]
-          });
-          uploadedImages.push(result.secure_url);
-        } catch (uploadError) {
-          console.error('Error uploading image to Cloudinary:', uploadError);
-          // Handle the error as needed, e.g., log it or provide user feedback
-          continue; // Skip to the next iteration on upload error
-        }
-      }
-
-      // Update product images
-      product.images = uploadedImages;
 //  MONGODB_URL = mongodb+srv://soso:f5ZNG6Xo03ycgHEd@cluster0.dg5pqdw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-      // Save the updated product
+      
       const updatedProduct = await product.save();
-      revalidatePath(path); // Replace with your implementation
+      revalidatePath(path); 
 
      return  {
       product:updatedProduct
