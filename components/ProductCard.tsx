@@ -3,26 +3,41 @@
 import { useState } from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useParams, usePathname } from "next/navigation";
 import Link from 'next/link';
 import { Image } from 'react-bootstrap';
 import Rating from './Rating';
 import { ProductProps } from '@/utils/shared';
+import { addToCart } from '@/lib/actions/product.actions';
 
 
 
-const ProductCard = ({product}:any) => {
- // console.log('PRODUCT HERE', JSON.parse(product))
+const ProductCard = ({product, user}:any) => {
+
  const parsedProduct = JSON.parse(product)
+ console.log('PRODUCT HERE SOSO', product)
+ const parsedUser = JSON.parse(user)
  console.log('SOUFIANE HERE HERE', parsedProduct)
   const router = useRouter();
-  const { pageNumber } = useParams();
-
   const [showModal, setShowModal] = useState(false);
   const [modalProduct, setModalProduct] = useState({ image: "", name: "" });
-
+  const pathname = usePathname()
   //if(loadingADDtoWishlist) return <Loader />
-
+  const handleAddToCart = async()=> {
+   // if(!product._id) return;
+     try {
+        await addToCart({
+            quantity: 1,
+            userId: parsedUser.user._id,
+            productId: parsedProduct._id,
+            path:pathname
+        })
+       
+        console.log('IT WENT THROUGHT')
+     } catch (error) {
+        console.log(error)
+     }
+ }
   return (
     <>
     
@@ -56,7 +71,7 @@ const ProductCard = ({product}:any) => {
               <p className="font-normal text-[13px] text-[#222222]  ">
                 Vendu par <span className="text-[#00afaa]">{parsedProduct.brand} </span></p>
             </div>
-            {product.rating >= 1 && (
+            {parsedProduct.rating >= 1 && (
               <div className='px-3'>
                 <Rating value={parsedProduct.rating} text={parsedProduct.numReviews} />
               </div>
@@ -66,7 +81,7 @@ const ProductCard = ({product}:any) => {
                 <p className="font-bold text-[#00afaa] text-[18px] ">{parsedProduct.price}Dh </p>
                 <p className="font-normal text-[#555] text-[13px] line-through ">{parsedProduct.prevPrice}Dh </p>
               </div>
-              <div className="rounded-full bg-[#00afaa] w-[35px] h-[35px] text-white flex items-center justify-center">
+              <div onClick={handleAddToCart} className="rounded-full bg-[#00afaa] w-[35px] h-[35px] text-white flex items-center justify-center">
                 <MdOutlineShoppingCart
                   color='white' className="w-[65%] h-[65%] outline-none border-none  cursor-pointer" />
               </div>

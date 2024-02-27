@@ -1,3 +1,4 @@
+"use server"
 import User from "@/database/models/userModel";
 import Wishlist from "@/database/models/wishlistModel";
 import { connectToDatabase } from "@/database/mongodb";

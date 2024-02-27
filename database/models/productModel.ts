@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Types } from "mongoose";
+import mongoose, { Document, Schema, Types, models, model  } from "mongoose";
 
 interface IReview extends Document {
     user: Types.ObjectId;
@@ -101,5 +101,5 @@ const ProductSchema = new Schema<IProduct>({
     },
 }, { timestamps: true });
 
-const ProductModel = mongoose.models.Product || mongoose.model<IProduct>('Product', ProductSchema);
+const ProductModel = models?.Product || model<IProduct>('Product', ProductSchema);
 export default ProductModel;
