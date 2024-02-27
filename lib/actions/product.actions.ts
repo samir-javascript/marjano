@@ -121,7 +121,7 @@ export async function addToCart(params: CreateCartParams) {
     const product = await ProductModel.findById(productId);
 
     if (product) {
-      let uploadedImages = [];
+      let uploadedImages = [] as any;
       if (images.length > 0) {
         // Use Promise.all to handle multiple image uploads concurrently
         uploadedImages = await Promise.all(images.map(async (image) => {
@@ -147,6 +147,7 @@ export async function addToCart(params: CreateCartParams) {
       product.position = position;
       product.prevPrice = prevPrice;
       product.productType = productType;
+      product.images = uploadedImages;
 
 //  MONGODB_URL = mongodb+srv://soso:f5ZNG6Xo03ycgHEd@cluster0.dg5pqdw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       
