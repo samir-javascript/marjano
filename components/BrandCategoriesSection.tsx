@@ -1,8 +1,6 @@
  /* eslint-disable react/no-unescaped-entities */
  import { Image } from "react-bootstrap"
- import cosmiticBrand from '../public/images/cosmitic.webp'
- import celioBrand from '../public/images/celio.webp'
- import sumsungBrand from "@/public/images/sumsung.webp"
+
  
 import  Link  from "next/link"
  const BrandCategoriesSection = () => {
