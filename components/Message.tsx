@@ -1,13 +1,22 @@
-import { Alert } from "react-bootstrap"
+import React, { ReactNode } from "react";
+import { Alert, AlertProps } from "react-bootstrap";
 
-const Message = ({variant, children }:any) => {
+interface MessageProps {
+  variant?: AlertProps["variant"];
+  children: ReactNode;
+}
+
+const Message: React.FC<MessageProps> = ({ variant = "info", children }) => {
   return (
-    <Alert className={`${variant === "danger" ? ' bg-red-100 text-[#ff5921]' : ''}  flex items-center mx-4 mt-3 mb-12 justify-center text-center`} variant={variant}>
-        {children}
+    <Alert
+      className={`${
+        variant === "danger" ? "bg-red-100 text-[#ff5921]" : ""
+      } flex items-center mx-4 mt-3 mb-12 justify-center text-center`}
+      variant={variant}
+    >
+      {children}
     </Alert>
-  )
-}
-Message.defaultProps = {
-  variant: 'info'
-}
-export default Message
+  );
+};
+
+export default Message;

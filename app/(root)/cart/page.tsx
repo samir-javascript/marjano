@@ -17,7 +17,7 @@ const Cart = async() => {
 
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})
-  const result = await getUserCart({
+  const result =  await getUserCart({
     userId: user.user._id
   })
 

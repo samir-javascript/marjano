@@ -8,7 +8,7 @@ const UpdateCalculator = ({item,user}:any) => {
  const pathname = usePathname()
 
    const parsedItem = JSON.parse(item)
-   console.log('PARSED ITEM HERE TO CHECK FOT _id', parsedItem)
+  
     const parsedUser = JSON.parse(user)
     //const [quantity, setQuantity] = useState(parsedItem.quantity);
    

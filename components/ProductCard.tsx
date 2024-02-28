@@ -15,9 +15,9 @@ import { addToCart } from '@/lib/actions/product.actions';
 const ProductCard = ({product, user}:any) => {
 
  const parsedProduct = JSON.parse(product)
- console.log('PRODUCT HERE SOSO', product)
- const parsedUser = JSON.parse(user)
- console.log('SOUFIANE HERE HERE', parsedProduct)
+
+  const parsedUser = user && JSON.parse(user)
+ 
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [modalProduct, setModalProduct] = useState({ image: "", name: "" });
@@ -33,7 +33,7 @@ const ProductCard = ({product, user}:any) => {
             path:pathname
         })
        
-        console.log('IT WENT THROUGHT')
+      
      } catch (error) {
         console.log(error)
      }

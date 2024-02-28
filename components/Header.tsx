@@ -21,9 +21,9 @@ const Header = async() => {
      
      
 
-     console.log('USER FROM HEADER',qty)
+     
   return (
-    <header className="w-full h-[80px] bg-[#0b4d54] sticky top-0 left-0 hidden lg:block z-[99] ">
+    <header className="w-full h-[80px] bg-[#0b4d54] sticky top-0 left-0 hidden lg:block z-[999] ">
          <div className="flex items-center justify-between h-full max-w-[1400px] mx-auto ">
             <Link href='/'>
                <Image width={250} height={100} alt='marjanemall maroc ' className="object-contain ml-[20px] mr-[55px] " src={'https://www.marjanemall.ma/static/version1706188772/frontend/Marjane/default/fr_FR/images/marjane-logo.svg'} />

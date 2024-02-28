@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 import Cart from "@/database/models/cartModel";
 export async function getProducts(params:GetProductsParams) {
    try {
-     
+     const { query } = params;
       await connectToDatabase()
       const products = await ProductModel.find({})
       if(!products) {
@@ -166,3 +166,42 @@ export async function addToCart(params: CreateCartParams) {
   }
 }
 
+export async function getNosCoupsDeCoursProducts() {
+   try {
+      await connectToDatabase()
+      const products = await ProductModel.find({position: "Nos coups de coeur"})
+      if(!products) {
+         throw new Error('No product was found')
+      }
+      return { products }
+   } catch (error) {
+    console.log(error)
+      throw error;
+   }
+}
+export async function getBonPlansProducts() {
+  try {
+     await connectToDatabase()
+     const products = await ProductModel.find({position: "bon plans"})
+     if(!products) {
+        throw new Error('No product was found')
+     }
+     return { products }
+  } catch (error) {
+   console.log(error)
+     throw error;
+  }
+}
+export async function getEnCemomentProducts() {
+  try {
+     await connectToDatabase()
+     const products = await ProductModel.find({position: "en ce moment"})
+     if(!products) {
+        throw new Error('No product was found')
+     }
+     return { products }
+  } catch (error) {
+   console.log(error)
+     throw error;
+  }
+}
