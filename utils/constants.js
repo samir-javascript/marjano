@@ -138,10 +138,10 @@ export const useCategoryNames = () => {
     {
        id: "0022559694998989dfdfdfd",
        image: 'https://www.marjanemall.ma/media/wysiwyg/category/HOMEPAGE/homepage_desktop_webp/output_image_8__1.webp',
-       name :'Bébé & Jouets',
+       name :'Bébé%20&%20Jouets',
        imageBanner: isMobile ? "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/BANNIERES-N1_mobile6-b_b_jouet_image_23_.webp" :  "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/SLIDE-N1-6-b_b_joeut_image_24_.webp"
     },
-    // <source media="(max-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/BANNIERES-N1_mobile6-b_b_jouet_image_23_.webp">
+
     {
      id: "0022559694454549889",
      image: 'https://www.marjanemall.ma/media/wysiwyg/category/HOMEPAGE/homepage_desktop_webp/output_image_9__1.webp',
@@ -155,14 +155,6 @@ export const useCategoryNames = () => {
      name :'vetements',
      imageBanner: isMobile ? 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_mode/output_image_26_.webp' : "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_mode/output_image_25_.webp"
   },
- // <source media="(max-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_mode/output_image_26_.webp">
-   /* {
-       id: "23698888899999999",
-       image: 'https://www.marjanemall.ma/media/wysiwyg/category/HOMEPAGE/homepage_desktop_webp/output_image_4__1.webp',
-       name :'telephone',
-       imageBanner: isMobile ? 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_telephone/output_image_18_.webp' :  'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_telephone/tele-desktop.webp'
-    },*/
-    // <source media="(max-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_telephone/output_image_18_.webp">
    ];
  
    // Update the imageBanner property for each category based on isMobile

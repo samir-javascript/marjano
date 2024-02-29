@@ -5,10 +5,11 @@ import { FaRegHeart } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import Link from 'next/link';
-import { Image } from 'react-bootstrap';
+
 import Rating from './Rating';
-import { ProductProps } from '@/utils/shared';
+
 import { addToCart } from '@/lib/actions/product.actions';
+import Image from 'next/image';
 
 
 
@@ -47,7 +48,7 @@ const ProductCard = ({product, user}:any) => {
           <div className="w-full h-[200px] relative flex items-center 
                    justify-center bg-[#f6f6f6] rounded-tl-xl rounded-tr-xl ">
             <Link href={`/products/${parsedProduct._id}`}>
-            <Image fluid loading='lazy'  className={`
+            <Image  width={140} height={200} loading='lazy'  className={`
              w-auto aspect-auto  
             h-[100%] rounded-tl-xl rounded-tr-xl !z-[-1] object-contain`}
              src={parsedProduct.images[0]} alt={parsedProduct.name} />

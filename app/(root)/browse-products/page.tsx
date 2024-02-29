@@ -1,9 +1,8 @@
 import ProductCard from '@/components/ProductCard';
 import { getProductsByCategory } from '@/lib/actions/product.actions'
-import { ProductProps } from '@/utils/shared';
-import { useCategoryNames } from '@/utils/constants';
+
 import Link from 'next/link';
-import { Image } from 'react-bootstrap';
+
 import SubBrandForClient from '@/components/SubBrandForClient';
 interface props {
   searchParams: {

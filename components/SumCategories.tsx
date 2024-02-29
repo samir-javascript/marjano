@@ -4,8 +4,9 @@ import {  ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 import { FaChevronLeft , FaChevronRight} from "react-icons/fa";
 import { subCategories } from "@/utils/constants"
-import { Image } from 'react-bootstrap';
+
 import Link  from 'next/link';
+import Image from 'next/image';
 function LeftArrow() {
     const { isFirstItemVisible, scrollPrev } = useContext(VisibilityContext);
      
@@ -52,8 +53,8 @@ function SumCategories() {
         className='space-y-3 mt-3 flex flex-col items-center justify-center text-center mx-3'>
           <div className='lg:w-[180px] lg:h-[180px] w-[130px] h-[130px]  border-[1px] border-[#ddd] flex justify-center items-center rounded-full '>
             <Image
-              fluid
-              className='w-full  h-full object-contain'
+              width={100} height={100}
+              className='!w-full  h-full object-contain'
               src={item.img}
               alt={item.title}
               style={{ backgroundColor: 'transparent' }} // Add this line

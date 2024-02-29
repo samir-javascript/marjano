@@ -1,7 +1,8 @@
  /* eslint-disable react/no-unescaped-entities */
- import { Image } from "react-bootstrap"
+
 
  
+import Image from "next/image"
 import  Link  from "next/link"
  const BrandCategoriesSection = () => {
     
@@ -21,8 +22,8 @@ import  Link  from "next/link"
                          
                       </div>
                  </div>
-                   <Image alt='' loading="lazy" className="rounded-[10px] z-3 w-full object-contain "
-                    src="/images/sumsung.webp" fluid  />
+                   <Image width={1000} height={100}   alt='' loading="lazy" className="rounded-[10px] z-3 h-auto  !w-full object-contain "
+                    src="/images/sumsung.webp"   />
               </Link>
               <Link href='/browse-boutique-brand/celio' className=" relative">
                  <div className="absolute inset-0  rounded-[10px] bg-[rgba(0,0,0,0.3)] top-0 left-0 " />
@@ -36,8 +37,8 @@ import  Link  from "next/link"
                          
                       </div>
                  </div>
-                   <Image alt='hy' loading="lazy" className="rounded-[10px] z-3  w-full object-contain"
-                    src="/images/celio.webp" fluid  />
+                   <Image width={1000} height={100}  alt='hy' loading="lazy" className="rounded-[10px] z-3 h-auto  !w-full object-contain"
+                    src="/images/celio.webp"   />
               </Link>
               <Link href='/browse-boutique-brand/Maybelline' className=" relative">
                  <div style={{
@@ -60,8 +61,8 @@ import  Link  from "next/link"
                          
                       </div>
                  </div>
-                   <Image alt='' loading="lazy" className="rounded-[10px] z-3 w-full object-contain"
-                    src="/images/cosmitic.webp" fluid  />
+                   <Image width={1000} height={100}  alt='' loading="lazy" className="rounded-[10px] h-auto z-3 !w-full object-contain"
+                    src="/images/cosmitic.webp"   />
               </Link>
          </div>
      </div>

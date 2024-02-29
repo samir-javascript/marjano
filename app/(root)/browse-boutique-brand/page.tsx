@@ -3,8 +3,8 @@ import ImageBanner from '@/components/ImageBanner';
 import ProductCard from '@/components/ProductCard';
 import { getProductsByBrand } from '@/lib/actions/product.actions';
 import Link from 'next/link';
-import React from 'react'
-import { Image } from 'react-bootstrap';
+
+
 interface Props {
   searchParams: {
      brandName: string;

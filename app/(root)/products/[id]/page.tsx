@@ -17,7 +17,7 @@ const page = async({params}:Props) => {
 
   return (
     <div>
-       <ProductDetails user={JSON.stringify(user)} product={result.products} />
+       <ProductDetails user={JSON.stringify(user)} product={JSON.stringify(result.products)} />
     </div>
   )
 }

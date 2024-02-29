@@ -13,7 +13,8 @@ const Brands = ({useBrands}:any) => {
                      className="rounded-md bg-[#f1f1f1] px-3 py-1 flex 
                      items-center justify-center w-[200px]   h-[70px]   "
                       key={index}>
-                        <Image alt='' width={130} height={100}  className={` w-[130px] object-contain max-w-full h-full`} src={item.src}  />
+                        <Image alt={item.url} width={130} height={100}
+                          className={` w-[130px] object-contain max-w-full h-full`} src={item.src}  />
                     </Link>
                 ))}
          </div>

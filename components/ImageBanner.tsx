@@ -2,6 +2,9 @@
 
 import { useBrands, useClothesBrands, useMakeupBrands, useTechBrands } from "@/utils/constants";
 import { Image } from "react-bootstrap";
+
+
+
 interface props {
      searchParams: {
         brandName: string;
@@ -20,11 +23,18 @@ const ImageBanner = ({searchParams}:props) => {
     const selectedBanner = techImageBanner || clothesImageBanner || makeUpImageBanner || imageBanner;
   return (
     <>
-    {(selectedBanner && selectedBanner.imageBanner) && (
+    {(selectedBanner && selectedBanner?.imageBanner) && (
         <div className="relative w-full ">
-          <div className={`${selectedBanner?.imageBanner ? "lg:block" : "hidden"} absolute  hidden w-full right-0 h-[200px] bottom-0 left-0 bg-for-brand z-20`} />
+          <div className={`${selectedBanner?.imageBanner ? "lg:block" : "hidden"}
+           absolute  hidden w-full right-0 h-[200px] bottom-0 left-0 bg-for-brand z-20`} />
           <div>
-            <Image alt='' loading="lazy" src={selectedBanner?.imageBanner} fluid />
+          <Image
+   fluid
+  className="w-full h-auto"
+   
+  alt={selectedBanner?.url}
+  src={selectedBanner?.imageBanner}
+/>
           </div>
         </div>
       )}

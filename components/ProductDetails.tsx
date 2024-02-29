@@ -1,8 +1,8 @@
 "use client"
-import { ProductProps } from '@/utils/shared';
+
 import { useState, useTransition } from 'react';
 import Link from 'next/link';
-import { Image } from 'react-bootstrap';
+
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaShippingFast } from 'react-icons/fa';
 import Rating from './Rating';
@@ -11,13 +11,16 @@ import Rating from './Rating';
 import { addToCart } from '@/lib/actions/product.actions';
 
 import { usePathname, useRouter } from 'next/navigation';
+import  Image from 'next/image'
+
 
  function  ProductDetails({ product, user }: any) {
   const parsedUser = JSON.parse(user)
+  const parsedProduct = JSON.parse(product)
   const router = useRouter()
    const pathname = usePathname()
     const [ isPending, startTransition] = useTransition()
-  const [thumbnailImages, setThumbnailImages] = useState<string[]>(product?.images || []);
+  const [thumbnailImages, setThumbnailImages] = useState<string[]>(parsedProduct?.images || []);
   const [selectedImage, setSelectedImage] = useState<string>(thumbnailImages[0] || "");
   const [quantity, setQuantity] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -34,12 +37,12 @@ import { usePathname, useRouter } from 'next/navigation';
     setQuantity((prevCount)=> prevCount - 1 )
  }
  const handleAddToCart = async()=> {
-    if(!product._id) return;
+    if(!parsedProduct._id) return;
      try {
         await addToCart({
             quantity,
             userId: parsedUser.user._id,
-            productId: product._id,
+            productId: parsedProduct._id,
             path: pathname
         })
         router.refresh()
@@ -55,22 +58,23 @@ import { usePathname, useRouter } from 'next/navigation';
       <div className="pb-4 max-w-[1200px] mx-auto lg:items-start items-center lg:justify-start justify-center flex lg:flex-row flex-col gap-12">
         <div className="sm:mx-[30px] mx-[10px]">
           <Image
-            fluid
+           width={300} height={200}
             loading="lazy"
             className="w-full lg:w-[350px] max-h-[100%] h-auto flex-1 rounded-[20px] flex flex-col items-center justify-center object-contain"
             src={selectedImage}
-            alt=""
+            alt={parsedProduct.name}
           />
           {thumbnailImages.length >= 3 && (
             <div className="max-w-full flex items-center justify-center mt-4 space-x-4">
               {thumbnailImages.map((thumbnail, index) => (
                 <Image
                   key={index}
-                  fluid
+                  width={100} height={100}
                   loading="lazy"
-                  className={`sm:w-[100px] object-contain sm:h-[100px] w-[110px] h-[120px] transition-all duration-150 rounded-[10px] cursor-pointer border border-gray-300`}
+                  className={`sm:w-[100px] object-contain sm:h-[100px] w-[110px] h-[120px]
+                   transition-all duration-150 rounded-[10px] cursor-pointer border border-gray-300`}
                   src={thumbnail}
-                  alt=""
+                  alt={parsedProduct.name}
                   onClick={() => handleThumbnailClick(thumbnail)}
                 />
               ))}
@@ -81,9 +85,11 @@ import { usePathname, useRouter } from 'next/navigation';
           <div className="flex items-center gap-10">
             <h2
               style={{ color: "hsl(220, 13%, 13%)" }}
-              className="lg:text-[30px] text-[15px] font-semibold lg:leading-[50px] leading-[30px] mb-[15px] capitalize sm:max-w-[600px] max-w-[400px] flex-1"
+              className="lg:text-[30px] text-[15px] font-semibold
+               lg:leading-[50px] leading-[30px] mb-[15px] capitalize 
+               sm:max-w-[600px] max-w-[400px] flex-1"
             >
-              {product.name}
+              {parsedProduct.name}
             </h2>
             <div className='sm:w-[50px] sm:h-[50px] rounded-full flex items-center justify-center sm:bg-[#ddd] '>
               {pro ? <FaHeart size={35} color='red' className=' cursor-pointer' /> : 
@@ -92,9 +98,9 @@ import { usePathname, useRouter } from 'next/navigation';
             </div>
           </div> 
           <div className="mb-2">
-            <Rating value={product.rating} text={product.numReviews} />
+            <Rating value={parsedProduct.rating} text={parsedProduct.numReviews} />
           </div>
-          <p className="font-normal text-[16px]">Marque: <Link href={`/browse-boutique-brand/${product.brand}`} className="text-[#00afaa] font-bold hover:underline"> {product.brand} </Link></p>
+          <p className="font-normal text-[16px]">Marque: <Link href={`/browse-boutique-brand/${parsedProduct.brand}`} className="text-[#00afaa] font-bold hover:underline"> {parsedProduct.brand} </Link></p>
           <div className="flex gap-2 items-start justify-start bg-[#ddd] w-fit p-2 rounded-[5px] mt-4">
             <FaShippingFast />
             <p className="max-w-xl font-normal text-sm ">Livraison entre <span className="font-extrabold ">le lundi 29 janvier 2024</span> et <span className="font-extrabold">le jeudi 1 février <br className="lg:block hidden" /> 2024</span></p>
@@ -102,7 +108,8 @@ import { usePathname, useRouter } from 'next/navigation';
           <p style={{ color: "hsl(220, 13%, 13%)" }} className="font-normal text-[16px] sm:max-w-[500px] leading-7 my-4">
             <p style={{ color: 'hsl(220, 13%, 13%)' }} className="font-semibold">À propos de cet article :</p>
             <>
-              {showFullDescription ? product.description : `${product.description.slice(0, 150)}...`}
+              {showFullDescription ? parsedProduct.description :
+               `${parsedProduct.description.slice(0, 150)}...`}
               <button
                 onClick={() => setShowFullDescription(!showFullDescription)}
                 className="text-[#00afaa] font-semibold ml-2 focus:outline-none hover:underline"
@@ -114,7 +121,7 @@ import { usePathname, useRouter } from 'next/navigation';
           <div className="flex sm:flex-col max-md:items-center max-md:justify-between">
             <div className="flex items-center space-x-6">
               <h3 style={{ color: "hsl(220, 13%, 13%)" }} className="font-semibold text-[30px] ">
-                ${product.price}
+                ${parsedProduct.price}
               </h3>
               <span
                 style={{ backgroundColor: "hsl(25, 100%, 94%)", color: "hsl(26, 100%, 55%)" }}
@@ -124,11 +131,13 @@ import { usePathname, useRouter } from 'next/navigation';
               </span>
             </div>
             <p style={{ color: "hsl(219, 9%, 45%)" }} className="line-through font-medium text-[18px] ">
-              ${product.prevPrice}
+              ${parsedProduct.prevPrice}
             </p>
           </div>
-          <div className="flex w-full sm:flex-row flex-col sm:items-center mt-8 sm:space-x-6 sm:space-y-0 space-y-6">
-            <div style={{ backgroundColor: "hsl(0, 0%, 95%)" }} className="flex items-center justify-between px-4 h-[50px] py-2.5 rounded-md flex-1">
+          <div className="flex w-full sm:flex-row flex-col sm:items-center mt-8 sm:space-x-6
+           sm:space-y-0 space-y-6">
+            <div style={{ backgroundColor: "hsl(0, 0%, 95%)" }} className="flex items-center
+             justify-between px-4 h-[50px] py-2.5 rounded-md flex-1">
               <FaMinus  onClick={handledecrement} className="cursor-pointer hover:opacity-[0.6]" />
               <p className="font-semibold text-black ">{quantity}</p>
               <FaPlus onClick={handleIncrement}  className="cursor-pointer hover:opacity-[0.6]" />
@@ -141,7 +150,8 @@ import { usePathname, useRouter } from 'next/navigation';
               disabled={isPending}
               type="button"
               style={{ backgroundColor: "#00afaa" }}
-              className="flex-1 flex items-center whitespace-nowrap text-white h-[40px] justify-center gap-x-6 rounded-md transition-all duration-200 hover:opacity-[0.7] py-3"
+              className="flex-1 flex items-center whitespace-nowrap text-white h-[40px]
+               justify-center gap-x-6 rounded-md transition-all duration-200 hover:opacity-[0.7] py-3"
             >
               <MdOutlineShoppingCart color='white' size={30} className="sm:hidden block" />
               <p className="capitalize font-semibold text-white text-[16px] ">

@@ -4,7 +4,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import ProductCard from "./ProductCard";
-import { Image } from 'react-bootstrap';
+import Image from 'next/image';
+
 
 
 
@@ -51,8 +52,8 @@ const BonPlans = ({bonPlansProducts}:any) => {
       {/* Background with a lower z-index */}
       <div className="bg-carousel z-[-1] w-full absolute inset-0"></div>
       <div className='max-w-[1400px] sm:mx-auto mx-[30px] flex items-center gap-x-1 mt-5 px-3'>
-        <Image src={"/images/icon_new-year.png"} alt='star icon'  />
-      <h2 className="text-[#fff] font-extrabold text-[30px]  p-2 z-1">Bons  <span className='animate-pulse text-[#d5c483] '>plans</span></h2>
+        <Image width={30} height={20}  src={"/images/icon_new-year.png"} alt='star icon'  />
+      <h2 className="text-[#fff] font-extrabold text-[30px]  px-2 z-1">Bons  <span className='animate-pulse text-[#d5c483] '>plans</span></h2>
       </div>
     
       <div className='z-1 max-w-[1400px] mx-auto '>
