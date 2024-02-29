@@ -8,6 +8,8 @@ import { getCartTotalCount, getUserById, getUserCart } from "@/lib/actions/cart.
 import CartIcon from "./CartIcon";
 
 import AdminDropDown from "./AdminDropDown";
+import MobileHeader from "./MobileHeader";
+import MegaMenu from "./Drawer/MegaMenu";
 
 
 const Header = async() => {
@@ -23,6 +25,8 @@ const Header = async() => {
 
      
   return (
+    <>
+
     <header className="w-full h-[80px] bg-[#0b4d54] sticky top-0 left-0 hidden lg:block z-[999] ">
          <div className="flex items-center justify-between h-full max-w-[1400px] mx-auto ">
             <Link href='/'>
@@ -58,6 +62,11 @@ const Header = async() => {
             </div>
          </div>
     </header>
+    <MobileHeader qty={qty} />
+    <div>
+       <MegaMenu />
+    </div>
+    </>
   )
 }
 

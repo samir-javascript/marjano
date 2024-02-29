@@ -1,12 +1,14 @@
 "use server"
 import { connectToDatabase } from "@/database/mongodb";
 import ProductModel from "@/database/models/productModel";
-import { CreateCartParams, CreateProductParams, GetProductDetailsParams, GetProductsParams, UpdateProductParams } from "@/utils/shared";
+import { CreateCartParams, CreateProductParams, GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams, GetProductsParams, UpdateProductParams } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
 import cloudinary from "@/utils/cloudinary";
 import User from "@/database/models/userModel";
+
 import { NextResponse } from "next/server";
 import Cart from "@/database/models/cartModel";
+
 export async function getProducts(params:GetProductsParams) {
    try {
      const { query } = params;
@@ -202,6 +204,32 @@ export async function getEnCemomentProducts() {
      return { products }
   } catch (error) {
    console.log(error)
+     throw error;
+  }
+}
+
+
+export async function getProductsByCategory(params:GetProductsByCategoryParams) {
+  try {
+    const { categoryName } = params;
+      await connectToDatabase()
+      const products = await ProductModel.find({category: categoryName})
+      return products
+  } catch (error) {
+    console.error('Error in getProductsByCategory:', error);
+    throw error;
+  }
+}
+
+
+export async function getProductsByBrand(params:GetProductsByBrandParams) {
+  try {
+    const { brandName } = params;
+     await connectToDatabase()
+     const products = await ProductModel.find({brand: { $regex: brandName, $options: "i"}})
+     return products;
+  } catch (error) {
+     console.log(error)
      throw error;
   }
 }

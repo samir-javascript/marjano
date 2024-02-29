@@ -61,7 +61,7 @@ const CategorySlider = () => {
           <Link 
             key={item.id}
             
-            href={`/browse-products/${item.name}`}
+            href={`/browse-products?categoryName=${item.name}`}
             className={`cate-slider`}
           >
            

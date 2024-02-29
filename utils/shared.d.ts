@@ -1,6 +1,22 @@
 import { IUser } from "@/database/models/userModel";
 import mongoose, { mongo } from "mongoose";
-
+export interface GetAllUsersProps {
+   page?: number;
+   pageSize?:number;
+   path?:string;
+}
+export interface GetProductsByCategoryParams {
+   path?: string;
+   categoryName: string;
+   page?:number;
+   pageSize?: number;
+}
+export interface GetProductsByBrandParams {
+  path?: string;
+  brandName: string;
+  page?:number;
+  pageSize?: number;
+}
 export interface ProductProps {
   product : {
     brand: string;
