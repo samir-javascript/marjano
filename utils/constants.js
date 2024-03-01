@@ -579,13 +579,13 @@ export const useTechBrands = () => {
     id: "545458783212121",
     icon: "/images/deco.png",
     name: 'Maison - Cuisine - Deco',
-    url:"/browse-products/Maison%20-%20Cuisine%20-%20Deco"
+    url:"/browse-products?categoryName=Maison%20-%20Cuisine%20-%20Deco"
   },
   {
     id: "545458783212121656565989845454545e4fdfdfdf",
     icon: "/images/game.png",
     name: 'Electronics',
-    url:'/browse/products/Electronics'
+    url:'/browse/products?categoryName=Electronics'
     
   },
  
@@ -593,7 +593,7 @@ export const useTechBrands = () => {
     id: "45554489663333660000zzdsdsd9890",
     icon: "/images/tv-son.png",
     name :'Tv - Son - Photo',
-    url: "/browse-products/Tv%20-%20Son%20-%20Photo",
+    url: "/browse-products?categoryName=Tv%20-%20Son%20-%20Photo",
    
  },
 
@@ -601,14 +601,14 @@ export const useTechBrands = () => {
     id: "455544896633336600000",
     icon: "/images/sport.png" ,
     name :'sport',
-    url: "/browse-products/sport",
+    url: "/browse-products?categoryName=sport",
    
  },
  {
    
    name:"Electroménager",
    icon:"/images/electro.png",
-   url:'/browse-products/Electroménager',
+   url:'/browse-products?categoryName=Electroménager',
    id:"8989ef656565fdfd554dsoand45454545"
  },
  
@@ -616,7 +616,7 @@ export const useTechBrands = () => {
     id: "0022559694998989dfdfdfd",
     icon: "/images/bebe.png",
     name :'Bébé & Jouets',
-    url: "/browse-products/Bébé%20&%20Jouets",
+    url: "/browse-products?categoryName=Bébé%20&%20Jouets",
  
  },
  // <source media="(max-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/BANNIERES-N1_mobile6-b_b_jouet_icon_23_.webp">
@@ -624,7 +624,7 @@ export const useTechBrands = () => {
   id: "0022559694454549889",
   icon: "/images/beaute.png",
   name :'Beauté - Santé',
-  url: "/browse-products/Beauté%20-%20Santé",
+  url: "/browse-products?categoryName=Beauté%20-%20Santé",
  
 },
 
@@ -632,7 +632,7 @@ export const useTechBrands = () => {
   id: "0022559694",
   icon: "/images/mode.png",
   name :'vetements',
-  url: "/browse-products/vetements",
+  url: "/browse-products?categoryName=vetements",
 },
 
 ];
@@ -642,21 +642,21 @@ export const brandsSideBar = [
     id: "545458783212,fd,fdnf,df121",
     icon: "/images/logo-apple.png",
     name: 'Apple',
-     url:"/browse-boutique-brand/apple"
+     url:"/browse-boutique-brand?brandName=apple"
     
   },
   {
     id: "5454587832121216sdsdsdszzz56565989845454545e4fdfdfdf",
     icon: "/images/samsung-icon.png",
     name: 'samsung',
-    url:"/browse-boutique-brand/samsung"
+    url:"/browse-boutique-brand?brandName=samsung"
   },
  
   {
     id: "45554489663333660000zzdsdsd9890",
     icon: "/images/hp-icon.png",
     name :'Hp',
-    url:"/browse-boutique-brand/hp"
+    url:"/browse-boutique-brand?brandName=hp"
    
  },
 
@@ -664,21 +664,21 @@ export const brandsSideBar = [
     id: "455544896633336600000",
     icon: "/images/ni.png" ,
     name :'Nike',
-    url:"/browse-boutique-brand/nike"
+    url:"/browse-boutique-brand?brandName=nike"
  },
  {
    
    name:"Adidas",
    icon:"/images/adidas.png",
    id:"898dddee9ef656565fdfd554dsoand45454545",
-   url:"/browse-boutique-brand/adidas"
+   url:"/browse-boutique-brand?brandName=adidas"
  },
  
  {
     id: "0022559694998989dfdfdfd",
     icon: "/images/puma1.png",
     name :'Puma',
-    url:"/browse-boutique-brand/puma"
+    url:"/browse-boutique-brand?brandName=puma"
  
  },
 
@@ -686,26 +686,26 @@ export const brandsSideBar = [
   id: "0022559694454549889",
   icon: "/images/shoe.png",
   name:"Converse",
-  url:"/browse-boutique-brand/converse"
+  url:"/browse-boutique-brand?brandName=converse"
 },
 
 {
   id: "002kkkk2559694",
   icon: "/images/loreal-paris.png",
   name :"L'oreal paris",
-  url:"/browse-boutique-brand/LOREAL"
+  url:"/browse-boutique-brand?brandName=LOREAL"
 },
 {
   id: "00ddeaaa2kkkk2559694",
   icon: "/images/posay.png",
   name :"La roche posay",
-  url:"/browse-boutique-brand/LA ROCHE-POSAY"
+  url:"/browse-boutique-brand?brandName=LA ROCHE-POSAY"
 },
 {
   id: "00ddeaaa2kkkk2559694",
   icon: "/images/may.png",
   name :"Maybelline new york",
-  url:"/browse-boutique-brand/Maybelline"
+  url:"/browse-boutique-brand?brandName=Maybelline"
  
 },
 
