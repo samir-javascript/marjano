@@ -11,6 +11,18 @@ export interface GetProductsByCategoryParams {
    page?:number;
    pageSize?: number;
 }
+export interface GetUserShippingAddressParams {
+   userId: string;
+}
+export interface CreateShippingAddressParams  {
+   path: string;
+   phoneNumber: number | string;
+   address: string;
+   postalCode: string ;
+   city: string;
+   country: string;
+   user: string;
+}
 export interface GetProductsByBrandParams {
   path?: string;
   brandName: string;

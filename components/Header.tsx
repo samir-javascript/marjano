@@ -21,9 +21,6 @@ const Header = async() => {
         userId: user?.user?._id
       })
      
-     
-
-     
   return (
     <>
 

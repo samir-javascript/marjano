@@ -10,12 +10,15 @@ import {  Drawer } from '@mui/material'
 import SideBar from "./SideBarComponent/SideBar";
 import { useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 
 const MobileHeader = ({result, qty}:any) => {
+   const pathname = usePathname()
+  
   const userInfo = true;
      const [mobileOpen,setMobileOpen] = useState(false)
-    
+     if(pathname === '/shipping') return null;
   return (
     <header className="lg:hidden  flex flex-col gap-4 bg-[#0b4d54] !text-white pt-2 px-2  ">
         <div className="flex items-center justify-between">

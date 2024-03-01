@@ -2,7 +2,7 @@
 import User from "@/database/models/userModel";
 import Wishlist from "@/database/models/wishlistModel";
 import { connectToDatabase } from "@/database/mongodb";
-import { CreateUserParams, DeleteUserParams, GetAllUsersProps, UpdateUserParams } from "@/utils/shared";
+import { CreateShippingAddressParams, CreateUserParams, DeleteUserParams, GetAllUsersProps, UpdateUserParams } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
 export async function createUser(userData:CreateUserParams) {
    try {
@@ -57,3 +57,4 @@ export async function updateUser(params:UpdateUserParams) {
          throw error
      }
   }
+  

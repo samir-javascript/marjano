@@ -1,16 +1,10 @@
 
 import Link from "next/link";
-import { Image } from "react-bootstrap";
-
 import Authority from '../../../components/Authority'
 import { getUserById, getUserCart } from "@/lib/actions/cart.actions";
 import { auth } from "@clerk/nextjs";
 import UpdateCalculator from "@/components/UpdateCalculator";
-
-
-
-
-
+import Image from "next/image";
 
 const Cart = async() => {
  
@@ -21,10 +15,6 @@ const Cart = async() => {
     userId: user.user._id
   })
 
-  
-
-  
- 
   return (
     <div className="w-full bg-white py-4">
        
@@ -36,7 +26,8 @@ const Cart = async() => {
            <div className="max-w-[1400px] mx-auto min-h-full pb-[200px] ">
             <div className="flex flex-col gap-y-2 mx-3">
             <p>Aucun article dans votre panier.</p>
-              <p>Cliquer <Link className="underline text-[#00afaa] " href='/'>ici</Link> pour continuer vos achats.</p>
+              <p>Cliquer <Link className="underline text-[#00afaa] "
+               href='/'>ici</Link> pour continuer vos achats.</p>
             </div>
               
            </div>
@@ -62,10 +53,10 @@ const Cart = async() => {
                 >
                   <div className="w-[120px] h-[120px] bg-[#efefef]
                    rounded-md flex items-center justify-center m-3 mb-1">
-                    <Image 
-                    loading="lazy" alt={item?.productId?.name}
+                    <Image
+                     width={120} height={120} alt={item?.productId?.name}
                       className="w-[100%] h-[100%] object-contain "
-                      fluid
+                      
                       src={item?.productId?.images[0]}
                     />
                   </div>
@@ -129,12 +120,12 @@ const Cart = async() => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center justify-center mt-3" >
-              <button  className="bg-[#00afaa]  lg:mx-0 mx-3 text-white font-bold lg:w-[420px]
+            <Link href='/shipping' className="flex items-center justify-center mt-3" >
+              <button   className="bg-[#00afaa]  lg:mx-0 mx-3 text-white font-bold lg:w-[420px]
                w-full h-[50px] rounded-[20px] ">
                 valider mon panier
               </button>
-            </div>
+            </Link>
 
 
            <Authority />

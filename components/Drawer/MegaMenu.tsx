@@ -4,10 +4,12 @@ import {  Drawer, } from '@mui/material'
 import { IoMenu } from "react-icons/io5";
 import SideBar from "../SideBarComponent/SideBar";
 import { NavDrawerStyles } from "./styles";
+import { usePathname } from "next/navigation";
 
 const MegaMenu = () => {
     const [mobileOpen,setMobileOpen] = useState(false)
-   
+   const pathname = usePathname()
+   if(pathname === '/shipping') return null;
   return (
     <div className="w-full ">
          <div className="max-w-[1400px] mx-auto">

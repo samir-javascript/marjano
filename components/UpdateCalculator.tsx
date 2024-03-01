@@ -77,14 +77,14 @@ const UpdateCalculator = ({item,user}:any) => {
   <div className="sm:hidden flex items-center w-full justify-between mt-4 mb-2 ">
   <div className="flex items-center justify-between mx-3 mb-2 border border-[#ddd] px-3 py-1 rounded-xl w-[140px]">
       <FaMinus
-        
+        onClick={()=> handleUpdateCart('decrease')}
         size={14}
         className="cursor-pointer"
         color="#00afaa"
       />
       <p className="font-semibold text-black">{parsedItem?.quantity}</p>
       <FaPlus
-      
+      onClick={()=> handleUpdateCart('increase')}
         size={14}
         className="cursor-pointer"
         color="#00afaa"
@@ -94,7 +94,7 @@ const UpdateCalculator = ({item,user}:any) => {
       <p className="font-bold text-base ">
         {parsedItem?.productId?.price * parsedItem?.quantity} Dh
         </p>
-        <FaTrash color="red" size={26} className="mx-3 cursor-pointer" />
+        <FaTrash onClick={()=> handleUpdateCart('remove')} color="red" size={26} className="mx-3 cursor-pointer" />
     </div>
   </div>
   </>

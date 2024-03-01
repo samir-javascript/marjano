@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BiLike } from 'react-icons/bi';
 import { FaShippingFast } from 'react-icons/fa';
 import { IoBook } from 'react-icons/io5';
