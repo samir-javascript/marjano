@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { RiLockPasswordFill } from 'react-icons/ri'
-import { toast } from 'react-toastify'
+
 import Spinner from 'react-bootstrap/Spinner'
 const UserForm = ({user}:any) => {
     const parsedUser = JSON.parse(user)
@@ -19,7 +19,7 @@ const UserForm = ({user}:any) => {
     const handleSubmit = async (e:any) => {
       e.preventDefault();
         if(newPassword !== confirmPassword) {
-           toast.error("passwords don't match!")
+         
            return;
         }else {
           try {

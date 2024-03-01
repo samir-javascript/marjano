@@ -12,7 +12,7 @@ import { BiCategory } from "react-icons/bi";
 import { FaRegHeart } from 'react-icons/fa'
 
 
-import { toast } from 'react-toastify'
+
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
 

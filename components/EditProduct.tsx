@@ -3,7 +3,7 @@ import { ProductProps } from "@/utils/shared";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState, useTransition } from "react";
 import Spinner from 'react-bootstrap/Spinner'
-import { toast } from "react-toastify";
+
 import { editProduct } from "@/lib/actions/product.actions";
 
 
@@ -85,7 +85,7 @@ const EditProduct = ({product}:ProductProps) => {
       })
         .then(() => {
           router.push('/admin/productsList');
-          toast.success('Product updated');
+         
         })
         .catch((error) => {
           // Handle error appropriately
