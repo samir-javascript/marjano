@@ -103,7 +103,7 @@ const ProfilePage = async() => {
              </span>
           
              <Link className=' text-[15px] capitalize font-semibold mt-1
-              text-[#00afaa] underline' href={shipping ? `/customer/profile/shipping/${shipping.user}/edit` : '/customer/shipping/addition'}>
+              text-[#00afaa] underline' href={shipping ? `/customer/profile/shipping/${shipping?.user}/edit` : '/customer/shipping/addition'}>
                  Modifier l’adresse
              </Link>
              </>
@@ -116,13 +116,13 @@ const ProfilePage = async() => {
                  {shipping?.address}
               </span>
               <span className='text-gray-500 font-normal text-[13px] '>
-                {shipping.city} , {shipping?.postalCode} {shipping.country}
+                {shipping?.city} , {shipping?.postalCode} {shipping?.country}
               </span>
               <span className='text-gray-500 font-normal text-[13px] '>
                 {shipping?.phoneNumber}
               </span>
          
-            <Link href={`/customer/profile/shipping/${shipping.user}/edit`}  className=' text-[15px] capitalize font-semibold mt-1 text-[#00afaa]
+            <Link href={`/customer/profile/shipping/${shipping?.user}/edit`}  className=' text-[15px] capitalize font-semibold mt-1 text-[#00afaa]
              underline' >
               Modifier l’adresse
             </Link>
