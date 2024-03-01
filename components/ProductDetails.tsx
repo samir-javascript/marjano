@@ -12,6 +12,7 @@ import { addToCart } from '@/lib/actions/product.actions';
 
 import { usePathname, useRouter } from 'next/navigation';
 import  Image from 'next/image'
+import { toggleSavedProduct } from '@/lib/actions/user.actions';
 
 
  function  ProductDetails({ product, user }: any) {
@@ -24,7 +25,7 @@ import  Image from 'next/image'
   const [selectedImage, setSelectedImage] = useState<string>(thumbnailImages[0] || "");
   const [quantity, setQuantity] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const pro = false;
+  const pro = parsedUser?.user?.saved?.includes(parsedProduct._id)
   
   const handleThumbnailClick = (thumbnail: string) => {
     setSelectedImage(thumbnail);
@@ -49,6 +50,18 @@ import  Image from 'next/image'
      } catch (error) {
         console.log(error)
      }
+ }
+ const handleAddToWishlist = async()=> {
+    try {
+       await toggleSavedProduct({
+         userId: parsedUser?.user?._id,
+         path: pathname,
+         productId: parsedProduct?._id
+       })
+       
+    } catch (error) {
+       console.log(error)
+    }
  }
   return (
     <div className="flex !relative w-full flex-col pb-5">
@@ -91,7 +104,7 @@ import  Image from 'next/image'
             >
               {parsedProduct.name}
             </h2>
-            <div className='sm:w-[50px] sm:h-[50px] rounded-full flex items-center justify-center sm:bg-[#ddd] '>
+            <div onClick={handleAddToWishlist} className='sm:w-[50px] sm:h-[50px] rounded-full flex items-center justify-center sm:bg-[#ddd] '>
               {pro ? <FaHeart size={35} color='red' className=' cursor-pointer' /> : 
               <FaRegHeart size={35} color='#0b4d54' className=' cursor-pointer' />
               } 

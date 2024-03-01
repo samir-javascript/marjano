@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../globals.css"
 import SubHeader from "@/components/SubHeader";
 import { ClerkProvider } from '@clerk/nextjs'

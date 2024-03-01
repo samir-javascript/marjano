@@ -34,10 +34,10 @@ const ProfilePage = async() => {
             <div className='flex flex-col mx-[20px] '>
               <span className='text-gray-500 font-normal text-[13px] '>
                 
-                Mr {user?.user.name}
+                Mr {user?.user?.name}
               </span>
               <span className='text-gray-500 font-normal text-[13px] '>
-                {user?.user.email}
+                {user?.user?.email}
               </span>
             </div>
             <Link className='mx-[20px] text-[15px] capitalize font-semibold mt-1 text-[#00afaa] underline' 
@@ -72,7 +72,7 @@ const ProfilePage = async() => {
              ) : (
                 <>
                <span className='text-gray-500 font-normal text-[13px] '>
-                Mr {user.user?.name} 
+                Mr {user?.user?.name} 
               </span>
               <span className='text-gray-500 font-normal text-[13px] '>
                  {shipping?.address}
@@ -110,7 +110,7 @@ const ProfilePage = async() => {
             ): (
               <>
               <span className='text-gray-500 font-normal text-[13px] '>
-                Mr {user?.user.name} 
+                Mr {user?.user?.name} 
               </span>
               <span className='text-gray-500 font-normal text-[13px] '>
                  {shipping?.address}
@@ -165,7 +165,7 @@ const ProfilePage = async() => {
       {order.createdAt.substring(0,10)}
     </td>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
-      Mr {user?.user.name} 
+      Mr {user?.user?.name} 
     </td>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
       {order.totalPrice} Dh

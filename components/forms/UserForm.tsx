@@ -1,45 +1,61 @@
 "use client"
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { RiLockPasswordFill } from 'react-icons/ri'
 
 import Spinner from 'react-bootstrap/Spinner'
+import { editUserProfile } from '@/lib/actions/user.actions'
 const UserForm = ({user}:any) => {
-    const parsedUser = JSON.parse(user)
-    const [name, setName] = useState('')
-    const router = useRouter()
-   const [isLoading,setIsLoading] = useState(false)
-    const [email, setEmail] = useState('')
+  const parsedUser = JSON.parse(user);
 
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [checkedForPassword, setCheckedForPassword] = useState(false)
-    const handleSubmit = async (e:any) => {
-      e.preventDefault();
-        if(newPassword !== confirmPassword) {
-         
-           return;
-        }else {
-          try {
-            
-        
-             
-           
-          } catch (error) {
-            console.log(error);
-            
-          }
-        }
-     
-    };
-    useEffect(() => {
-       if(parsedUser) {
-         setName(parsedUser.user.name)
-         setEmail(parsedUser.user.email)
-       }
-    }, [parsedUser])
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Initialize state with user data
+  const [email, setEmail] = useState(parsedUser?.user?.email || '');
+  const [name, setName] = useState(parsedUser?.user?.name || '');
+  const [username, setUsername] = useState(parsedUser?.user?.username || '');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [checkedForPassword, setCheckedForPassword] = useState(false);
+
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      await editUserProfile({
+        userId: parsedUser.user._id,
+        path: pathname,
+        email,
+        name,
+        username,
+       
+      });
+      router.push(`/profile/${parsedUser.user.clerkId}`)
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+
+ /* useEffect(() => {
+    // Update state when user prop changes
+    if (parsedUser) {
+      setName(parsedUser.user.name || '');
+      setEmail(parsedUser.user.email || '');
+      setUsername(parsedUser.user.username || '');
+    }
+  }, [parsedUser]);*/
+
     
   return (
     <>
@@ -61,9 +77,9 @@ const UserForm = ({user}:any) => {
                                    placeholder:text-sm" type="text" placeholder="Nom"  />
                           </div>
                       </div>
-                      <div>
+                      <div className='mb-3'>
                           <label className="font-normal ml-8 text-[#0aafaa] text-sm"
-                           htmlFor="name">Address email</label>
+                           htmlFor="email">Address email</label>
                           <div className="border-b border-gray-500 flex items-center
                            relative ">
                                <MdEmail  color='#2c7c7a'/> 
@@ -73,10 +89,27 @@ const UserForm = ({user}:any) => {
                          className="ml-4 w-full bg-transparent text-base
                           font-medium outline-none border-none
                            placeholder:text-gray-400 placeholder:font-normal
-                            placeholder:text-sm" type="text" placeholder="Email address"  />
+                            placeholder:text-sm" type="email" placeholder="Email address"  />
                           </div>
                       </div>
-                     
+                      <div>
+                          <label className="font-normal ml-8 text-[#0aafaa] text-sm"
+                           htmlFor="username">User name</label>
+                          <div className="border-b border-gray-500 flex items-center
+                           relative ">
+                               <FaUser  color='#2c7c7a'/> 
+                               <input onChange={(e) => {
+    console.log('Input changed:', e.target.value);
+    setUsername(e.target.value);
+  }}
+                               value={username} 
+                               
+                         className="ml-4 w-full bg-transparent text-base
+                          font-medium outline-none border-none
+                           placeholder:text-gray-400 placeholder:font-normal
+                            placeholder:text-sm" type="text" placeholder="Full name"  />
+                          </div>
+                      </div>
                         
                           <div className=" flex gap-x-2 items-center relative mt-4">
                           <input

@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import AddressCols from "@/components/AddressCols";
+import DeleteBtn from "@/components/DeleteBtn";
 import ProfileMobileTabs from "@/components/ProfileMobileTabs";
 import ProfileTable from "@/components/ProfileTable";
 import { getUserById } from "@/lib/actions/cart.actions";
@@ -149,9 +150,7 @@ const CustomerAddressPage = async() => {
                                 </Link>
                                  
                                    <span className="mx-2">| </span>
-                                  <button   type="button" className="outline-none border-none text-base text-red-500 font-medium hover:underline ">
-                                    Supprimer
-                                  </button>
+                                 <DeleteBtn _id={shipping._id} />
                               </div>
                           </td>
 

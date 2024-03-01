@@ -117,3 +117,31 @@ export interface CreateUserParams {
     userId: string;
     path: string;
   }
+
+  export interface EditUserProfileParams {
+     userId: string;
+     path: string;
+     name: string;
+     username: string;
+     email: string;
+  }
+
+  export interface EditShippingAddress {
+      address: string;
+      postalCode:string;
+      path: string;
+      city: string;
+      phoneNumber: string;
+      country: string;
+      userId: string;
+  }
+  export interface DeleteShippingAddressParams {
+      shippingId: string;
+      path: string;
+      
+  }
+  export interface ToggleSavedProductParams {
+     productId: string;
+     path: string;
+     userId: string;
+  }

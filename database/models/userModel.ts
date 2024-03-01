@@ -7,6 +7,7 @@ export interface IUser extends Document {
     name: string;
     email: string;
     picture: string;
+    saved: Schema.Types.ObjectId[];
     password?: string;
     joinedAt: Date;
     isAdmin: boolean;
@@ -16,6 +17,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    saved: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Product', 
+    }],
     username: {
         type: String,
         required: true,
