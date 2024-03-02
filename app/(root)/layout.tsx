@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { Analytics } from "@vercel/analytics/react"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../globals.css"
@@ -35,7 +35,7 @@ export default function RootLayout({
         <Header />
         {children}
         <SpeedInsights />
-  
+        <Analytics />
       </body>
     </html>
     </ClerkProvider>

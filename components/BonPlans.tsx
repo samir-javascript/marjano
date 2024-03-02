@@ -9,9 +9,9 @@ import Image from 'next/image';
 
 
 
-const BonPlans = ({bonPlansProducts}:any) => {
+const BonPlans = ({bonPlansProducts, user}:any) => {
   const parsedProducts = JSON.parse(bonPlansProducts)
-
+  const parsedUser = JSON.parse(user)
   const settings = {
     dots: false,
     infinite: true,
@@ -60,7 +60,7 @@ const BonPlans = ({bonPlansProducts}:any) => {
         <Slider {...settings}>
           {parsedProducts.products.map((item:any) => (
             <div key={item._id} className="flex gap-4 mx-[30px] z-10  mt-3 lg:items-start justify-center items-center lg:justify-start">
-              <ProductCard product={JSON.stringify(item)} />
+              <ProductCard  product={JSON.stringify(item)} user={JSON.stringify(parsedUser)} />
             </div>
           ))}
         </Slider>

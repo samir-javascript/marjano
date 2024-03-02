@@ -46,7 +46,7 @@ export default async function Home() {
        <Banner />
        <CategorySlider />
        <BrandCategoriesSection />
-       <BonPlans bonPlansProducts={JSON.stringify(bonPlansProducts)} />
+       <BonPlans bonPlansProducts={JSON.stringify(bonPlansProducts)} user={JSON.stringify(user)} />
         <div className="max-w-[1400px] mx-auto flex flex-col ">
         <h2 className="text-[#333] font-extrabold text-[30px]  mt-5 mx-[30px] ">Nos coups de coeur</h2>
        <div className="flex flex-wrap md:gap-[15px]  gap-y-[15px]  md:mx-[20px] mt-3 lg:items-start justify-center items-center lg:justify-start">

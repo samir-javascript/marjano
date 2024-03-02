@@ -13,6 +13,7 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.9",
+    "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "bootstrap": "^5.3.3",
     "cloudinary": "^2.0.1",
@@ -27,7 +28,6 @@
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
     "svix": "^1.20.0"
-
   },
   "devDependencies": {
     "@types/node": "^20",
