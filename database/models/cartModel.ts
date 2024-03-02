@@ -7,7 +7,7 @@ interface CartDocument extends Document {
     userId: ObjectId;
     cartItems: CartItem[];
     price: number;
-    images: string[];
+    
     name: string;
 }
 const CartSchema = new Schema<CartDocument>({
@@ -30,9 +30,7 @@ const CartSchema = new Schema<CartDocument>({
             type: String,
             
         },
-        images: {
-            images: [ {type: String,}] ,
-        },
+       
         price: {
             type: Number,
         }
