@@ -83,7 +83,7 @@ export const useCategoryNames = () => {
      const mediaQuery = window.matchMedia('(max-width: 768px)');
      setIsMobile(mediaQuery.matches);
  
-     const handleMediaQueryChange = (event) => {
+     const handleMediaQueryChange = (event:any) => {
        setIsMobile(event.matches);
      };
  
@@ -272,7 +272,7 @@ export const useBrands =  () => {
      const mediaQuery = window.matchMedia('(max-width: 768px)');
      setIsMobile(mediaQuery.matches);
  
-     const handleMediaQueryChange = (event) => {
+     const handleMediaQueryChange = (event:any) => {
        setIsMobile(event.matches);
      };
  
@@ -338,7 +338,7 @@ export const useMakeupBrands =  () => {
      const mediaQuery = window.matchMedia('(max-width: 768px)');
      setIsMobile(mediaQuery.matches);
  
-     const handleMediaQueryChange = (event) => {
+     const handleMediaQueryChange = (event:any) => {
        setIsMobile(event.matches);
      };
  
@@ -397,7 +397,7 @@ export const useTechBrands = () => {
      const mediaQuery = window.matchMedia('(max-width: 768px)');
      setIsMobile(mediaQuery.matches);
  
-     const handleMediaQueryChange = (event) => {
+     const handleMediaQueryChange = (event:any) => {
        setIsMobile(event.matches);
      };
  
@@ -456,7 +456,7 @@ export const useTechBrands = () => {
      const mediaQuery = window.matchMedia('(max-width: 768px)');
      setIsMobile(mediaQuery.matches);
  
-     const handleMediaQueryChange = (event) => {
+     const handleMediaQueryChange = (event:any) => {
        setIsMobile(event.matches);
      };
  
@@ -522,7 +522,7 @@ export const useTechBrands = () => {
      const mediaQuery = window.matchMedia('(max-width: 768px)');
      setIsMobile(mediaQuery.matches);
  
-     const handleMediaQueryChange = (event) => {
+     const handleMediaQueryChange = (event:any) => {
        setIsMobile(event.matches);
      };
  
