@@ -6,7 +6,7 @@ import { FaMinus, FaPlus, FaTrash } from 'react-icons/fa'
 
 const UpdateCalculator = ({item,user}:any) => {
  const pathname = usePathname()
-
+  
    const parsedItem = JSON.parse(item)
   
     const parsedUser = JSON.parse(user)
@@ -17,6 +17,9 @@ const UpdateCalculator = ({item,user}:any) => {
         if(type === 'increase') {
           await addToCart({
             quantity: 1,
+            name: parsedItem.productId.name,
+            price: parsedItem.productId.price,
+            images: parsedItem.productId.images,
             userId: parsedUser.user._id,
             productId: parsedItem.productId._id,
             path:pathname
@@ -29,12 +32,18 @@ const UpdateCalculator = ({item,user}:any) => {
             quantity: -1,
             userId: parsedUser.user._id,
             productId: parsedItem.productId._id,
+            name: parsedItem.productId.name,
+            price: parsedItem.productId.price,
+            images: parsedItem.productId.images,
             path:pathname
         })
         }else if(type === 'remove') {
           await addToCart({
             quantity: -parsedItem.quantity,
             userId: parsedUser.user._id,
+            name: parsedItem.productId.name,
+            price: parsedItem.productId.price,
+            images: parsedItem.productId.images,
             productId: parsedItem.productId._id,
             path:pathname
         })

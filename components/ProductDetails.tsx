@@ -43,6 +43,9 @@ import { toggleSavedProduct } from '@/lib/actions/user.actions';
         await addToCart({
             quantity,
             userId: parsedUser.user._id,
+            images: parsedProduct.images,
+            name: parsedProduct.name,
+            price: parsedProduct.price,
             productId: parsedProduct._id,
             path: pathname
         })

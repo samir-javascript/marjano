@@ -2,13 +2,17 @@ import Message from "@/components/Message";
 import ProductCard from "@/components/ProductCard";
 import ProfileMobileTabs from "@/components/ProfileMobileTabs";
 import ProfileTable from "@/components/ProfileTable";
+import { getSavedProducts } from "@/lib/actions/user.actions";
+import { auth } from "@clerk/nextjs";
 
 const WishlistPage = async() => {
 
+  const { userId } = auth()
+  const result = await getSavedProducts({clerkId:userId!})
+  
  
- 
-   const data = [] as any;
-  if (!data.wishlist || data.wishlist.products.length === 0) {
+  
+  if (result?.saved?.length === 0) {
     return (
       <div className="w-full h-full bg-slate-50">
         
@@ -39,7 +43,7 @@ const WishlistPage = async() => {
                  
                     <div className="flex flex-wrap md:gap-[15px]  gap-y-[15px] md:mx-[20px]  mt-3 items-start justify-center sm:justify-start">
                      
-                       {data.wishlist?.products.map((item:any) => (
+                       {result?.saved?.map((item:any) => (
                         <ProductCard key={item._id} product={JSON.stringify(item)} />
                        ))}
                </div>

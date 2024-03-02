@@ -2,9 +2,9 @@
 import  { useEffect, useState } from 'react'
 
 import {  useParams } from 'next/navigation'
-import { Carousel } from 'react-bootstrap'
+import { Carousel, Image } from 'react-bootstrap'
 import Link from 'next/link'
-import Image from 'next/image'
+
 
 const Banner = () => {
   const {keyword} = useParams()
@@ -39,10 +39,9 @@ const Banner = () => {
 
     <Carousel   pause='hover' className='mb-4'>
           <Carousel.Item>
-               <Link href='/browse-products/Electroménager'>
+               <Link href='/browse-products?categoryName=Electroménager'>
                <Image
-              width={1000}
-              height={100}
+              fluid
               className='z-[-1] w-full h-auto'
               src={
                 isMobile
@@ -50,17 +49,15 @@ const Banner = () => {
                   : 'https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/CHa-GO_DT.webp'
               }
               alt='Electroménager'
-              onError={(e) => {
-                console.error('Image failed to load:', e);
-              }}
+             
             />
                
                </Link>
             </Carousel.Item>
             
             <Carousel.Item>
-               <Link href='/browse-products/Maison%20-%20Cuisine%20-%20Deco'>
-                  <Image width={1000} height={100}   className='z-[-1] w-full h-auto'
+               <Link href='/browse-products?categoryName=Maison%20-%20Cuisine%20-%20Deco'>
+                  <Image fluid   className='z-[-1] w-full h-auto'
                    src={isMobile ?
                     'https://www.marjanemall.ma/media/wysiwyg/Mois-du-blanc/slider-mobile-linge-maison.webp' :
                      "https://www.marjanemall.ma/media/wysiwyg/Mois-du-blanc/slider-linge-maison-desktop.webp" }
@@ -74,10 +71,8 @@ const Banner = () => {
             
 
             <Carousel.Item>
-               <Link href='/browse-products/Beauté - Santé'>
-                  <Image onError={(e) => {
-                console.error('Image failed to load:', e);
-              }} width={1000} height={100}   className='z-[-1] w-full h-auto'
+               <Link href='/browse-products?categoryName=Beauté - Santé'>
+                  <Image fluid   className='z-[-1] w-full h-auto'
                    src={ isMobile ? 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/mobile_CA.jpg' : 
                     "https://www.marjanemall.ma/media/wysiwyg/complement-alimentaire/Slider_compl_ment_alimentaire_desktop.webp"}
                      alt='Beauté - Santé sur MARJANEMALL MAROC'  /> 

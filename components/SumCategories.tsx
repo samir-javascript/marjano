@@ -3,10 +3,11 @@ import { useContext } from 'react';
 import {  ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 import { FaChevronLeft , FaChevronRight} from "react-icons/fa";
-import { subCategories } from "@/utils/constants"
+
 
 import Link  from 'next/link';
 import Image from 'next/image';
+import { subCategories } from '@/utils/constants';
 function LeftArrow() {
     const { isFirstItemVisible, scrollPrev } = useContext(VisibilityContext);
      

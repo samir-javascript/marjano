@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import { List, Divider, ListItem,   ListItemText, ListItemIcon } from '@mui/material'
-import { brandsSideBar, categoriesSideBar } from '../../utils/constants'
+
 
 
 import {  NavDropdown } from 'react-bootstrap'
@@ -15,6 +15,7 @@ import { FaRegHeart } from 'react-icons/fa'
 
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { brandsSideBar, categoriesSideBar } from '@/utils/constants';
 
 const SideBar = ({setMobileOpen}:any) => {
   

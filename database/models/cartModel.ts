@@ -5,7 +5,10 @@ interface CartItem {
 }
 interface CartDocument extends Document {
     userId: ObjectId;
-    cartItems: CartItem[]
+    cartItems: CartItem[];
+    price: number;
+    images: string[];
+    name: string;
 }
 const CartSchema = new Schema<CartDocument>({
    userId: {
@@ -22,6 +25,16 @@ const CartSchema = new Schema<CartDocument>({
         quantity: {
             type: Number,
             default: 1
+        },
+        name: {
+            type: String,
+            
+        },
+        images: {
+            images: [ {type: String,}] ,
+        },
+        price: {
+            type: Number,
         }
        }
     ]

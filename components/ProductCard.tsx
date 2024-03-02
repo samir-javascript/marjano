@@ -31,6 +31,9 @@ const ProductCard = ({product, user}:any) => {
             quantity: 1,
             userId: parsedUser.user._id,
             productId: parsedProduct._id,
+            name: parsedProduct.name,
+            price: parsedProduct.price,
+            images: parsedProduct.images,
             path:pathname
         })
        
@@ -42,15 +45,15 @@ const ProductCard = ({product, user}:any) => {
   return (
     <>
     
-        <div  className={` sm:w-[210px]  max-sm:w-[161px] max-w-full border mx-2
+        <div  className={` sm:w-[200px]  max-sm:w-[161px] max-w-full border mx-2
                  border-[rgba(211,211,211,0.78)] rounded-xl min-h-auto h-[375px]  flex flex-col`}>
                  
           <div className="w-full h-[200px] relative flex items-center 
                    justify-center bg-[#f6f6f6] rounded-tl-xl rounded-tr-xl ">
             <Link href={`/products/${parsedProduct._id}`}>
-            <Image  width={140} height={200} loading='lazy'  className={`
-             w-auto aspect-auto  
-            h-[100%] rounded-tl-xl rounded-tr-xl !z-[-1] object-contain`}
+             <Image  width={140} height={200} loading='lazy'  className={`
+               w-auto aspect-auto  
+               h-[100%] rounded-tl-xl rounded-tr-xl !z-[-1] object-contain`}
              src={parsedProduct.images[0]} alt={parsedProduct.name} />
             </Link>
             <div className='absolute bottom-0 right-0 m-3 w-[35px] h-[35px] rounded-full flex items-center justify-center bg-white '>

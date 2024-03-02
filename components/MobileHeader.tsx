@@ -18,7 +18,7 @@ const MobileHeader = ({result, qty}:any) => {
   
   const userInfo = true;
      const [mobileOpen,setMobileOpen] = useState(false)
-     if(pathname === '/shipping') return null;
+     if(pathname === '/shipping' || pathname === '/payment') return null;
   return (
     <header className="lg:hidden  flex flex-col gap-4 bg-[#0b4d54] !text-white pt-2 px-2  ">
         <div className="flex items-center justify-between">

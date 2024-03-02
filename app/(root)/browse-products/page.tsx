@@ -4,6 +4,8 @@ import { getProductsByCategory } from '@/lib/actions/product.actions'
 import Link from 'next/link';
 
 import SubBrandForClient from '@/components/SubBrandForClient';
+import { auth } from '@clerk/nextjs';
+import { getUserById } from '@/lib/actions/cart.actions';
 interface props {
   searchParams: {
      categoryName: string;
@@ -13,7 +15,9 @@ interface props {
 const Page = async({searchParams}:props) => {
  
   const result = await getProductsByCategory({categoryName: searchParams.categoryName})
+  const { userId } = auth()
  
+  const user = userId && await getUserById({clerkId:userId})
   return (
     <div className="w-full ">
     
@@ -37,7 +41,7 @@ const Page = async({searchParams}:props) => {
           </h2>
           <div className="flex flex-wrap md:gap-[15px]  gap-y-[15px] md:mx-[20px] mt-3 lg:items-start justify-center items-center lg:justify-start">
             {result.map((item:any) => (
-              <ProductCard key={item._id} product={JSON.stringify(item)} />
+              <ProductCard user={JSON.stringify(user)} key={item._id} product={JSON.stringify(item)} />
             ))}
           </div>
         

@@ -1,8 +1,10 @@
 "use server"
+import ProductModel from "@/database/models/productModel";
 import User from "@/database/models/userModel";
 
 import { connectToDatabase } from "@/database/mongodb";
 import { CreateUserParams, DeleteUserParams, EditUserProfileParams, GetAllUsersProps,
+    GetSavedProductsParams,
     ToggleSavedProductParams, UpdateUserParams } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
 export async function createUser(userData:CreateUserParams) {
@@ -102,3 +104,20 @@ export async function updateUser(params:UpdateUserParams) {
        throw error;
      }
   }
+
+export async function getSavedProducts(params:GetSavedProductsParams) {
+    try {
+       const  { clerkId} = params;
+       await connectToDatabase()
+       const user = await User.findOne({clerkId}).populate({
+         path:"saved", model: ProductModel
+       }).sort({createdAt: -1})
+       if(!user) {
+         throw new Error('User not found')
+       }
+          return user;
+    } catch (error) {
+       console.log(error)
+       throw error;
+    }
+}

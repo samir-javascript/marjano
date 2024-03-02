@@ -1,5 +1,5 @@
 import { IUser } from "@/database/models/userModel";
-import mongoose, { mongo } from "mongoose";
+import mongoose, { ObjectId, mongo } from "mongoose";
 export interface GetAllUsersProps {
    page?: number;
    pageSize?:number;
@@ -61,7 +61,35 @@ export interface GetProductsParams {
    
     page?: number;
     pageSize?: number;
-    query?: string;
+    searchQuery?: string;
+    filter?: string;
+}
+export interface AddOrderItemsParams {
+    paymentMethod: string;
+    path: string;
+    userId: string;
+    shippingAddress: {
+      phoneNumber: number | string;
+      address: string;
+      postalCode: string ;
+      city: string;
+      country: string;
+      user: string;
+    };
+    itemsPrice: number;
+    shippingPrice: number;
+    totalPrice: number;
+    orderItems: [
+      {
+          [x: string]: any; product: ObjectId;
+       quantity: number;
+       name: string;
+       price: number;
+       images: string[];
+      }
+
+    ]
+
 }
 export interface CreateUserParams {
     clerkId: string;
@@ -87,6 +115,9 @@ export interface CreateUserParams {
      quantity: number;
      path: string;
      userId: string;
+     name: string;
+     price: number;
+     images: string[]
   }
   export interface GetUserByIdParams {
     clerkId: string;
@@ -144,4 +175,9 @@ export interface CreateUserParams {
      productId: string;
      path: string;
      userId: string;
+  }
+
+  export interface GetSavedProductsParams {
+     clerkId:string;
+    
   }

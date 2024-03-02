@@ -8,10 +8,10 @@ export interface IOrder extends Document {
         country: string;
         address: string;
         postalCode: string;
+        user: Schema.Types.ObjectId;
     };
     paymentMethod: string;
     itemsPrice: number;
-    taxPrice: number;
     shippingPrice: number;
     totalPrice: number;
     isPaid: boolean;
@@ -28,7 +28,7 @@ export interface IOrder extends Document {
         {
             name: string;
             price: number;
-            qty: number;
+            quantity: number;
             images: string[];
             product: Schema.Types.ObjectId;
         }
@@ -47,7 +47,7 @@ const OrderSchema =  new Schema({
         {
             name: { type: String, },
             price: { type: Number, },
-            qty: { type: Number, },
+            quantity: { type: Number, },
             images: [ {type: String,}] ,
             product: {
                 type: mongoose.Schema.Types.ObjectId,
@@ -63,6 +63,7 @@ const OrderSchema =  new Schema({
         country: { type: String, required: true },
         address: { type: String, required: true },
         phoneNumber: { type: String, required: true},
+        user: { type: Schema.Types.ObjectId, ref: 'User'}
     },
     paymentMethod: {
         type: String,
@@ -79,11 +80,7 @@ const OrderSchema =  new Schema({
         default: 0.0,
         required: true
     },
-    taxPrice: {
-        type: Number,
-        required: true,
-        default: 0.0
-    },
+   
     shippingPrice: {
         type: Number,
         required: true,

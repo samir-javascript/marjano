@@ -5,15 +5,24 @@ import { CreateCartParams, CreateProductParams, GetProductDetailsParams, GetProd
 import { revalidatePath } from "next/cache";
 import cloudinary from "@/utils/cloudinary";
 import User from "@/database/models/userModel";
+import { FilterQuery } from "mongoose";
 
 import { NextResponse } from "next/server";
 import Cart from "@/database/models/cartModel";
 
 export async function getProducts(params:GetProductsParams) {
    try {
-     const { query } = params;
+     const { searchQuery } = params;
+     const query:FilterQuery<typeof ProductModel> = {}
+      if(searchQuery) {
+         query.$or =  [
+          { name: { $regex: searchQuery, $options: "i" } } ,
+           { brand: { $regex: searchQuery, $options: "i" } } ,
+          { category: { $regex: searchQuery, $options: "i" } },
+         ]
+      }
       await connectToDatabase()
-      const products = await ProductModel.find({})
+      const products = await ProductModel.find(query)
       if(!products) {
         throw new Error('No product was found')
       }
@@ -69,7 +78,7 @@ export async function createProduct(params:CreateProductParams) {
 
 export async function addToCart(params: CreateCartParams) {
    try {
-     const { quantity, productId, userId, path } = params;
+     const { quantity, productId, userId, path,images, price, name  } = params;
  
      await connectToDatabase();
      const user = await User.findById(userId);
@@ -79,7 +88,10 @@ export async function addToCart(params: CreateCartParams) {
      if (!cart) {
        await Cart.create({
          userId: user._id,
-         cartItems: [{ productId, quantity }],
+        
+         cartItems: [{ productId, quantity,  name,
+          images,
+          price, }],
        });
      } else {
        const existingItemIndex = cart.cartItems.findIndex((item: any) => item.productId.toString() === productId);
@@ -93,7 +105,9 @@ export async function addToCart(params: CreateCartParams) {
            cart.cartItems.splice(existingItemIndex, 1);
          }
        } else {
-         cart.cartItems.push({ productId, quantity });
+         cart.cartItems.push({ productId, quantity , name,
+          images,
+          price,});
        }
      }
  

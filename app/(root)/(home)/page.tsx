@@ -26,7 +26,7 @@ import {
   useBrands,
   useMakeupBrands,
   useTechBrands,
-} from "../../../utils/constants"
+} from '../../../utils/constants'
 import Brands from "@/components/Brands";
 import MobileBrands from "@/components/MobileBrands";
 
@@ -37,8 +37,7 @@ export default async function Home() {
   const bonPlansProducts = await getBonPlansProducts()
 
   const { userId } = auth()
- 
-    const user = userId && await getUserById({clerkId:userId})
+  const user = userId && await getUserById({clerkId:userId});
   
  
   
