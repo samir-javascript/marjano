@@ -26,7 +26,7 @@ import { toggleSavedProduct } from '@/lib/actions/user.actions';
   const [quantity, setQuantity] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const pro = parsedUser?.user?.saved?.includes(parsedProduct._id)
-  
+   
   const handleThumbnailClick = (thumbnail: string) => {
     setSelectedImage(thumbnail);
   };
@@ -43,7 +43,6 @@ import { toggleSavedProduct } from '@/lib/actions/user.actions';
         await addToCart({
             quantity,
             userId: parsedUser.user._id,
-            images: parsedProduct.images,
             name: parsedProduct.name,
             price: parsedProduct.price,
             productId: parsedProduct._id,

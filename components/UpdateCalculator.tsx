@@ -19,7 +19,7 @@ const UpdateCalculator = ({item,user}:any) => {
             quantity: 1,
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
-            images: parsedItem.productId.images,
+            
             userId: parsedUser.user._id,
             productId: parsedItem.productId._id,
             path:pathname
@@ -34,7 +34,7 @@ const UpdateCalculator = ({item,user}:any) => {
             productId: parsedItem.productId._id,
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
-            images: parsedItem.productId.images,
+            
             path:pathname
         })
         }else if(type === 'remove') {
@@ -43,7 +43,7 @@ const UpdateCalculator = ({item,user}:any) => {
             userId: parsedUser.user._id,
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
-            images: parsedItem.productId.images,
+            
             productId: parsedItem.productId._id,
             path:pathname
         })

@@ -85,7 +85,7 @@ export interface AddOrderItemsParams {
        quantity: number;
        name: string;
        price: number;
-       images: string[];
+      
       }
 
     ]
@@ -117,7 +117,7 @@ export interface CreateUserParams {
      userId: string;
      name: string;
      price: number;
-     images: string[]
+    
   }
   export interface GetUserByIdParams {
     clerkId: string;

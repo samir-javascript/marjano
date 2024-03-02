@@ -78,7 +78,7 @@ export async function createProduct(params:CreateProductParams) {
 
 export async function addToCart(params: CreateCartParams) {
    try {
-     const { quantity, productId, userId, path,images, price, name  } = params;
+     const { quantity, productId, userId, path, price, name  } = params;
  
      await connectToDatabase();
      const user = await User.findById(userId);
@@ -90,7 +90,7 @@ export async function addToCart(params: CreateCartParams) {
          userId: user._id,
         
          cartItems: [{ productId, quantity,  name,
-          images,
+          
           price, }],
        });
      } else {
@@ -106,7 +106,7 @@ export async function addToCart(params: CreateCartParams) {
          }
        } else {
          cart.cartItems.push({ productId, quantity , name,
-          images,
+         
           price,});
        }
      }

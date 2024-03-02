@@ -18,7 +18,6 @@ export async function addOrderItems(params:AddOrderItemsParams) {
          orderItems: orderItems.map((order)=> ({
             ...order,
             _id: undefined,
-            images: order.images,
             product: order?._id,
          }))
       })

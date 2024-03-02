@@ -33,7 +33,7 @@ const ProductCard = ({product, user}:any) => {
             productId: parsedProduct._id,
             name: parsedProduct.name,
             price: parsedProduct.price,
-            images: parsedProduct.images,
+         
             path:pathname
         })
        
