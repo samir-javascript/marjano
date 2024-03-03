@@ -64,7 +64,7 @@ const ProductCard = ({product, user}:any) => {
           <div className="w-full h-[200px] relative flex items-center 
                    justify-center bg-[#f6f6f6] rounded-tl-xl rounded-tr-xl ">
             <Link href={`/products/${parsedProduct._id}`}>
-             <Image  width={140} height={200} loading='lazy'  className={`
+             <Image priority  width={140} height={200}   className={`
                w-auto aspect-auto  
                h-[100%] rounded-tl-xl rounded-tr-xl !z-[-1] object-contain`}
              src={parsedProduct.images[0]} alt={parsedProduct.name} />
