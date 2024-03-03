@@ -5,9 +5,10 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 import './styles.css';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { Image } from "react-bootstrap";
+
 import Link from "next/link";
 import { useCategoryNames } from "@/utils/constants";
+import { Image } from "react-bootstrap";
 
 interface Props {
   name: string;
@@ -75,8 +76,8 @@ const CategorySlider = () => {
             <div className='cate-paragraph'>
               <p className="whitespace-nowrap font-extrabold text-sm ">{item.name}</p>
             </div>
-            <div className='cate-slider-img'>
-              <Image fluid loading="lazy" src={item.image} alt={item.name} />
+            <div className='cate-slider-img relative'>
+              <Image fluid src={item.image} alt={item.name} />
             </div>
           </Link>
         ))}

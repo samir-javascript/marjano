@@ -2,6 +2,7 @@
 
 
  
+
 import Image from "next/image"
 import  Link  from "next/link"
  const BrandCategoriesSection = () => {
@@ -22,7 +23,7 @@ import  Link  from "next/link"
                          
                       </div>
                  </div>
-                   <Image width={1000} height={100}   alt='' loading="lazy" className="rounded-[10px] z-3 h-auto  !w-full object-contain "
+                   <Image prioriry width={1000} height={100}     alt=''  className="rounded-[10px] z-3 h-auto  !w-full object-contain "
                     src="/images/sumsung.webp"   />
               </Link>
               <Link href='/browse-boutique-brand/celio' className=" relative">
@@ -37,7 +38,7 @@ import  Link  from "next/link"
                          
                       </div>
                  </div>
-                   <Image width={1000} height={100}  alt='hy' loading="lazy" className="rounded-[10px] z-3 h-auto  !w-full object-contain"
+                   <Image prioriry width={1000} height={100}     alt='celio brand'  className="rounded-[10px] z-3 h-auto  !w-full object-contain"
                     src="/images/celio.webp"   />
               </Link>
               <Link href='/browse-boutique-brand/Maybelline' className=" relative">
@@ -61,7 +62,7 @@ import  Link  from "next/link"
                          
                       </div>
                  </div>
-                   <Image width={1000} height={100}  alt='' loading="lazy" className="rounded-[10px] h-auto z-3 !w-full object-contain"
+                   <Image prioriry width={1000} height={100}     alt=''  className="rounded-[10px] h-auto z-3 !w-full object-contain"
                     src="/images/cosmitic.webp"   />
               </Link>
          </div>
