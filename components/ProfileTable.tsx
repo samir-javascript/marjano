@@ -2,7 +2,7 @@
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { SignOutButton } from "@clerk/nextjs";
 const ProfileTable = () => {
   const { userId } = useAuth()
   const pathname = usePathname()
@@ -40,9 +40,13 @@ const ProfileTable = () => {
       <li className=" border border-[#ddd] rounded-br-[20px] rounded-bl-[20px] transition-all duration-150 ease-in-out p-4 
              hover:bg-[rgb(173,216,230)]"
           >
-             <button  type="button" className={ 'text-[#575757] font-bold'}>
-                Deconnextion
-             </button>
+           
+            <SignOutButton>       
+               <p className="text-[#575757] font-bold">Deconnextion</p>       
+            </SignOutButton>
+            
+            
+             
         </li>
     </ul>
   </div>

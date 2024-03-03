@@ -2,13 +2,12 @@ import { ObjectId, Document, Schema, models, model} from 'mongoose'
 interface CartItem {
     productId: ObjectId;
     quantity: number;
+    price: number;
+    name: string;
 }
 interface CartDocument extends Document {
     userId: ObjectId;
     cartItems: CartItem[];
-    price: number;
-    
-    name: string;
 }
 const CartSchema = new Schema<CartDocument>({
    userId: {

@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
 "use client";
 import { useState } from 'react';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useRouter, useParams, usePathname } from "next/navigation";
+import { useRouter,  usePathname } from "next/navigation";
 import Link from 'next/link';
 
 import Rating from './Rating';
 
 import { addToCart } from '@/lib/actions/product.actions';
 import Image from 'next/image';
+import { toggleSavedProduct } from '@/lib/actions/user.actions';
 
 
 
@@ -23,7 +24,7 @@ const ProductCard = ({product, user}:any) => {
   const [showModal, setShowModal] = useState(false);
   const [modalProduct, setModalProduct] = useState({ image: "", name: "" });
   const pathname = usePathname()
-  //if(loadingADDtoWishlist) return <Loader />
+  const pro = parsedUser?.user?.saved?.includes(parsedProduct._id)
   const handleAddToCart = async()=> {
    // if(!product._id) return;
      try {
@@ -42,6 +43,18 @@ const ProductCard = ({product, user}:any) => {
         console.log(error)
      }
  }
+ const handleAddToWishlist = async()=> {
+  try {
+     await toggleSavedProduct({
+       userId: parsedUser?.user?._id,
+       path: pathname,
+       productId: parsedProduct?._id
+     })
+     
+  } catch (error) {
+     console.log(error)
+  }
+}
   return (
     <>
     
@@ -56,13 +69,12 @@ const ProductCard = ({product, user}:any) => {
                h-[100%] rounded-tl-xl rounded-tr-xl !z-[-1] object-contain`}
              src={parsedProduct.images[0]} alt={parsedProduct.name} />
             </Link>
-            <div className='absolute bottom-0 right-0 m-3 w-[35px] h-[35px] rounded-full flex items-center justify-center bg-white '>
-              <>
-                <FaRegHeart color='#0b4d54' className='w-[65%] h-[65%] outline-none border-none object-contain cursor-pointer'
-                  data-tooltip-id='my-tooltip'
-                  data-tooltip-content="Ajouter à ma list d'envie"
-                />
-              </>
+            <div onClick={handleAddToWishlist} className='absolute bottom-0 right-0 m-3 w-[35px] h-[35px] rounded-full flex items-center justify-center bg-white '>
+              
+              {pro ? <FaHeart data-tooltip-id='my-tooltip'
+                  data-tooltip-content="Ajouter à ma list d'envie" size={35} color='red' className='w-[65%] h-[65%] outline-none border-none object-contain cursor-pointer' /> : 
+              <FaRegHeart size={35}  color='#0b4d54' className='w-[65%] h-[65%] outline-none border-none object-contain cursor-pointer' /> }
+  
             </div>
           </div>
 

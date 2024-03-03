@@ -29,7 +29,6 @@ export interface IOrder extends Document {
             name: string;
             price: number;
             quantity: number;
-            images: string[];
             product: Schema.Types.ObjectId;
         }
     ]
@@ -48,7 +47,7 @@ const OrderSchema =  new Schema({
             name: { type: String, },
             price: { type: Number, },
             quantity: { type: Number, },
-            images: [ {type: String,}] ,
+          
             product: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: true,

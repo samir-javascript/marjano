@@ -1,4 +1,5 @@
 "use client"
+import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaRegHeart, FaShoppingBag, FaUser } from "react-icons/fa";
@@ -30,15 +31,19 @@ const ProfileMobileTabs = () => {
              <p className="text-[12px] md:text-[15px] font-medium  mb-2 mt-1  ">{item.title} </p>
            </Link>
         ))}
+        <SignOutButton>
          <div  className="flex flex-col gap-1 items-center text-center ">
              <div className={ "bg-[#ddd] md:w-[100px] md:h-[100px] w-[70px] h-[70px] flex items-center justify-center  rounded-full"}>
                   <div className={"text-[#0b4d54]"}>
                      <IoLogOutOutline size={40} />
                   </div>
              </div>
-             <p className="text-[12px] md:text-[15px] font-medium  mb-2 mt-1  ">Deconnexion </p>
+                  
+               <p className="text-[12px] md:text-[15px] font-medium  mb-2 mt-1  ">Deconnextion</p>       
+           
+            
            </div>
-          
+           </SignOutButton>
     </div>
   )
 }

@@ -37,7 +37,7 @@ const PaymentPage = async() => {
         </div>
          <h1 className="font-extrabold sm:text-[35px] text-[28px] text-[#0b4d54] text-center w-full py-4">Mode de paiement</h1>
         <div className="flex justify-center items-start gap-8 lg:flex-row flex-col">
-           <PaymentForm  user={JSON.stringify(user)} result={JSON.stringify(result)} shipping={JSON.stringify(shipping)} />
+           <PaymentForm user={JSON.stringify(user)} shipping={JSON.stringify(shipping)} result={JSON.stringify(result)} />
         </div>
     </div>
   )

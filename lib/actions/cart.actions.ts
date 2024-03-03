@@ -1,7 +1,7 @@
 "use server"
 import Cart from "@/database/models/cartModel";
 import { connectToDatabase } from "@/database/mongodb";
-import { CreateCartParams, DeleteUserParams, GetTotalCartCount, GetUserByIdParams, GetUserCart } from "@/utils/shared";
+import { ClearCartParams, CreateCartParams, DeleteUserParams, GetTotalCartCount, GetUserByIdParams, GetUserCart } from "@/utils/shared";
 
 import User from "@/database/models/userModel";
 import { NextResponse } from "next/server";
@@ -56,5 +56,19 @@ export async function getCartTotalCount(params:GetTotalCartCount) {
    } catch (error) {
      console.log(error)
      throw error;
+   }
+}
+export async function clearCart(params:ClearCartParams) {
+   try {
+     const { userId , path } = params;
+     await connectToDatabase()
+    const cart = await Cart.findOne({userId}) 
+     cart.cartItems = [];
+     await cart.save()
+     revalidatePath(path)
+
+   } catch (error) {
+      console.log(error)
+      throw error
    }
 }
