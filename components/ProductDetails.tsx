@@ -74,7 +74,8 @@ import { toggleSavedProduct } from '@/lib/actions/user.actions';
         <div className="sm:mx-[30px] mx-[10px]">
           <Image
            width={300} height={200}
-            loading="lazy"
+            priority
+            
             className="w-full lg:w-[350px] max-h-[100%] h-auto flex-1 rounded-[20px] flex flex-col items-center justify-center object-contain"
             src={selectedImage}
             alt={parsedProduct.name}
