@@ -1,7 +1,7 @@
 "use server"
 import { connectToDatabase } from "@/database/mongodb";
 import ProductModel from "@/database/models/productModel";
-import { CreateCartParams, CreateProductParams, GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams, GetProductsParams, UpdateProductParams } from "@/utils/shared";
+import { CreateCartParams, CreateProductParams, DeleteProductParams, GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams, GetProductsParams, UpdateProductParams } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
 import cloudinary from "@/utils/cloudinary";
 import User from "@/database/models/userModel";
@@ -218,6 +218,22 @@ export async function getEnCemomentProducts() {
      return { products }
   } catch (error) {
    console.log(error)
+     throw error;
+  }
+}
+export async function deleteProduct(params:DeleteProductParams) {
+  try {
+      const { productId, path } = params;
+      await connectToDatabase()
+     const product = await ProductModel.findById(productId)
+     if(!product) {
+       throw new Error('Prodict not found')
+     }
+     await ProductModel.findOneAndDelete({_id: product._id})
+     revalidatePath(path)
+     
+  } catch (error) {
+     console.log(error)
      throw error;
   }
 }

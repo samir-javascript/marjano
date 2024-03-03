@@ -4,13 +4,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState, useTransition } from "react";
 import Spinner from 'react-bootstrap/Spinner'
 
-import { editProduct } from "@/lib/actions/product.actions";
+
 
 
 
 const EditProduct = ({product}:ProductProps) => {
+    console.log('PRODUCT FOR EDIT', product)
  
-  const [isPending,startTransition] = useTransition()
  const router = useRouter()
  const pathname = usePathname()
   
@@ -19,6 +19,7 @@ const EditProduct = ({product}:ProductProps) => {
   const [position, setPosition] = useState("");
   const [price, setPrice] = useState(0);
   const [prevPrice, setPrevPrice] = useState(0);
+  const [loading,setLoading] = useState(false)
   const [productType, setProductType] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
@@ -32,6 +33,7 @@ const EditProduct = ({product}:ProductProps) => {
       setBrand(product.brand);
       setPrevPrice(product.prevPrice);
       setPosition(product.position);
+
       //@ts-ignore
       setProductType(product?.productType);
       setCategory(product.category);
@@ -66,33 +68,36 @@ const EditProduct = ({product}:ProductProps) => {
   };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    startTransition(() => {
-      editProduct({
-        productId: product._id,
-        name,
-        brand,
-        category,
-        position,
-        productType,
-        prevPrice,
-        price,
-        countInStock,
-        images: productImages,
-        description,
-        path: pathname,
-      })
-        .then(() => {
-          router.push('/admin/productsList');
-         
-        })
-        .catch((error) => {
-          // Handle error appropriately
-          console.error('Error updating product:', error);
-        });
-    });
-  };
+        e.preventDefault()
+        setLoading(true)
+        try {
+             const res = await fetch('/api/editProduct', {
+              cache: 'no-cache',
+               method: 'PUT',
+               body: JSON.stringify({
+                 path: pathname,
+                 images: productImages,
+                 position,
+                 name,
+                 countInStock,
+                 description,
+                  productType,
+                  price,
+                  prevPrice,
+                  productId: product._id,
+                  brand,
+                  category
+               })
+             })
+             if(res.ok) {
+                router.push('/admin/productsList')
+             }
+        } catch (error) {
+           console.log(error)
+        }finally {
+          setLoading(false)
+        }
+  }
 
 
 
@@ -220,9 +225,9 @@ const EditProduct = ({product}:ProductProps) => {
 
 </div>
 </div>
-<button disabled={isPending} type='submit' className="px-[15px] py-[8px] 
+<button disabled={loading} type='submit' className="px-[15px] py-[8px] 
      rounded-[8px] transition-all duration-150  text-white font-bold  bg-[#00afaa] hover:bg-[#0b4d54] ">
-        {isPending ? <Spinner role='status' animation='border' style={{
+        {loading ? <Spinner role='status' animation='border' style={{
         display:'block',
         width:'30px',
         height:'30px',

@@ -1,4 +1,5 @@
 import Btn from "@/components/Btn";
+import BtnDelete from "@/components/BtnDelete";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getProducts } from "@/lib/actions/product.actions";
 import { auth } from "@clerk/nextjs";
@@ -7,7 +8,7 @@ import { Button, Col, Row, Spinner, Table } from "react-bootstrap"
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const ProductsList = async() => {
- 
+  
   
   const products  = [] as any
   
@@ -72,9 +73,7 @@ const ProductsList = async() => {
                                    
                                     </td>
                                     <td className='text-center text-[14px] text-gray-500 font-medium whitespace-nowrap'>
-                                      <Button   type='button' variant='light' className='btn-sm m-0'>
-                                        <FaTrash color='red' />
-                                      </Button>
+                                      <BtnDelete _id={product._id} />
                                      
                                     </td>
                                </tr>

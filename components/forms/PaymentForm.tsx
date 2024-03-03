@@ -6,8 +6,10 @@ import Link from "next/link";
 import {  useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { usePathname, useRouter } from "next/navigation";
+import { clearCart } from "@/lib/actions/cart.actions";
 
 const PaymentForm = ({shipping,user,result}:any) => {
+ 
   
    const parsedUser = JSON.parse(user)
    const parsedResult = JSON.parse(result)
@@ -16,7 +18,13 @@ const PaymentForm = ({shipping,user,result}:any) => {
   const [paymentMethode, setPaymentMethode] = useState('PayPal');
   const router = useRouter();
   const pathname = usePathname();
-
+  const itemsPrice = parsedResult?.cart?.cartItems.reduce((acc:any,item:any)=> acc + item.quantity * item.productId.price, 0).toFixed(2)
+  const shippingPrice = parsedResult?.cart?.cartItems.reduce((acc:any,item:any)=> acc + item.quantity * item.productId.price, 0).toFixed(2) >= 400 ? 0 : 30
+  const totalPrice = (
+    parsedResult?.cart?.cartItems.reduce((acc: any, item: any) => acc + item.quantity * item.productId.price, 0) < 400
+      ? parsedResult?.cart?.cartItems.reduce((acc: any, item: any) => acc + item.quantity * item.productId.price, 0) + 30
+      : parsedResult?.cart?.cartItems.reduce((acc: any, item: any) => acc + item.quantity * item.productId.price, 0)
+  ).toFixed(2);
  
 
   
@@ -36,6 +44,48 @@ const PaymentForm = ({shipping,user,result}:any) => {
   };
 
  
+  const createOrder = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/placeOrder', {
+        method: 'POST',
+        body: JSON.stringify({
+          orderItems: parsedResult.cart.cartItems,
+          path: pathname,
+          user: parsedUser.user._id,
+          itemsPrice: itemsPrice,
+          totalPrice: totalPrice,
+          shippingAddress: parsedShipping,
+          shippingPrice: shippingPrice,
+          paymentMethod: paymentMethode,
+        }),
+      });
+
+      if (res.ok) {
+        const { orderId } = await res.json();
+
+        await clearCart({
+          path: pathname,
+          userId: parsedUser.user._id,
+        });
+
+        router.push(`/orders/${orderId}`);
+      } else {
+        const { orderId } = await res.json();
+
+        await clearCart({
+          path: pathname,
+          userId: parsedUser.user._id,
+        });
+
+        router.push(`/success/${orderId}`);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -129,7 +179,7 @@ const PaymentForm = ({shipping,user,result}:any) => {
                    text-[#00afaa] mt-4">J'accepte les conditions générales de ventes</p>
              </Link>
              
-                    <button  disabled={isLoading} className="sm:w-[300px] mx-2 w-auto mt-3 flex
+                    <button onClick={createOrder}  disabled={isLoading} className="sm:w-[300px] mx-2 w-auto mt-3 flex
                      items-center justify-center font-bold text-[15px] bg-[#00afaa] text-white rounded-[30px] h-[40px]"  type="button">
                          {isLoading ? <Spinner role='status' animation='border' style={{
                 display:'block',

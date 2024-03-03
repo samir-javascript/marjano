@@ -5,6 +5,7 @@ import { getUserById, getUserCart } from "@/lib/actions/cart.actions";
 import { auth } from "@clerk/nextjs";
 import UpdateCalculator from "@/components/UpdateCalculator";
 import Image from "next/image";
+import { getShipping } from "@/lib/actions/shipping.actions";
 
 const Cart = async() => {
  
@@ -14,6 +15,7 @@ const Cart = async() => {
   const result =  await getUserCart({
     userId: user.user._id
   })
+  const shipping = await getShipping({userId: user?.user?._id})
 
   return (
     <div className="w-full bg-white py-4">
@@ -120,7 +122,7 @@ const Cart = async() => {
                 </p>
               </div>
             </div>
-            <Link href='/shipping' className="flex items-center justify-center mt-3" >
+            <Link href={shipping ? '/user-shipping' : '/shipping'} className="flex items-center justify-center mt-3" >
               <button   className="bg-[#00afaa]  lg:mx-0 mx-3 text-white font-bold lg:w-[420px]
                w-full h-[50px] rounded-[20px] ">
                 valider mon panier

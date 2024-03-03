@@ -102,6 +102,10 @@ export interface CreateUserParams {
      userId: string;
      path: string;
   }
+  export interface DeleteProductParams {
+     productId: string;
+     path: string;
+  }
   export interface UpdateUserParams {
     clerkId: string;
     updateData: Partial<IUser>;
