@@ -50,7 +50,7 @@ export const POST = async(req:Request)=> {
             paymentMethode: 'Stripe',
             paymentIntent: stripeSession.payment_intent,
             stripeCustomerId: stripeSession.customer,
-            totalAmount: stripeSession.amount_subtotal / 100 >= 400 ? stripeSession.amount_subtotal + 0 : stripeSession.amount_subtotal + 30 ,
+            totalAmount: stripeSession.amount_subtotal / 100 >= 400 ? stripeSession.amount_subtotal / 100 + 0 : stripeSession.amount_subtotal / 100 + 30 ,
             shippingPrice: stripeSession.amount_subtotal / 100 >= 400 ? 0 : 30,
             itemsPrice: stripeSession.amount_subtotal / 100,
             isPaid: true,

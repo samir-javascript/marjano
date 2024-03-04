@@ -98,6 +98,9 @@ export interface CreateUserParams {
     email: string;
     picture: string;
   }
+  export interface GetOrderByIdParams {
+    orderId: string;
+  }
   export interface ClearCartParams {
      userId: string;
      path: string;

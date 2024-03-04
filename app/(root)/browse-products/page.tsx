@@ -16,8 +16,8 @@ const Page = async({searchParams}:props) => {
  
   const result = await getProductsByCategory({categoryName: searchParams.categoryName})
   const { userId } = auth()
- 
-  const user = userId && await getUserById({clerkId:userId})
+   if(!userId) return;
+  const user = await getUserById({clerkId:userId})
   return (
     <div className="w-full ">
     

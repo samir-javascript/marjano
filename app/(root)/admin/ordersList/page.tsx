@@ -4,10 +4,20 @@
 import {  Col, Row, Table } from "react-bootstrap";
 import Link from 'next/link'
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { getAllOrders } from "@/lib/actions/orders.actions";
+import { auth } from "@clerk/nextjs";
+import { getUserById } from "@/lib/actions/cart.actions";
+import { getShipping } from "@/lib/actions/shipping.actions";
 
 
-const OrdersList = () => {
-const orders = [] as any
+const OrdersList = async() => {
+  const { userId } = auth()
+  const user = await getUserById({clerkId:userId!})
+ 
+  const shipping = await getShipping({userId: user?.user?._id})
+  const result = await getAllOrders()
+  console.log('ORDERS ARE HERE', result)
+  
 
   return (
     <div className='max-w-[1400px] mx-auto '>
@@ -34,15 +44,15 @@ const orders = [] as any
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order:any) => (
+                {result.map((order:any) => (
                   <tr key={order._id}>
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order._id}</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.user?.name || "" }</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.shippingAddress.phoneNumber}</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.user?.email || "" }</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.createdAt.substring(0, 10)}</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.totalPrice} Dh</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.paymentMethod}</td>
+                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.userId?.name}</td>
+                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.shippingAddress.phoneNumber || shipping.phoneNumber}  </td>
+                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.userId?.email || "" }</td>
+                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>01/30/2002 </td>
+                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.itemsPrice >= 400 ? order.itemsPrice + 0 : order.itemsPrice + 30} Dh</td>
+                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.paymentMethode}</td>
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>
   {order.isPaid ? <FaCheck size={20} className="mx-auto" color="green" /> : <FaTimes size={20} className="mx-auto" color='red' />}
 </td>

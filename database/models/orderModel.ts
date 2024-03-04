@@ -234,7 +234,7 @@ const OrderSchema = new Schema<OrderDocument>({
             product: { type: Types.ObjectId, ref: "Product"}
         },
     ],
-});
+}, {timestamps: true});
 
 const OrderModel = models.Order || model<OrderDocument>('Order', OrderSchema);
 

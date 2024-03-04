@@ -15,7 +15,8 @@ import MegaMenu from "./Drawer/MegaMenu";
 const Header = async() => {
     
      const { userId } = auth()
-     const user = await getUserById({clerkId:userId!})
+     if(!userId) return;
+     const user = await getUserById({clerkId:userId})
     
       const qty = await getCartTotalCount({
         userId: user?.user?._id
