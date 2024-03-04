@@ -35,7 +35,7 @@ const ShippingEdit = async() => {
                            
                         </div>
                      
-                      <EditShippingForm user={JSON.stringify(user)} shipping={JSON.stringify(shipping)} />
+                      <EditShippingForm user={JSON.stringify(user)} type={"shipping"} shipping={JSON.stringify(shipping)} />
                     </div>
                </div>
           </div>

@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation"
  import { useState } from "react"
  import Select, { SingleValue } from 'react-select';
 import { editShipping } from "@/lib/actions/shipping.actions";
-const EditShippingForm = ({shipping, user}:any) => {
+const EditShippingForm = ({shipping, user, type}:any) => {
     const parsedUser = JSON.parse(user)
  const parsedShipping = JSON.parse(shipping)
    const [phoneNumber, setPhoneNumber] = useState(parsedShipping.phoneNumber || "")
@@ -34,7 +34,12 @@ const EditShippingForm = ({shipping, user}:any) => {
                 phoneNumber,
                 userId: parsedUser.user._id
              })
-            router.push(`/profile/${parsedUser.user.clerkId}`)
+             if(type === 'payment') {
+              router.push(`/payment`)
+             } else {
+              router.push(`/profile/${parsedUser.user.clerkId}`)
+             }
+           
             setIsLoading(false)
          } catch (error) {
              console.log(error)

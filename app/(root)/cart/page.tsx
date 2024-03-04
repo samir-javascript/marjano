@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Authority from '../../../components/Authority'
 import { getUserById, getUserCart } from "@/lib/actions/cart.actions";
@@ -6,7 +5,6 @@ import { auth } from "@clerk/nextjs";
 import UpdateCalculator from "@/components/UpdateCalculator";
 import Image from "next/image";
 import { getShipping } from "@/lib/actions/shipping.actions";
-
 const Cart = async() => {
  
 
@@ -19,12 +17,11 @@ const Cart = async() => {
 
   return (
     <div className="w-full bg-white py-4">
-       
       <div className="max-w-[1400px] mx-auto  ">
         <h2 className="text-[#000] font-extrabold mb-5 text-[35px] pt-3 px-2 ">
           mon panier
         </h2>
-        {result.cart.cartItems.length === 0 ? (
+        {!result.cart || result.cart === null || result?.cart?.cartItems?.length === 0 ? (
            <div className="max-w-[1400px] mx-auto min-h-full pb-[200px] ">
             <div className="flex flex-col gap-y-2 mx-3">
             <p>Aucun article dans votre panier.</p>
@@ -43,11 +40,11 @@ const Cart = async() => {
                 Expedié depuis le Maroc
               </h3>
               <p className="font-bold text-base ">
-                {result.cart.cartItems.reduce((acc:any, item:any) => acc + item.quantity, 0)} produits
+                {result?.cart?.cartItems?.reduce((acc:any, item:any) => acc + item.quantity, 0)} produits
               </p>
             </div>
             <div className="flex flex-col gap-[15px] ">
-            {result.cart.cartItems.map((item: any, index: number) => (
+            {result?.cart?.cartItems?.map((item: any, index: number) => (
                 <div
                   key={index}
                   className="bg-white rounded-lg border p-2
@@ -92,7 +89,7 @@ const Cart = async() => {
                   Total produits
                 </p>
                 <p className="font-normal text-[18px]  text-[#333] ">
-                  {result?.cart?.cartItems.reduce((acc:any, item:any) => acc + item?.quantity, 0)} produits
+                  {result?.cart?.cartItems?.reduce((acc:any, item:any) => acc + item?.quantity, 0)} produits
                 </p>
               </div>
 
@@ -101,7 +98,7 @@ const Cart = async() => {
                   Sous-total
                 </p>
                 <p className="font-extrabold text-[13px]  text-[#333] ">
-                  {result?.cart?.cartItems.reduce(
+                  {result?.cart?.cartItems?.reduce(
                     (acc:any, item:any) => acc + item?.quantity * item?.productId?.price,
                     0
                   ).toFixed(2)}{" "}
@@ -114,7 +111,7 @@ const Cart = async() => {
                   Total
                 </p>
                 <p className="font-extrabold text-[20px]  text-[#00afaa] ">
-                  {result.cart.cartItems.reduce(
+                  {result?.cart?.cartItems?.reduce(
                     (acc:any, item:any) => acc + item?.quantity * item?.productId?.price,
                     0
                   ).toFixed(2)}{" "}

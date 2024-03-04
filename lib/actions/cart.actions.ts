@@ -24,9 +24,7 @@ export async function getUserCart(params:GetUserCart) {
       const { userId } = params;
       const cart = await Cart.findOne({userId:userId})
       .populate('cartItems.productId')
-      if(!cart) {
-        throw new Error('User cart was not found')
-      }
+      
       
       return { cart }
    } catch (error) {

@@ -25,7 +25,7 @@ const NouvelleAddressPage = async() => {
         <div>
              <h2 className=" text-[#00afaa] font-bold text-[30px] mb-3 ">Ajouter une nouvelle address</h2>
              <div className="mt-3 lg:w-[60%] w-[90%] ">
-               <EditShippingForm shipping={JSON.stringify(shipping)} user={JSON.stringify(user)} />
+               <EditShippingForm shipping={JSON.stringify(shipping)} type='payment' user={JSON.stringify(user)} />
              </div>
               
         </div>

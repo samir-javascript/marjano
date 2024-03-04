@@ -13,9 +13,10 @@ const PaymentForm = ({shipping,user,result}:any) => {
   
    const parsedUser = JSON.parse(user)
    const parsedResult = JSON.parse(result)
+   console.log('PARSED RESULT HERE FOR ID', parsedResult)
    const parsedShipping = JSON.parse(shipping)
   const [isLoading, setIsLoading] = useState(false);
-  const [paymentMethode, setPaymentMethode] = useState('PayPal');
+  const [paymentMethode, setPaymentMethode] = useState('Stripe');
   const router = useRouter();
   const pathname = usePathname();
   const itemsPrice = parsedResult?.cart?.cartItems.reduce((acc:any,item:any)=> acc + item.quantity * item.productId.price, 0).toFixed(2)
@@ -52,12 +53,12 @@ const PaymentForm = ({shipping,user,result}:any) => {
         body: JSON.stringify({
           orderItems: parsedResult.cart.cartItems,
           path: pathname,
-          user: parsedUser.user._id,
+          userId: parsedUser?.user?._id,
           itemsPrice: itemsPrice,
           totalPrice: totalPrice,
           shippingAddress: parsedShipping,
           shippingPrice: shippingPrice,
-          paymentMethod: paymentMethode,
+          paymentMethode: paymentMethode,
         }),
       });
 
@@ -87,6 +88,43 @@ const PaymentForm = ({shipping,user,result}:any) => {
     }
   };
 
+  const handleCheckout = async()=> {
+    setIsLoading(true)
+     try {
+        const res = await fetch('/api/checkout', {
+           method: 'POST',
+           body: JSON.stringify({cartId: parsedResult?.cart?._id}),
+
+        })
+        const  {error,url}  = await res.json()
+        if(!res.ok) {
+            console.log(error)
+        }else {
+           window.location.href = url
+        }
+        setIsLoading(false)
+     } catch (error) {
+        console.log(error)
+     }finally {
+      setIsLoading(false)
+     }
+  }
+
+  const handlePayment = async()=> {
+    setIsLoading(true)
+      try {
+          if(paymentMethode === "Stripe")  {
+              await handleCheckout()
+          }else {
+            await createOrder();
+          }
+       } catch (error) {
+         console.log(error)
+      }finally {
+         setIsLoading(false)
+      }
+  }
+
   return (
     <>
       <div className="flex flex-col">
@@ -95,8 +133,8 @@ const PaymentForm = ({shipping,user,result}:any) => {
             <div className="flex items-center gap-2 mb-1">
               <input
                 type='checkbox'
-                checked={paymentMethode === 'PayPal'}
-                onChange={() => handlePaymentMethodChange('PayPal')}
+                checked={paymentMethode === 'Stripe'}
+                onChange={() => handlePaymentMethodChange('Stripe')}
               />
               <p className="font-bold text-[#00afaa] text-[16px] ">Paiement par carte bancaire</p>
             </div>
@@ -179,7 +217,7 @@ const PaymentForm = ({shipping,user,result}:any) => {
                    text-[#00afaa] mt-4">J'accepte les conditions générales de ventes</p>
              </Link>
              
-                    <button onClick={createOrder}  disabled={isLoading} className="sm:w-[300px] mx-2 w-auto mt-3 flex
+                    <button onClick={handlePayment}  disabled={isLoading} className="sm:w-[300px] mx-2 w-auto mt-3 flex
                      items-center justify-center font-bold text-[15px] bg-[#00afaa] text-white rounded-[30px] h-[40px]"  type="button">
                          {isLoading ? <Spinner role='status' animation='border' style={{
                 display:'block',

@@ -1,18 +1,19 @@
-import Order from "@/database/models/orderModel";
+
+import OrderModel from "@/database/models/orderModel";
 import { connectToDatabase } from "@/database/mongodb";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 export async function POST(req:Request) {
    try {
       const { path, orderItems, shippingAddress, shippingPrice,
-         paymentMethod, totalPrice, user, itemsPrice} = await req.json()
+         paymentMethode, totalPrice, userId, itemsPrice} = await req.json()
          await connectToDatabase()
-     const order = new Order({
+     const order = new OrderModel({
           shippingAddress,
           shippingPrice,
           itemsPrice,
-          paymentMethod,
-          user,
+          paymentMethode,
+          userId,
           totalPrice,
           orderItems: orderItems.map((order:any)=> ({
              ...order,
