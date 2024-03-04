@@ -50,7 +50,10 @@ const OrdersList = async() => {
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.userId?.name}</td>
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.shippingAddress.phoneNumber || shipping.phoneNumber}  </td>
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.userId?.email || "" }</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>01/30/2002 </td>
+                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>
+                      {order.createdAt ? order.createdAt.toISOString().substring(0, 10) : ""}
+                      </td>
+
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.itemsPrice >= 400 ? order.itemsPrice + 0 : order.itemsPrice + 30} Dh</td>
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.paymentMethode}</td>
                     <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>

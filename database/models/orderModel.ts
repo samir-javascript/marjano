@@ -125,12 +125,11 @@ interface Address {
 }
 
 interface OrderItem {
-  
     name: string;
     price: number;
     quantity: string;
-    product: Types.ObjectId
-}
+    product: string; // Change Types.ObjectId to string
+  }
 
 interface ShippingDetails {
     address: Address;
@@ -231,7 +230,7 @@ const OrderSchema = new Schema<OrderDocument>({
             name: { type: String },
             price: { type: Number },
             quantity: { type: String },
-            product: { type: Types.ObjectId, ref: "Product"}
+            product: { type: Types.ObjectId, ref: "Product", required: true}
         },
     ],
 }, {timestamps: true});

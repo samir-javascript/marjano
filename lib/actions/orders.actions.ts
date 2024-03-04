@@ -17,19 +17,24 @@ export async function getAllOrders() {
    }
 }
 export async function getOrderById(params:GetOrderByIdParams) {
-   try {
-     const { orderId } = params;
-     await connectToDatabase();
-     
-     const order = await OrderModel.findById(orderId)
-       .populate("userId", "name email")
-       .populate("orderItems.product"); // Populate the product information
- 
-     return order;
-   } catch (error) {
-     console.log(error);
-     throw error;
-   }
+  try {
+    const { orderId } = params;
+    await connectToDatabase();
+
+    const order = await OrderModel.findById(orderId)
+      .populate('userId', 'name email')
+      .populate({
+        path: 'orderItems.product',
+        model: ProductModel
+      });
+
+    console.log('Order:', order);
+
+    return order;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
  }
  
  
