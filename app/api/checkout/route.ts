@@ -64,6 +64,6 @@ export const POST = async (req: Request) => {
     console.log('CHECKOUT SESSION')
     return NextResponse.json({ url: checkoutSession.url });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json( error , { status: 500 });
   }
 };
