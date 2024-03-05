@@ -119,7 +119,7 @@ export interface CreateUserParams {
   }
   export interface DeleteUserParams {
     clerkId: string;
-    path: string;
+   
   }
   export interface GetProductDetailsParams {
      productId: string;

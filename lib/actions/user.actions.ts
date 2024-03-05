@@ -33,7 +33,7 @@ export async function updateUser(params:UpdateUserParams) {
   }
   export async function deleteUser(params:DeleteUserParams) {
      try {
-        const { clerkId , path } = params;
+        const { clerkId  } = params;
          await connectToDatabase()
          const user = await User.findOneAndDelete({clerkId})
          if(!user) {
@@ -43,7 +43,7 @@ export async function updateUser(params:UpdateUserParams) {
          // delete his reviews;
          // delete his history orders etc;
          const deletedUser = await User.findByIdAndDelete(user._id)
-         revalidatePath(path)
+        
          return deletedUser
      } catch (error) {
          console.log(error)
