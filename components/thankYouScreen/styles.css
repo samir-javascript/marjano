@@ -5,11 +5,19 @@
     background-color: #dcdcdc;
     padding: 50px;
     border-radius: 15px;
+    gap: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
+  @media (max-width:768px) {
+    .success .cancel {
+       width:350px;
+       padding: 20px;
+    }
+  }
+  
   .success-wrapper, .cancel-wrapper{
  
     min-height: 69vh;

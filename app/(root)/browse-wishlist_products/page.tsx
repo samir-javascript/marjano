@@ -2,12 +2,14 @@ import Message from "@/components/Message";
 import ProductCard from "@/components/ProductCard";
 import ProfileMobileTabs from "@/components/ProfileMobileTabs";
 import ProfileTable from "@/components/ProfileTable";
+import { getUserById } from "@/lib/actions/cart.actions";
 import { getSavedProducts } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
 
 const WishlistPage = async() => {
 
   const { userId } = auth()
+  const user = await getUserById({clerkId:userId!})
   const result = await getSavedProducts({clerkId:userId!})
   
  
@@ -44,7 +46,7 @@ const WishlistPage = async() => {
                     <div className="flex flex-wrap md:gap-[15px]  gap-y-[15px] md:mx-[20px]  mt-3 items-start justify-center sm:justify-start">
                      
                        {result?.saved?.map((item:any) => (
-                        <ProductCard key={item._id} product={JSON.stringify(item)} />
+                        <ProductCard key={item._id} product={JSON.stringify(item)} user={JSON.stringify(user)} />
                        ))}
                </div>
                       

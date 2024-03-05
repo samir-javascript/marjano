@@ -32,7 +32,7 @@ const UserShipping = async() => {
              <div className="w-full border-b border-[#e5e5e5] leading-[0.1em] m-[10px 0 20px] text-center  "></div>
          </div>
          <div className="flex flex-col space-y-3 mt-3">
-            <h3 className="font-medium text-[#0aafaa] text-[18px] ">J'utilise une adresse enregistrée</h3>
+            <h3 className="font-medium text-[#0aafaa] text-[18px] whitespace-nowrap ">J'utilise une adresse enregistrée</h3>
              <div>
                  <p className="font-bold text-black text-[16px] mb-1.5 ">Mr. {user?.user?.name} </p>
                  <p className="font-normal text-[#4c4c4c] text-[14px] ">{shipping?.city}, {shipping?.address} </p>

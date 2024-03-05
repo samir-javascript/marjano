@@ -163,8 +163,8 @@ const PaymentForm = ({shipping,user,result}:any) => {
               <p className="text-sm text-[#333] font-normal "><span>{parsedShipping?.city}, </span> {parsedShipping?.postalCode} {parsedShipping?.country} </p>
               <p className="text-sm text-[#333] font-normal ">{parsedShipping?.phoneNumber} </p>
             </div>
-            <Link className="underline  font-bold text-base text-[#00afaa] " href='/shipping'>
-              Modifier
+            <Link className="underline  font-bold text-base text-[#00afaa] " href='/customer/address/checkout_address/newShipping'>
+                  Modifier
             </Link>
                      </div>
                 </div>
