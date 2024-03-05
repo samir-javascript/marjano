@@ -34,8 +34,6 @@ export async function getOrderById(params:GetOrderByIdParams) {
   }
  }
  
-export async function getMyOrders(params) {
- 
-}
+
  
  
