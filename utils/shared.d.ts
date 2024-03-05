@@ -98,6 +98,9 @@ export interface CreateUserParams {
     email: string;
     picture: string;
   }
+  export interface GetMyOrdersParams {
+     userId:string;
+  }
   export interface GetOrderByIdParams {
     orderId: string;
   }
@@ -116,11 +119,22 @@ export interface CreateUserParams {
   }
   export interface DeleteUserParams {
     clerkId: string;
+    path: string;
   }
   export interface GetProductDetailsParams {
      productId: string;
   }
-  
+  export interface EditUserByAdminParams {
+     path: string;
+     userId: string;
+     name: strign;
+     email: string;
+     isAdmin: boolean
+  }
+  export interface DeleteUserByAdminParams {
+      userId: string;
+      path: string;
+  }
   export interface CreateCartParams {
      productId: string;
      quantity: number;

@@ -2,13 +2,23 @@ import { FaCheck, FaEdit, FaTimes, FaTrash } from "react-icons/fa";
 import { Button, Table } from "react-bootstrap";
 import Link from 'next/link';
 import { getAllUsers } from "@/lib/actions/user.actions";
+import { auth } from "@clerk/nextjs";
+import BtnDeleteUser from "@/components/BtnDeleteUser";
+import { getUserById } from "@/lib/actions/cart.actions";
+import { redirect } from "next/navigation";
 
-const UsersList = async () => {
+
+const UsersList = async() => {
+  const { userId } = auth()
+  const user = await getUserById({clerkId:userId!})
+  if(user.user.isAdmin === false) redirect('/')
   const result = await getAllUsers({});
-  console.log('ALL USERS ARE HERE' , result)
-
+  
+ 
+  
   return (
     <div className='products-list'>
+     
       <div className='align-items-center m-4'>
         <h2 className="text-[#333] font-extrabold text-[30px] w-full mt-5 mb-3 mx-[30px]">
           Users List
@@ -54,9 +64,7 @@ const UsersList = async () => {
                            
                          </td>
                          <td className='text-center whitespace-nowrap text-[15px] font-medium'>
-                         <Button  type='button' variant='light' className='btn-sm'>
-                              <FaTrash color='red' />
-                           </Button>
+                            <BtnDeleteUser isAdmin={user.isAdmin} userId={user._id} />
                          </td>
                       </tr>
                    ))}

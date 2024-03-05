@@ -3,10 +3,11 @@ import ProductModel from "@/database/models/productModel";
 import User from "@/database/models/userModel";
 
 import { connectToDatabase } from "@/database/mongodb";
-import { CreateUserParams, DeleteUserParams, EditUserProfileParams, GetAllUsersProps,
+import { CreateUserParams, DeleteUserByAdminParams, DeleteUserParams, EditUserByAdminParams, EditUserProfileParams, GetAllUsersProps,
     GetSavedProductsParams,
     ToggleSavedProductParams, UpdateUserParams } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 export async function createUser(userData:CreateUserParams) {
    try {
       await connectToDatabase()
@@ -32,7 +33,7 @@ export async function updateUser(params:UpdateUserParams) {
   }
   export async function deleteUser(params:DeleteUserParams) {
      try {
-        const { clerkId } = params;
+        const { clerkId , path } = params;
          await connectToDatabase()
          const user = await User.findOneAndDelete({clerkId})
          if(!user) {
@@ -42,6 +43,7 @@ export async function updateUser(params:UpdateUserParams) {
          // delete his reviews;
          // delete his history orders etc;
          const deletedUser = await User.findByIdAndDelete(user._id)
+         revalidatePath(path)
          return deletedUser
      } catch (error) {
          console.log(error)
@@ -105,6 +107,28 @@ export async function updateUser(params:UpdateUserParams) {
      }
   }
 
+  export async function editUserByAdmin(params:EditUserByAdminParams) {
+      try {
+         const { path, userId,name, email, isAdmin } = params;
+         await connectToDatabase()
+         const user = await User.findById(userId)
+         if(!user) {
+            throw new Error('User not found')
+         }
+         user.name = name || user.name;
+         user.email =  email || user.email;
+         user.isAdmin = Boolean(isAdmin) || user.isAdmin;
+         await user.save()
+         revalidatePath(path)
+         return NextResponse.json({message: "user has been updated successfuly"})
+      } catch (error) {
+          console.log(error)
+          throw error;
+      }
+  }
+
+
+
 export async function getSavedProducts(params:GetSavedProductsParams) {
     try {
        const  { clerkId} = params;
@@ -121,3 +145,23 @@ export async function getSavedProducts(params:GetSavedProductsParams) {
        throw error;
     }
 }
+
+
+export async function deleteUserByAdmin(params:DeleteUserByAdminParams) {
+     try {
+        const {  userId, path  } = params;
+        await connectToDatabase()
+        const user = await User.findById(userId)
+        if(!user) {
+         throw new Error('User not found')
+        }
+        if(user.isAdmin) {
+         throw new Error('admin users cannot be deleted')
+         }
+         await User.findOneAndDelete({_id: user._id})
+         revalidatePath(path)
+     } catch (error) {
+        console.log(error)
+     }
+}
+

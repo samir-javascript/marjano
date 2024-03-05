@@ -25,7 +25,7 @@ const MobileHeader = ({result, qty}:any) => {
              <div className="flex items-center space-x-2">
                  <IoMenu onClick={()=> setMobileOpen(true)}   size={40} color='white' cursor='pointer' />
                  <Link href='/' className="w-[180px] mr-2"> 
-                      <Image  className="w-full object-contain"  src="https://www.marjanemall.ma/static/version1706188772/frontend/Marjane/default/fr_FR/images/marjane-logo.svg"  title="" alt="MARJANEMALL MAROC" width="218" height="36" />
+                      <Image priority  className="w-full object-contain"  src="https://www.marjanemall.ma/static/version1706188772/frontend/Marjane/default/fr_FR/images/marjane-logo.svg"  title="" alt="MARJANEMALL MAROC" width="218" height="36" />
                  </Link>
              </div>
              <div  className="flex items-center space-x-3">

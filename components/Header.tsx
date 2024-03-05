@@ -15,8 +15,8 @@ import MegaMenu from "./Drawer/MegaMenu";
 const Header = async() => {
     
      const { userId } = auth()
-     if(!userId) return;
-     const user = await getUserById({clerkId:userId})
+    
+     const user = await getUserById({clerkId:userId!})
     
       const qty = await getCartTotalCount({
         userId: user?.user?._id
@@ -28,7 +28,7 @@ const Header = async() => {
     <header className="w-full h-[80px] bg-[#0b4d54] sticky top-0 left-0 hidden lg:block z-[999] ">
          <div className="flex items-center justify-between h-full max-w-[1400px] mx-auto ">
             <Link href='/'>
-               <Image width={250} height={100} alt='marjanemall maroc ' className="object-contain ml-[20px] mr-[55px] " src={'https://www.marjanemall.ma/static/version1706188772/frontend/Marjane/default/fr_FR/images/marjane-logo.svg'} />
+               <Image priority width={250} height={100} alt='marjanemall maroc ' className="object-contain ml-[20px] mr-[55px] " src={'https://www.marjanemall.ma/static/version1706188772/frontend/Marjane/default/fr_FR/images/marjane-logo.svg'} />
             </Link>
              <Input />
             <div className="flex items-center gap-x-6 ml-8 mr-4 ">

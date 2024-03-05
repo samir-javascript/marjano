@@ -26,19 +26,35 @@ const Banner = () => {
     };
   }, []);
 
+// <source media="(min-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/CHa-GO_DT.webp">
 
-
- 
+ // <source media="(min-width:768px)" data-srcset="https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/Bannie_re-chaabane-Denwa-.webp" srcset="https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/Bannie_re-chaabane-Denwa-.webp">
  
 
   if(keyword) return null;
-  
+  // <source media="(max-width:768px)" data-srcset="https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/Bannie_re-chaabane-Denwa-vm-_1.webp" srcset="https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/Bannie_re-chaabane-Denwa-vm-_1.webp">
   return (
     <div className='max-w-[1400px] mx-auto relative'>
       <div className='absolute bottom-0 w-full h-[210px] max-md:h-[130px] z-20  bg' />
 
     <Carousel   pause='hover' className='mb-4'>
           <Carousel.Item>
+               <Link href='/browse-products?categoryName=Electroménager'>
+               <Image
+              fluid
+              className='z-[-1] w-full h-auto'
+              src={
+                isMobile
+                  ? "https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/Bannie_re-chaabane-Denwa-vm-_1.webp"
+                  : 'https://www.marjanemall.ma/media/wysiwyg/HOME_page_new/Bannie_re-chaabane-Denwa-.webp'
+              }
+              alt='AEG'
+             
+            />
+               
+               </Link>
+            </Carousel.Item>
+            <Carousel.Item>
                <Link href='/browse-products?categoryName=Electroménager'>
                <Image
               fluid
@@ -54,7 +70,6 @@ const Banner = () => {
                
                </Link>
             </Carousel.Item>
-            
             <Carousel.Item>
                <Link href='/browse-products?categoryName=Maison%20-%20Cuisine%20-%20Deco'>
                   <Image fluid   className='z-[-1] w-full h-auto'

@@ -2,7 +2,7 @@
 import OrderModel from "@/database/models/orderModel";
 import ProductModel from "@/database/models/productModel";
 import { connectToDatabase } from "@/database/mongodb";
-import { GetOrderByIdParams } from "@/utils/shared";
+import { GetMyOrdersParams, GetOrderByIdParams } from "@/utils/shared";
 import mongoose from "mongoose";
 
 export async function getAllOrders() {
@@ -32,6 +32,18 @@ export async function getOrderById(params:GetOrderByIdParams) {
     console.log(error);
     throw error;
   }
+ }
+
+ export async function getMyOrders(params:GetMyOrdersParams) {
+     try {
+        const { userId } = params;
+        await connectToDatabase()
+        const orders = await OrderModel.find({userId:userId}).populate("orderItems.product")
+        return orders;
+     } catch (error) {
+        console.log(error)
+        throw error
+     }
  }
  
 

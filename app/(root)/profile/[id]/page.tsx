@@ -4,6 +4,7 @@ import OrderCols from "@/components/OrderCols";
 import ProfileMobileTabs from "@/components/ProfileMobileTabs";
 import ProfileTable from "@/components/ProfileTable";
 import { getUserById } from "@/lib/actions/cart.actions";
+import { getMyOrders } from "@/lib/actions/orders.actions";
 import { getShipping } from "@/lib/actions/shipping.actions";
 import { auth } from "@clerk/nextjs";
 import Link from "next/link";
@@ -15,7 +16,8 @@ const ProfilePage = async() => {
  
   const shipping = await getShipping({userId: user?.user?._id})
  
- const orders = []  as any
+ 
+ const result = await getMyOrders({userId:user?.user?._id})
  
  
   return (
@@ -133,7 +135,7 @@ const ProfilePage = async() => {
         </div>
 
         {/** Orders table */}
-       {orders.length === 0 ? (
+       {result.length === 0 ? (
         <>
          <h2 className="text-[#333] font-extrabold text-[20px] my-3 mx-[20px]">Commandes récentes </h2>
            <Message variant="danger">
@@ -156,19 +158,19 @@ const ProfilePage = async() => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order:any) => (
+            {result.map((order:any) => (
     <tr key={order._id}>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
       {order._id}
     </td>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
-      {order.createdAt.substring(0,10)}
+      20/21/2024
     </td>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
       Mr {user?.user?.name} 
     </td>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
-      {order.totalPrice} Dh
+      {order.itemsPrice} Dh
     </td>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
       
@@ -194,7 +196,7 @@ const ProfilePage = async() => {
             fifthLine='action'
               isLoading={false}
              user={user}
-              orders={orders}  />
+              orders={result}  />
       </div>
     </div>
     </div>

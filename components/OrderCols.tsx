@@ -20,20 +20,20 @@ const OrderCols = ({orders,isLoading, firstLine, secondLine, thirdLine, fourthLi
         </div>
         <div className="flex items-center gap-3">
            <p className="font-medium text-base text-[#333] "><strong className="font-extrabold">
-            {secondLine}:</strong> {order.createdAt.substring(0,10)}</p>
+            {secondLine}:</strong> 20/25/2024</p>
         </div>
         <div className="flex items-center gap-3">
            <p className="font-medium text-base text-[#333] "><strong className="font-extrabold">
-            {thirdLine}:</strong>  Mr {user.user.name} </p>
+            {thirdLine}:</strong>  Mr {user?.user?.name} </p>
         </div>
         <div className="flex items-center gap-3">
-           <p className="font-medium text-base text-[#333] "><strong className="font-extrabold">{fourthLine}:</strong>  {(order.totalPrice).toFixed(2)} Dh</p>
+           <p className="font-medium text-base text-[#333] "><strong className="font-extrabold">{fourthLine}:</strong>  {(order.itemsPrice).toFixed(2)} Dh</p>
         </div>
         <div className="flex items-center gap-3">
            <p className="font-medium text-base text-[#333] ">
             <strong className="font-extrabold">{fifthLine}:</strong> 
             <Link className="underline font-bold text-[#00afaa] text-base "
-             href={order.paymentMethod === 'PayPal' ? `/order/${order._id}` : `/success/${order._id}`}> 
+             href={order.paymentMethode === 'Stripe' ? `/orders/${order._id}` : `/success/${order._id}`}> 
            Voir la command
            </Link> </p>
         </div>
