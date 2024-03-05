@@ -21,11 +21,11 @@ export const POST = async (req: Request) => {
       userId: user?.user?._id,
     });
 
-    if (!result) {
+    /*if (!result) {
       return NextResponse.json({ error: 'Cart not found' }, { status: 404 });
-    }
+    }*/
 
-    const line_items = result.cart.cartItems.map((item: any) => ({
+    const line_items = result?.cart?.cartItems?.map((item: any) => ({
       price_data: {
         currency: 'MAD',
         unit_amount: item.productId.price * 100,
@@ -38,7 +38,7 @@ export const POST = async (req: Request) => {
     }));
     
     const data = await req.json();
-    const cartId = data.cartId as string;
+    const cartId = data?.cartId as string;
 
     if (!isValidObjectId(cartId)) {
       return NextResponse.json({ error: 'Invalid cart ID' }, { status: 401 });
