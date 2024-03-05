@@ -1,7 +1,6 @@
+
 import CheckoutHeader from "@/components/CheckoutHeader";
-import { getUserById } from "@/lib/actions/cart.actions";
 import { getOrderById } from "@/lib/actions/orders.actions";
-import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,10 +9,9 @@ interface props {
      id: string
   }
 }
+
 const Page = async({params}:props) => {
-  const result = await getOrderById({orderId: params.id})
-  console.log('ORDER ID HERE', result)
- 
+   const result = await getOrderById({orderId:params.id})
   //const order = myOrders?.filter((item) => item.paymentMethod === 'cash-on-delivery');
   const truncate = (string:string, n:number) => {
     return string.length > n ? string.substring(0, n) + '...' : string;

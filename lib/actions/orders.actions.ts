@@ -23,10 +23,7 @@ export async function getOrderById(params:GetOrderByIdParams) {
 
     const order = await OrderModel.findById(orderId)
       .populate('userId', 'name email')
-      .populate({
-        path: 'orderItems.product',
-        model: ProductModel
-      });
+      
 
     console.log('Order:', order);
 
@@ -37,5 +34,8 @@ export async function getOrderById(params:GetOrderByIdParams) {
   }
  }
  
+export async function getMyOrders(params) {
+ 
+}
  
  
