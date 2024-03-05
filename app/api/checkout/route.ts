@@ -64,6 +64,9 @@ export const POST = async (req: Request) => {
     console.log('CHECKOUT SESSION')
     return NextResponse.json({ url: checkoutSession.url });
   } catch (error) {
-    return NextResponse.json( error , { status: 500 });
+    console.error('Error during checkout:', error);
+    // Add additional error handling or return an error response to the client
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+
   }
 };

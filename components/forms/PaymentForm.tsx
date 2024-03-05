@@ -119,7 +119,8 @@ const PaymentForm = ({shipping,user,result}:any) => {
             await createOrder();
           }
        } catch (error) {
-         console.log(error)
+        console.error('Error during payment:', error);
+        throw error;
       }finally {
          setIsLoading(false)
       }
@@ -217,7 +218,7 @@ const PaymentForm = ({shipping,user,result}:any) => {
                    text-[#00afaa] mt-4">J'accepte les conditions générales de ventes</p>
              </Link>
              
-                    <button onClick={handleCheckout}  disabled={isLoading} className="sm:w-[300px] mx-2 w-auto mt-3 flex
+                    <button onClick={handlePayment}  disabled={isLoading} className="sm:w-[300px] mx-2 w-auto mt-3 flex
                      items-center justify-center font-bold text-[15px] bg-[#00afaa] text-white rounded-[30px] h-[40px]"  type="button">
                          {isLoading ? <Spinner role='status' animation='border' style={{
                 display:'block',
