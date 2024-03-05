@@ -8,26 +8,17 @@ import { useEffect, useState } from "react"
 import Select, { SingleValue } from 'react-select';
 const ShippingForm = ({user, shipping}:any) => {
   const parsedUser = JSON.parse(user)
-  const parsedShipping = JSON.parse(shipping)
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [city, setCity] = useState('')
-    const [country, setCountry] = useState('')
-    const [postalCode, setPostalCode] = useState("")
-    const [address, setAddress] = useState('')
+  const parsedShipping = JSON.parse(shipping) 
+    const [phoneNumber, setPhoneNumber] = useState(parsedShipping.phoneNumber ||  "")
+    const [city, setCity] = useState(parsedShipping.city || '')
+    const [country, setCountry] = useState(parsedShipping.country || '')
+    const [postalCode, setPostalCode] = useState(parsedShipping.postalCode || "")
+    const [address, setAddress] = useState(parsedShipping.address || '')
     const [loading,setLoading] = useState(false)
    
      const pathname = usePathname()
      const router = useRouter()
-    useEffect(() => {
-        if(user && parsedShipping) {
-           
-            setCity(parsedShipping?.city)
-            setCountry(parsedShipping.country)
-            setAddress(parsedShipping.address)
-            setPhoneNumber(parsedShipping.phoneNumber)
-            setPostalCode(parsedShipping.postalCode)
-        }
-    }, [parsedShipping,user])
+    
     
     const handleCountryChange = (selectedOption: SingleValue<{ value: string; label: string; } | null>) => {
       // Check if selectedOption is null, and set the country accordingly
