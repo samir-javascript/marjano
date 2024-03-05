@@ -28,17 +28,17 @@ const CommandeInfoMobile = ({ paymentMethod, order, user }:any) => {
           </div>
           <div className={`mt-1 ${isAddressOpen ? 'h-auto' : 'h-0'} overflow-hidden`}>
             <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5">
-              Mr. {parsedUser.user.name} 
+              Mr. {parsedUser?.user?.name} 
             </p>
             <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5">
-              {parsedOrder.shippingAddress.city}, {parsedOrder.shippingAddress.address}
+              {parsedOrder?.shippingAddress?.city}, {parsedOrder?.shippingAddress?.address}
             </p>
             <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5">
-              <span className="uppercase">{parsedOrder.shippingAddress.city}, </span>
-              {parsedOrder.shippingAddress.postalCode} {parsedOrder.shippingAddress.country}
+              <span className="uppercase">{parsedOrder?.shippingAddress?.city}, </span>
+              {parsedOrder?.shippingAddress?.postalCode} {parsedOrder?.shippingAddress?.country}
             </p>
             <p className="font-semibold text-[#00afaa] underline text-[15px] mb-0.5">
-              {parsedOrder.shippingAddress.phoneNumber}
+              {parsedOrder?.shippingAddress?.phoneNumber}
             </p>
           </div>
         </div>
@@ -49,17 +49,17 @@ const CommandeInfoMobile = ({ paymentMethod, order, user }:any) => {
           </div>
           <div className={`mt-1 ${isBillingOpen ? 'h-auto' : 'h-0'} overflow-hidden`}>
             <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5">
-              Mr. {parsedUser.user.name} 
+              Mr. {parsedUser?.user?.name} 
             </p>
             <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5">
-              {parsedOrder.shippingAddress.city}, {parsedOrder.shippingAddress.address}
+              {parsedOrder?.shippingAddress?.city}, {parsedOrder?.shippingAddress?.address}
             </p>
             <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5">
-              <span className="uppercase">{parsedOrder.shippingAddress.city}, </span>
-              {parsedOrder.shippingAddress.postalCode} {parsedOrder.shippingAddress.country}
+              <span className="uppercase">{parsedOrder?.shippingAddress?.city}, </span>
+              {parsedOrder?.shippingAddress?.postalCode} {parsedOrder?.shippingAddress?.country}
             </p>
             <p className="font-semibold text-[#00afaa] underline text-[15px] mb-0.5">
-              {parsedOrder.shippingAddress.phoneNumber}
+              {parsedOrder?.shippingAddress?.phoneNumber}
             </p>
           </div>
         </div>

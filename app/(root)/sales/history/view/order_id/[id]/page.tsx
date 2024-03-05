@@ -132,7 +132,7 @@ const OrderDetails = async({params}:props) => {
                         <h4 className="font-bold text-[#4c4c4c] text-[15px] mb-2 ">Adresse de facturation</h4>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">Mr. {result.shippingAddress.firstName} {result.shippingAddress.lastName} </p>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">{result.shippingAddress.city}, {result.shippingAddress.address}</p>
-                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result.shippingAddress.city}, </span>{result.shippingAddress.postalCode} {result.shippingAddress.country} </p>
+                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result?.shippingAddress?.city}, </span>{result.shippingAddress.postalCode} {result.shippingAddress.country} </p>
                         <p className="font-semibold text-[#00afaa] underline  text-[15px] mb-0.5 ">{result.shippingAddress.phoneNumber} </p>
                     </div>
                     <div  className="flex flex-col mr-3">

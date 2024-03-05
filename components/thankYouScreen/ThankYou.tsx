@@ -5,9 +5,6 @@ import './styles.css'
 import { BsBagCheckFill } from 'react-icons/bs';
 import { runFireworks } from '@/utils/confetii'
 
-
-
-
 const ThankYou = () => {
  
   
