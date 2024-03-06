@@ -1,10 +1,9 @@
  'use client'
- import { FaRegHeart, FaUser } from "react-icons/fa";
+import { FaRegHeart, FaUser } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import Input from "./Input";
 import  Link  from 'next/link'
-
 import { NavDrawerStyles } from "./Drawer/styles";
 import {  Drawer } from '@mui/material'
 import SideBar from "./SideBarComponent/SideBar";
@@ -20,7 +19,7 @@ const MobileHeader = ({result, qty}:any) => {
      const [mobileOpen,setMobileOpen] = useState(false)
      if(pathname === '/shipping' || pathname === '/payment') return null;
   return (
-    <header className="lg:hidden  flex flex-col gap-4 bg-[#0b4d54] !text-white pt-2 px-2  ">
+    <header className="lg:hidden  flex flex-col  bg-[#0b4d54] !text-white pt-2 px-2 !overflow-hidden ">
         <div className="flex items-center justify-between">
              <div className="flex items-center space-x-2">
                  <IoMenu onClick={()=> setMobileOpen(true)}   size={40} color='white' cursor='pointer' />
@@ -56,7 +55,10 @@ const MobileHeader = ({result, qty}:any) => {
                  
              </div>
         </div>
-        <Input />
+        <div className="my-2">
+          <Input />
+        </div>
+        
         <div>
              <NavDrawerStyles>
                

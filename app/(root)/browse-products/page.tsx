@@ -14,7 +14,10 @@ interface props {
 
 const Page = async({searchParams}:props) => {
  
-  const result = await getProductsByCategory({categoryName: searchParams.categoryName})
+  const decodedCategoryName = decodeURIComponent(searchParams.categoryName);
+
+  const result = await getProductsByCategory({ categoryName: searchParams.categoryName });
+  console.log(decodedCategoryName.trim());
   const { userId } = auth()
    if(!userId) return;
   const user = await getUserById({clerkId:userId})

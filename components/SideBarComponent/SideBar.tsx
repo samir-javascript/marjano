@@ -13,22 +13,28 @@ import { FaRegHeart } from 'react-icons/fa'
 
 
 
-import { usePathname, useRouter } from 'next/navigation'
+import {  useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { brandsSideBar, categoriesSideBar } from '@/utils/constants';
-
-const SideBar = ({setMobileOpen}:any) => {
+import { useAuth } from '@clerk/nextjs';
+interface props {
+   setMobileOpen:any;
+   
+}
+const SideBar = ({setMobileOpen}:props) => {
   
    const router = useRouter()
   
-  const  pathname  = usePathname()
+ const searchParams = useSearchParams()
+ const query = searchParams.get("categoryName")
+  const { userId } = useAuth()
   const userInfo = true;
 // && userInfo.isAdmin
   useEffect(() => {
     {/* each time route changes i want you to close the drawer */}
     setMobileOpen(false)
    
-  }, [pathname,setMobileOpen])
+  }, [query,setMobileOpen])
  
   return (
     <>
@@ -108,7 +114,7 @@ const SideBar = ({setMobileOpen}:any) => {
        </LinkStyles>
       
         <Divider className='!text-gray-500 ' />
-        <LinkStyles href='/profile'>
+        <LinkStyles href={`/profile/${userId}`}>
         <ListItem className='hover:bg-[#f1f1f1] '>
                  <ListItemIcon>
                     <Image width={30} height={30}  alt='' loading='lazy' 

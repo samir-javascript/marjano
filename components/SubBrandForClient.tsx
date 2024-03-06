@@ -13,12 +13,16 @@ const SubBrandForClient = ({searchParams}:any) => {
  
   const Params = useSearchParams()
   const query = Params.get('categoryName')
-  console.log(query, "nabil query")
+  
   const categoryBanner  = categoryNames.find((item:any) => item.name === searchParams.categoryName)
+  const bebeCategoryBanner = categoryNames.find((item:any)=> item.name === "Bébé - Jouets")
+ 
   return (
     <>
          <div className="w-full">
-        
+           {!categoryBanner && (
+             <Image fluid alt={bebeCategoryBanner?.name || ""}  src={bebeCategoryBanner?.imageBanner || ""} className="w-full h-full object-contain" />
+           )} 
              <Image fluid alt={categoryBanner?.name || ""}  src={categoryBanner?.imageBanner || ""} className="w-full h-full object-contain" />
          </div>
         

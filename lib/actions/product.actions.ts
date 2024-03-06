@@ -243,7 +243,7 @@ export async function getProductsByCategory(params:GetProductsByCategoryParams) 
   try {
     const { categoryName } = params;
       await connectToDatabase()
-      const products = await ProductModel.find({category: categoryName})
+      const products = await ProductModel.find({category: { $regex: categoryName, $options: "i"}})
       return products
   } catch (error) {
     console.error('Error in getProductsByCategory:', error);

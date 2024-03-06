@@ -42,9 +42,12 @@ export default async function Home() {
  
   
   return (
-    <div>
+    <div className="max-sm:!overflow-x-hidden">
        <Banner />
+      
        <CategorySlider />
+       
+       
        <BrandCategoriesSection />
        <BonPlans bonPlansProducts={JSON.stringify(bonPlansProducts)} user={JSON.stringify(user)} />
         <div className="max-w-[1400px] mx-auto flex flex-col ">

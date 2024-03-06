@@ -138,7 +138,7 @@ export const useCategoryNames = () => {
     {
        id: "0022559694998989dfdfdfd",
        image: 'https://www.marjanemall.ma/media/wysiwyg/category/HOMEPAGE/homepage_desktop_webp/output_image_8__1.webp',
-       name :'Bébé%20&%20Jouets',
+       name :'Bébé - Jouets',
        imageBanner: isMobile ? "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/BANNIERES-N1_mobile6-b_b_jouet_image_23_.webp" :  "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/SLIDE-N1-6-b_b_joeut_image_24_.webp"
     },
 
