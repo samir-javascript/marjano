@@ -127,8 +127,8 @@ interface Address {
 interface OrderItem {
     name: string;
     price: number;
-    quantity: string;
-    product: string; // Change Types.ObjectId to string
+    quantity: number;
+    product: mongoose.Schema.Types.ObjectId; // Change Types.ObjectId to string
   }
 
 interface ShippingDetails {
@@ -229,12 +229,16 @@ const OrderSchema = new Schema<OrderDocument>({
         {
             name: { type: String },
             price: { type: Number },
-            quantity: { type: String },
-            product: { type: Types.ObjectId, ref: "Product", required: true}
+            quantity: { type: Number },
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref: 'Product'
+            },
         },
     ],
 }, {timestamps: true});
 
-const OrderModel = models.Order || model<OrderDocument>('Order', OrderSchema);
+const OrderModel = models.Order || model('Order', OrderSchema);
 
 export default OrderModel;

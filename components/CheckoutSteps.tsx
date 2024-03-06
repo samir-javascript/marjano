@@ -1,5 +1,6 @@
 "use client"
-import Link from 'next/link';
+
+import { useRouter } from 'next/navigation';
 import { Nav } from 'react-bootstrap'
 
 import {  FaCheck} from 'react-icons/fa'
@@ -11,13 +12,13 @@ interface Props {
 }
 const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
  
-   
+   const router = useRouter()
   return (
     <Nav className='justify-content-center my-4 bg-transparent '>
          <Nav.Item className='flex items-center'>
            
             {step1 ? (
-                <Link href='/cart'>
+                <div onClick={()=> router.push('/cart')}>
                      <Nav.Link >
                       <div className=' flex flex-col items-center text-center gap-[2px]  '>
                         <div className='w-[20px] h-[20px] flex items-center justify-center rounded-full bg-[#00afaa]  '>
@@ -28,7 +29,7 @@ const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
                       </div>
                    </Nav.Link>
                   
-                </Link>
+                </div>
             ): (
                 <>
                 <Nav.Link  disabled>
@@ -48,7 +49,7 @@ const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
          </Nav.Item>
          <Nav.Item className='flex items-center'>
             {step2 ? (
-                <Link href='/shipping'>
+                <div  onClick={()=> router.push('/shipping')}>
                     <Nav.Link >
                     <div className=' flex flex-col items-center text-center gap-[2px]'>
                         <div className='w-[20px] h-[20px] flex items-center justify-center rounded-full bg-[#00afaa]  '>
@@ -58,7 +59,7 @@ const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
                           <p className='font-bold text-[#00afaa] text-sm '>address de livraison</p>
                       </div>
                     </Nav.Link>
-                </Link>
+                </div>
             ): (
                 <Nav.Link  disabled>
                    <div className=' flex flex-col items-center text-center gap-[2px]'>
@@ -74,7 +75,7 @@ const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
          </Nav.Item>
          <Nav.Item className='flex items-center'>
             {step3 ? (
-                <Link href='/payment'>
+                <div  onClick={()=> router.push('/payment')}>
                     <Nav.Link >
                     <div className=' flex flex-col items-center text-center gap-[2px]'>
                         <div className='w-[20px] h-[20px] flex items-center justify-center rounded-full bg-[#00afaa]  '>
@@ -84,7 +85,7 @@ const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
                           <p className='font-bold text-[#00afaa] text-sm '>payment</p>
                       </div>
                     </Nav.Link>
-                </Link>
+                </div>
             ): (
                 <Nav.Link  disabled>
                   <div className=' flex flex-col items-center text-center gap-[2px]'>
@@ -100,7 +101,7 @@ const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
          </Nav.Item>
          <Nav.Item>
             {step4 ? (
-                <Link href="/place-order">
+                <div  onClick={()=> router.push('/place-order')}>
                     <Nav.Link >
                     <div className=' flex flex-col items-center text-center gap-[2px]'>
                         <div className='w-[20px] h-[20px] flex items-center justify-center rounded-full bg-[#00afaa]  '>
@@ -110,7 +111,7 @@ const CheckoutSteps = ({step1 , step2 , step3 , step4}:Props) => {
                           <p className='font-bold text-[#00afaa] text-sm '>place order</p>
                       </div>
                     </Nav.Link>
-                </Link>
+                </div>
             ): (
                 <Nav.Link disabled>
                    <div className=' flex flex-col items-center text-center gap-[2px]'>
