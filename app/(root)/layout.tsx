@@ -4,10 +4,11 @@ import { Analytics } from "@vercel/analytics/react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../globals.css"
 import SubHeader from "@/components/SubHeader";
-import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkProvider, auth } from '@clerk/nextjs'
 import Header from "@/components/Header";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Roboto } from "next/font/google";
+import { getCartTotalCount, getUserById } from "@/lib/actions/cart.actions";
 
 
 
@@ -22,17 +23,24 @@ const roboto = Roboto({
 })
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = auth()
+    
+  const user = await getUserById({clerkId:userId!})
+ 
+   const qty = await getCartTotalCount({
+     userId: user?.user?._id
+   })
   return (
     <ClerkProvider>
     <html lang="en">
       <body className={roboto.className}>
         <SubHeader />
-        <Header />
+        <Header qty={qty} user={user} />
         {children}
         <SpeedInsights />
         <Analytics />

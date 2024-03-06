@@ -15,7 +15,7 @@ const CustomerOrders = async() => {
   const user = await getUserById({clerkId:userId!})
    const result = await getMyOrders({userId:user.user._id})
    console.log('ORDERS ARE HERE', result)
-const orders = [] as any;
+  
  
   return ( 
     <div className="w-full h-full bg-slate-50">
@@ -36,13 +36,13 @@ const orders = [] as any;
                                 <p className="lg:text-sm text-[12px] font-normal text-[#555] whitespace-nowrap lg:block hidden ">N° {order._id} </p>
                                 <div className=" flex flex-row w-full  items-center justify-between">
                                     <div className="flex lg:flex-row flex-1 justify-between flex-col">
-                                    <p className="font-extrabold text-[#4c4c4c] text-base text-[14px] ">Effectuée le 10/21/2024 </p>
+                                    <p className="font-extrabold text-[#4c4c4c] text-base text-[14px] ">Effectuée le  {order.createdAt ? order.createdAt.toISOString().substring(0, 10) : ""}</p>
                                     <p className="font-normal text-sm lg:hidden block  ">Total: {(order?.itemsPrice).toFixed(2)} Dh </p>
                                     </div>
                                    {/* btn */}
                                      <div className="flex items-center gap-4">
                                         <p className="font-normal text-sm lg:block hidden  ">Total: {(order?.itemsPrice).toFixed(2)} Dh </p>
-                                        <Link href={`view/order_id/${order._id}`}>
+                                        <Link href={`/sales/history/view/order_id/${order._id}`}>
                                            <button className="px-4 py-1.5 rounded-[15px] whitespace-nowrap text-white font-bold text-base bg-[#00afaa]  ">Detail</button>
                                         </Link>
                                      </div>
@@ -51,16 +51,16 @@ const orders = [] as any;
                              
                              <div>
                                   {order.orderItems.map((x:any,index:number) => {
-                                    console.log('x x x x which means product', x)
+                                   
                                      return (
                                       <div className="flex border-b border-[#ddd]  justify-between items-center gap-x-2 " key={index}> 
                                       <div className="lg:w-[110px]  lg:h-[110px] w-[170px] h-[80px] 
                                         border border-[#efefef] rounded-md flex items-center justify-center m-3">
                                             <Image
                                               className="w-full h-full object-contain "
-                                              alt=''
+                                              alt={x.product.name}
                                               width={100} height={100}
-                                              src={""}
+                                              src={x.product.images[0]}
                            
                                             />
                                                    
@@ -78,7 +78,7 @@ const orders = [] as any;
                                             </div>
                                                       
                                                       <div className="flex flex-col justify-end items-center space-y-1 mr-3">
-                                                            <Link href={`view/order_id/${order._id}`}>
+                                                            <Link href={`/sales/history/view//order_id/${order._id}`}>
                                                                   <button className="px-3 py-1 rounded-[15px] text-[#00afaa]  font-bold text-base bg-transparent border border-[#00afaa] whitespace-nowrap  ">suivi coolis</button>
                                                                </Link>
                                                                {order.isPaid ? (

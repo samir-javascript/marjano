@@ -65,9 +65,9 @@ const Page = async({params}:props) => {
                  loading="lazy"
                    className="w-[100%] h-[100%] object-contain "
                    width={100} 
-                   alt=''
+                   alt={x.product.name}
                    height={100}
-                   src={""}
+                   src={x.product.images[0]}
 
                  />
                 

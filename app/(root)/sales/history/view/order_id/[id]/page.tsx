@@ -16,7 +16,9 @@ interface props {
 const OrderDetails = async({params}:props) => {
   // Fetching order details based on the id from the URL params
   const {userId} = auth()
+
   const result = await getOrderById({orderId:params.id})
+  console.log('ORDER BY ID FROM ROUTE ID ', result)
   const user = await getUserById({clerkId:userId!})
   // Display loading message while data is being fetched
  
@@ -40,8 +42,8 @@ const OrderDetails = async({params}:props) => {
             <p className="lg:text-[2rem] text-[16px] lg:mx-0 mx-2 text-black font-extrabold  ">Commande N°{result._id} </p>
           </div>
           <div className="rounded-[10px] bg-[rgb(211,211,211)] p-2 mt-8 mx-2">
-              <p className="text-[#4c4c4c] font-bold text-base ml-3 ">Effectuée le 10/25/2024 </p>
-          </div>
+    <p className="text-[#4c4c4c] font-bold text-base ml-3 ">Effectuée le  {result.createdAt ? result.createdAt.toISOString().substring(0, 10) : ""} </p>
+</div>
           <div className="lg:hidden flex items-center justify-between mx-2 mt-3">
           <p className="text-red-500  lg:text-[12px] text-[11px] lg:text-right font-semibold ">Livraison entre le samedi 3 février 2024 et le lundi 5 février 2024</p>
           {result.isPaid ? (
@@ -62,8 +64,8 @@ const OrderDetails = async({params}:props) => {
                    className="w-full h-full object-contain  "
                   width={100}
                   height={100}
-                   src=""
-                    alt=''
+                   src={x?.product?.images[0]}
+                    alt={x?.product?.name}
                  />
                         
                  </div>
@@ -118,7 +120,7 @@ const OrderDetails = async({params}:props) => {
                <div className="flex justify-between">
                     <div  className="flex flex-col ">
                         <h4 className="font-bold text-[#4c4c4c] text-[15px] mb-2 ">Adresse de livraison</h4>
-                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">Mr. {result.shippingAddress.firstName} {result.shippingAddress.lastName} </p>
+                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">Mr. {user.user.name}  </p>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">{result.shippingAddress.city}, {result.shippingAddress.address}</p>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result.shippingAddress.city}, </span>{result.shippingAddress.postalCode} {result.shippingAddress.country} </p>
                         <p className="font-semibold text-[#00afaa] underline  text-[15px] mb-0.5 ">{result.shippingAddress.phoneNumber} </p>
@@ -130,7 +132,7 @@ const OrderDetails = async({params}:props) => {
                     </div>
                     <div  className="flex flex-col ">
                         <h4 className="font-bold text-[#4c4c4c] text-[15px] mb-2 ">Adresse de facturation</h4>
-                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">Mr. {result.shippingAddress.firstName} {result.shippingAddress.lastName} </p>
+                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">Mr. {user.user.name} </p>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">{result.shippingAddress.city}, {result.shippingAddress.address}</p>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result?.shippingAddress?.city}, </span>{result.shippingAddress.postalCode} {result.shippingAddress.country} </p>
                         <p className="font-semibold text-[#00afaa] underline  text-[15px] mb-0.5 ">{result.shippingAddress.phoneNumber} </p>

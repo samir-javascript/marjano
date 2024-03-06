@@ -1,27 +1,31 @@
-
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import Input from "./Input"
 import { FaRegHeart, FaUser } from "react-icons/fa";
-import { SignedIn, UserButton, auth } from "@clerk/nextjs";
-import { getCartTotalCount, getUserById, getUserCart } from "@/lib/actions/cart.actions";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+
 import CartIcon from "./CartIcon";
 
 import AdminDropDown from "./AdminDropDown";
 import MobileHeader from "./MobileHeader";
 import MegaMenu from "./Drawer/MegaMenu";
+import { usePathname } from "next/navigation";
 
 
-const Header = async() => {
+const Header =({qty,user}:any) => {
     
-     const { userId } = auth()
-    
-     const user = await getUserById({clerkId:userId!})
-    
-      const qty = await getCartTotalCount({
-        userId: user?.user?._id
-      })
-     
+const words = user.user?.name.split(' ') || []
+
+
+// Get the first character of each word
+const initials = user &&  words.map((word:any) => word.charAt(0));
+
+// Concatenate the initials into a string
+const result = user && initials.join('').toUpperCase();
+   const pathname = usePathname()
+    if(pathname === '/payment' || pathname.startsWith('/orders')) return null;
+
   return (
     <>
 
@@ -35,15 +39,29 @@ const Header = async() => {
             {user && user?.user?.isAdmin && (
               <AdminDropDown />   
           )}
-                 <Link href='/browse-wishlist_products' className="flex no-underline  flex-col text-center transition-all gap-1 duration-200 hover:!text-[#80d4dd] cursor-pointer items-center text-white">
+                 <Link href='/browse-wishlist_products' className="flex no-underline 
+                  flex-col text-center transition-all gap-1 duration-200 hover:!text-[#80d4dd]
+                   cursor-pointer items-center text-white">
                      <FaRegHeart size={25} />
                      <p>Mon favoris </p>
                  </Link>
-                 <Link href={`/profile/${userId}`} className="flex text-white no-underline gap-1 transition-all duration-200 hover:!text-[#80d4dd] flex-col text-center items-center cursor-pointer">
-                    <FaUser size={25} />
-                    <p>Mon Compte</p>
-                 </Link>
-             <CartIcon  qty={userId ? qty : 0} />
+                 <Link href={`/profile/${user.user.clerkId}`} 
+             className="flex no-underline flex-col items-center !text-white
+              gap-1 cursor-pointer transition-all duration-150 hover:!text-[#80d4dd]">
+                <div className="relative">
+                   <FaUser size={24} />
+                   {user && (
+                      <div className="absolute top-[-10px] right-[-10px] bg-yellow-500
+                          rounded-full w-[20px] h-[20px] flex justify-center items-center">
+                          <span className="text-[10px] text-blue-900 font-extrabold">{result} </span>
+                     </div>
+                   )}
+                </div>
+               
+                <p>Mon compte</p>
+            </Link>
+                 
+             <CartIcon  qty={user ? qty : 0} />
 
                  <SignedIn>
                    <UserButton 
@@ -60,7 +78,7 @@ const Header = async() => {
             </div>
          </div>
     </header>
-    <MobileHeader qty={qty} />
+    <MobileHeader result={result} qty={qty} />
     <div>
        <MegaMenu />
     </div>

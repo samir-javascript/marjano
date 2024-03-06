@@ -16,11 +16,14 @@ export async function POST(req:Request) {
           userId,
           totalPrice,
           orderItems: orderItems.map((order:any)=> ({
+
              ...order,
-              product: order._id,
+             product: order.productId._id,
               _id: undefined
           }))
+         
       })
+      console.log('ORDER ITEMS HERE', orderItems)
       const createdOrder = await order.save()
       revalidatePath(path)
       return NextResponse.json({createdOrder, orderId: createdOrder._id})
