@@ -30,7 +30,7 @@ const ProfileTable = () => {
          
         >
           <Link className={pathname.startsWith(item.url) ? 
-            ' text-white' : 'text-[#575757] tracking-normal font-bold'} href={item.url}>
+            ' text-white' : 'text-[#575757] tracking-normal font-bold !whitespace-nowrap'} href={item.url}>
             {item.title}
           </Link>
         </li>

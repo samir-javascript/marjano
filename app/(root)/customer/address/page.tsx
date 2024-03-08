@@ -18,9 +18,9 @@ const CustomerAddressPage = async() => {
   return ( 
     <div className="w-full bg-slate-50">
       
-      <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 py-5">
+      <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 lg:py-5">
         <ProfileTable />
-        <ProfileMobileTabs />
+        <ProfileMobileTabs user={user} />
       {/*   */}
   <div className="flex-1 flex flex-col"> 
   <h2 className="text-[#333] font-extrabold text-[20px] mb-3 mx-[20px] ">Adresses par défaut</h2>

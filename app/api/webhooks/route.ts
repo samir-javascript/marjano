@@ -64,7 +64,7 @@ export const POST = async(req:Request)=> {
             orderItems: result.cart.cartItems.map((order:any)=> ({
                 ...order,
                 _id: undefined,
-                product: order._id,
+                product: order.productId._id,
             }))
           })
          const updateProductPromises = result?.cart.cartItems.map(async(product:any)=> {

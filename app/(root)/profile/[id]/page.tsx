@@ -26,13 +26,16 @@ const ProfilePage = async() => {
    
     <div className="max-w-[1400px] lg:mx-auto lg:py-5  py-2  flex lg:flex-row flex-col gap-4 justify-start items-start w-full mx-[20px]">
         <ProfileTable  />
-       <ProfileMobileTabs />
+       <ProfileMobileTabs user={user} />
       <div className='flex flex-col flex-1 max-w-[1000px]'>
-        <div className='flex lg:flex-row flex-col lg:items-center gap-4 
-        justify-between w-full border-b border-[#ddd] pb-5'>
+      <h2 className="text-[#333] font-extrabold text-[20px] mb-5 !mx-[20px]">Informations du compte</h2>
+        <div className='flex lg:flex-row flex-col lg:items-start gap-4 
+         w-full border-b border-[#ddd] pb-5'>
+          <div>
+         
           <div className='flex flex-col'>
-            <h2 className="text-[#333] font-extrabold text-[20px] mb-5 mx-[20px]">Informations du compte</h2>
-            <p className="text-[#333] font-bold text-[14px]  mx-[20px] mb-2">Informations de contact</p>
+         
+            <p className="text-[#333] font-bold text-[14px]  !mx-[25px] mb-2">Informations de contact</p>
             <div className='flex flex-col mx-[20px] '>
               <span className='text-gray-500 font-normal text-[13px] '>
                 
@@ -47,17 +50,20 @@ const ProfilePage = async() => {
               modifier
             </Link>
           </div>
+          </div>
           <div className='flex flex-col mx-[20px] '>
             <p className="text-[#333] font-bold text-[14px]  mb-2">Mes communications</p>
             <span className='text-gray-500 font-normal text-[13px] '>
-              Vous êtes abonné à nos communications email et/ou SMS
+              Vous êtes abonné à nos <br className="sm:block hidden" /> communications email et/ou SMS
             </span>
           </div>
         </div>
+     <div className="pt-4">
 
-        <div className='flex lg:flex-row flex-col lg:items-center gap-4 justify-between w-full py-4  border-b border-[#ddd]'>
+     <h2 className="text-[#333] font-extrabold text-[20px] mx-[20px] mb-5">Carnet d’adresses</h2>
+        <div className='flex lg:flex-row flex-col lg:items-start gap-4  w-full pb-4 border-b border-[#ddd]'>
           <div className='flex flex-col mx-[20px]'>
-            <h2 className="text-[#333] font-extrabold text-[20px] mb-5">Carnet d’adresses</h2>
+           
             <p className="text-[#333] font-bold text-[14px]  mb-2">Adresse de facturation par défaut</p>
             <div className='flex flex-col  '>
             {!shipping || shipping === null || Object.keys(shipping).length === 0 ? (
@@ -133,7 +139,7 @@ const ProfilePage = async() => {
            
           </div>
         </div>
-
+        </div>
         {/** Orders table */}
        {result.length === 0 ? (
         <>
@@ -146,7 +152,10 @@ const ProfilePage = async() => {
           
       <>
         <h2 className="text-[#333] font-extrabold text-[20px] my-3 mx-[20px]">Commandes récentes </h2>
-        <Table responsive striped hover className='table-sm mx-[20px] max-md:hidden'>
+        <div  className="lg:block hidden">
+
+        
+        <Table responsive striped hover className='table-sm mx-[20px] '>
       
           <thead>
             <tr>
@@ -187,6 +196,7 @@ const ProfilePage = async() => {
         
           </tbody>
         </Table>
+        </div>
         </>
          )}
         <OrderCols  firstLine='Commande #'

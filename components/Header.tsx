@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 
 
 const Header =({qty,user}:any) => {
-    
+  
 const words = user.user?.name.split(' ') || []
 
 
@@ -78,7 +78,7 @@ const result = user && initials.join('').toUpperCase();
             </div>
          </div>
     </header>
-    <MobileHeader result={result} qty={qty} />
+    <MobileHeader user={user} result={result} qty={qty} />
     <div>
        <MegaMenu />
     </div>

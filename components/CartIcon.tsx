@@ -1,15 +1,24 @@
+"use client"
 
-
-import Link from 'next/link';
 import { MdOutlineShoppingCart } from 'react-icons/md'
 
 interface Props {
   qty: number;
 }
 const CartIcon = ({qty}:Props) => {
- 
+  const navtoggle = () => {
+        console.log('I WAS CLICKED')
+
+    const menu = document.getElementById('menu-cart');
+  
+    menu?.classList.toggle('show-menu');
+    document.body.classList.add('stop-scrolling');
+    console.log('I WAS CLICKED AGAIN')
+    // Add click event listener to the body
+  
+  };
   return (
-    <Link href='/cart'  id='cartSlide-btn'
+    <div onClick={navtoggle}  id='cartSlide-btn'
     className="flex  flex-col !text-white items-center gap-1 cursor-pointer
      transition-all duration-150 hover:!text-[#80d4dd]">
        <div className="relative">
@@ -26,7 +35,7 @@ const CartIcon = ({qty}:Props) => {
       </div>
       
       <p className="text-base font-normal whitespace-nowrap">Mon panier</p>
-  </Link>
+  </div>
   )
 }
 

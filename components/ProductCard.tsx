@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 "use client";
 import { useState } from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaTimes } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useRouter,  usePathname } from "next/navigation";
 import Link from 'next/link';
@@ -9,11 +9,10 @@ import Link from 'next/link';
 import Rating from './Rating';
 
 import { addToCart } from '@/lib/actions/product.actions';
-import Image from 'next/image';
+//import Image from 'next/image';
 import { toggleSavedProduct } from '@/lib/actions/user.actions';
-
-
-
+import { Image, Modal } from 'react-bootstrap';
+import Loader from './Loader';
 const ProductCard = ({product, user}:any) => {
 
  const parsedProduct = JSON.parse(product)
@@ -23,10 +22,14 @@ const ProductCard = ({product, user}:any) => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [modalProduct, setModalProduct] = useState({ image: "", name: "" });
+  const [isLoading,setIsLoading] = useState(false)
+  const [isAdding,setIsAdding] = useState(false)
   const pathname = usePathname()
+
   const pro = parsedUser?.user?.saved?.includes(parsedProduct._id)
   const handleAddToCart = async()=> {
    // if(!product._id) return;
+     setIsLoading(true)
      try {
         await addToCart({
             quantity: 1,
@@ -34,25 +37,36 @@ const ProductCard = ({product, user}:any) => {
             productId: parsedProduct._id,
             name: parsedProduct.name,
             price: parsedProduct.price,
-         
             path:pathname
         })
-       
-      
+       setIsLoading(false)
      } catch (error) {
         console.log(error)
+     }finally {
+        setIsLoading(false)
      }
  }
+ const loading = false
  const handleAddToWishlist = async()=> {
+  setIsAdding(true)
   try {
      await toggleSavedProduct({
        userId: parsedUser?.user?._id,
        path: pathname,
        productId: parsedProduct?._id
      })
-     
+     setIsAdding(false)
+     if (!pro) {
+      setModalProduct({
+        image: parsedProduct?.images[0],
+        name: parsedProduct?.name,
+      });
+      setShowModal(true);
+    }
   } catch (error) {
      console.log(error)
+  }finally {
+    setIsAdding(false)
   }
 }
   return (
@@ -60,14 +74,16 @@ const ProductCard = ({product, user}:any) => {
     
         <div  className={` sm:w-[200px]  max-sm:w-[161px] max-w-full border mx-2
                  border-[rgba(211,211,211,0.78)] rounded-xl min-h-auto h-[375px]  flex flex-col`}>
-                 
+              {isLoading || isAdding && (
+                <Loader />
+              )}
           <div className="w-full h-[200px] relative flex items-center 
                    justify-center bg-[#f6f6f6] rounded-tl-xl rounded-tr-xl ">
             <Link href={`/products/${parsedProduct._id}`}>
-             <Image priority  width={140} height={200}   className={`
+             <Image   width={140} height={200}   className={`
                w-auto aspect-auto  
                h-[100%] rounded-tl-xl rounded-tr-xl !z-[-1] object-contain`}
-             src={parsedProduct.images[0]} alt={parsedProduct.name} />
+             src={loading ? "/images/lodingGif.gif" : parsedProduct.images[0]} alt={parsedProduct.name}  />
             </Link>
             <div onClick={handleAddToWishlist} className='absolute bottom-0 right-0 m-3 w-[35px] h-[35px] rounded-full flex items-center justify-center bg-white '>
               
@@ -103,6 +119,29 @@ const ProductCard = ({product, user}:any) => {
               </div>
             </div>
           </div>
+          <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <div onClick={() => setShowModal(false)} className="p-3 ">
+          <FaTimes cursor='pointer' color='gray' size={24} />
+        </div>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-[#333] font-bold text-[16px] w-full flex flex-col gap-1 text-center ">
+            <p>{modalProduct.name} </p>
+            <p>has been added to your wish list</p>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="flex max-w-full mx-auto items-center justify-center w-[150px] h-[150px] bg-[#ddd] ">
+            <Image loading="lazy" className="w-[100%] h-[100%] object-contain " src={modalProduct.image} alt={modalProduct.name} fluid />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Link className="w-full flex justify-center" href='/browse-wishlist_products'>
+            <button className="px-4 py-2 rounded-[15px] w-full font-bold text-[15px] bg-[#00afaa]  text-white transition-all duration-150 hover:bg-[#0b4d54] ">
+              Accedez a votre liste
+            </button>
+          </Link>
+        </Modal.Footer>
+      </Modal>
         </div>
       
     </>

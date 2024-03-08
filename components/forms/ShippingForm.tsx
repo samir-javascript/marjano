@@ -6,14 +6,14 @@ import { countryOptions } from "@/utils/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import Select, { SingleValue } from 'react-select';
-const ShippingForm = ({user, shipping}:any) => {
+const ShippingForm = ({user, shipping,type}:any) => {
   const parsedUser = JSON.parse(user)
   const parsedShipping = JSON.parse(shipping) 
-    const [phoneNumber, setPhoneNumber] = useState(parsedShipping.phoneNumber ||  "")
-    const [city, setCity] = useState(parsedShipping.city || '')
-    const [country, setCountry] = useState(parsedShipping.country || '')
-    const [postalCode, setPostalCode] = useState(parsedShipping.postalCode || "")
-    const [address, setAddress] = useState(parsedShipping.address || '')
+    const [phoneNumber, setPhoneNumber] = useState(parsedShipping?.phoneNumber ||  "")
+    const [city, setCity] = useState(parsedShipping?.city || '')
+    const [country, setCountry] = useState(parsedShipping?.country || '')
+    const [postalCode, setPostalCode] = useState(parsedShipping?.postalCode || "")
+    const [address, setAddress] = useState(parsedShipping?.address || '')
     const [loading,setLoading] = useState(false)
    
      const pathname = usePathname()
@@ -37,7 +37,12 @@ const ShippingForm = ({user, shipping}:any) => {
               country,
               phoneNumber
            })
-          router.push('/payment')
+           if(type === "addition")  {
+              router.push(`/profile/${parsedUser.user.clerkId}`)
+           }else {
+            router.push('/payment')
+           }
+         
         } catch (error) {
             console.log(error)
         }

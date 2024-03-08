@@ -18,9 +18,9 @@ const WishlistPage = async() => {
     return (
       <div className="w-full h-full bg-slate-50">
         
-        <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 py-5">
+        <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 lg:py-5">
             <ProfileTable />
-            <ProfileMobileTabs />
+            <ProfileMobileTabs user={user} />
             <div className="flex flex-col flex-1">
             <Message className='flex  items-center justify-center' variant="danger">
           Il n’y a aucun article dans votre liste d’envies.
@@ -36,9 +36,9 @@ const WishlistPage = async() => {
     <>
     <div className="w-full h-full bg-slate-50">
      
-        <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 py-5">
+        <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 lg:py-5">
             <ProfileTable />
-            <ProfileMobileTabs />
+            <ProfileMobileTabs user={user} />
             <div className="flex flex-col flex-1">
                  <h2 className="text-[#000] font-extrabold text-[25px] mx-[20px] ">Ma liste d’envie</h2>
                  <div className="mt-5 w-full max-w-[1000px] ">

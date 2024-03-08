@@ -18,11 +18,11 @@ const CustomerOrders = async() => {
   
  
   return ( 
-    <div className="w-full h-full bg-slate-50">
+    <div className="w-full h-full bg-slate-50 ">
        
-        <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 py-5">
+        <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 md:!py-10 ">
             <ProfileTable />
-            <ProfileMobileTabs />
+            <ProfileMobileTabs user={user} />
 
              <div className="flex flex-1 flex-col gap-2 lg:mx-0 mx-2">
                 {result.length === 0 ? (
@@ -58,9 +58,9 @@ const CustomerOrders = async() => {
                                         border border-[#efefef] rounded-md flex items-center justify-center m-3">
                                             <Image
                                               className="w-full h-full object-contain "
-                                              alt={x.product.name}
+                                              alt={x?.product?.name}
                                               width={100} height={100}
-                                              src={x.product.images[0]}
+                                              src={x?.product?.images[0]}
                            
                                             />
                                                    

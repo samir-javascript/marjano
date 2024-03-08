@@ -12,10 +12,10 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 
-const MobileHeader = ({result, qty}:any) => {
+const MobileHeader = ({result, qty, user}:any) => {
    const pathname = usePathname()
   
-  const userInfo = true;
+  
      const [mobileOpen,setMobileOpen] = useState(false)
      if(pathname === '/shipping' || pathname === '/payment') return null;
   return (
@@ -28,9 +28,9 @@ const MobileHeader = ({result, qty}:any) => {
                  </Link>
              </div>
              <div  className="flex items-center space-x-3">
-             <Link href={userInfo ? '/profile' : '/auth'} className="relative !text-white">
+             <Link href={`/profile/${user.user.clerkId}`} className="relative !text-white">
                    <FaUser size={24} />
-                   {userInfo && (
+                   {user && (
                       <div className="absolute top-[-10px] right-[-10px] bg-yellow-500
                        rounded-full w-[20px] h-[20px] flex justify-center items-center">
                           <span className="text-[10px] text-blue-900 font-extrabold">{result} </span>

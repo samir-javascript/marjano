@@ -15,11 +15,11 @@ const ShippingEdit = async() => {
     return (
       
         <div className="w-full h-full bg-slate-50">
-        <div  className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 py-5">
+        <div  className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 lg:py-5">
              
        
            <ProfileTable />
-            <ProfileMobileTabs />
+            <ProfileMobileTabs user={user} />
           <div className="flex flex-col flex-1 max-w-[1000px] mx-auto ">
               
                <div className="w-full bg-white shadow-md mx-auto  flex-col flex rounded-md p-3">

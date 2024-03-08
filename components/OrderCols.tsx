@@ -13,8 +13,8 @@ const OrderCols = ({orders,isLoading, firstLine, secondLine, thirdLine, fourthLi
 
    orders.map((order:any) => (
 
-   <div key={order._id} className="flex flex-col border-b border-[#ddd] pb-3 ">
- <div  className="max-md:flex hidden flex-col gap-4 mx-[20px] mt-4 ">
+   <div key={order._id} className="flex flex-col border-b border-[#ddd] pb-3 lg:hidden ">
+ <div  className="flex  flex-col gap-4 mx-[20px] mt-4 ">
         <div className="flex items-center gap-3">
            <p className="font-medium text-base text-[#333] "><strong className="font-extrabold">{firstLine}:</strong> {order._id} </p>
         </div>

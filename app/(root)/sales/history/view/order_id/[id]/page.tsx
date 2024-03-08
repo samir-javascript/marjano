@@ -28,9 +28,9 @@ const OrderDetails = async({params}:props) => {
   return (
     <div className="w-full h-full bg-slate-50">
       
-      <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 py-5">
+      <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 lg:py-5">
         <ProfileTable />
-        <ProfileMobileTabs />
+        <ProfileMobileTabs user={user} />
         <div className="flex flex-col flex-1 ">
           {/* Link to navigate back to sales history */}
           <Link href='/sales/history' className="flex items-center lg:mx-0 mx-2 space-x-10">

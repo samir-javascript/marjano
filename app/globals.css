@@ -80,7 +80,8 @@ a {
 }
 ul {
    list-style: none;
-   
+   padding: 0;
+   margin: 0;
 }
 .grid-container {
    display: grid;
@@ -91,12 +92,7 @@ ul {
   
 /* hsl(223, 64%, 98%)*/
 }
-.show-menu {
-   transform: translateX(0);
-}
-.stop-scrolling {
-   overflow: hidden;
-}
+
 
 /* Define the styles for the scrollbar */
 ::-webkit-scrollbar {
@@ -142,7 +138,12 @@ ul {
    transition: height 0.3s ease-in-out; /* Adjust the duration and timing function as needed */
    padding: 0;
  }
- 
+ .show-menu {
+  transform: translateX(0)!important;
+}
+.stop-scrolling {
+  overflow: hidden;
+}
  .accordion .contentbx.active .content {
    height: auto;
    padding: 10px;

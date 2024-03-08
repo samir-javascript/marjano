@@ -1,5 +1,7 @@
 "use client"
+import { deleteShipping } from "@/lib/actions/shipping.actions"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { Modal } from "react-bootstrap"
 import { FaTimes } from "react-icons/fa"
@@ -7,8 +9,19 @@ import { FaTimes } from "react-icons/fa"
 
 const AddressCols = ({shipping, user}:any) => {
    const parsedUser = JSON.parse(user)
-  
+    const pathname = usePathname()
  const [showModal,setShowModal] = useState(false)
+ const handleDelete = async()=> {
+    try {
+       await deleteShipping({
+         shippingId: shipping?._id,
+         path: pathname
+       })
+       //alert('Shipping address has been deleted')
+    } catch (error) {
+       console.log(error)
+    }
+ }
   return (
    <div  className="flex flex-col border-b border-[#ddd] pb-3 ">
  <div  className="max-md:flex hidden flex-col gap-4 mx-[20px] mt-4 ">
@@ -57,7 +70,7 @@ const AddressCols = ({shipping, user}:any) => {
         <Modal.Footer className="border-none"> 
           <div className="w-full flex justify-center gap-x-3">
           <button
-            
+            onClick={handleDelete}
              type="button"
           
              

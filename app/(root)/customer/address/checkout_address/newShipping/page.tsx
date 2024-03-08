@@ -15,11 +15,11 @@ const NouvelleAddressPage = async() => {
   return (
     <div className="w-full bg-slate-50 h-full">
      
-    <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 py-5">
+    <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 lg:py-5">
 
    
     <ProfileTable />
-        <ProfileMobileTabs />
+        <ProfileMobileTabs user={user} />
     
     <div className=" flex  lg:ml-10 flex-col flex-1 pb-8 lg:mx-auto mx-3">
         <div>
