@@ -100,6 +100,7 @@ export interface CreateUserParams {
   }
   export interface GetMyOrdersParams {
      userId:string;
+     page?: number;
   }
   export interface GetOrderByIdParams {
     orderId: string;
@@ -204,6 +205,8 @@ export interface CreateUserParams {
 
   export interface GetSavedProductsParams {
      clerkId:string;
+     page?: number;
+     pageSize?: number;
     
   }
   export interface GetRecommendedProduct {

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import Message from "@/components/Message";
+import PaginateCategories from "@/components/Paginate";
 import ProfileMobileTabs from "@/components/ProfileMobileTabs"
 import ProfileTable from "@/components/ProfileTable"
 import { getUserById } from "@/lib/actions/cart.actions";
@@ -9,11 +10,15 @@ import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
-
-const CustomerOrders = async() => {
+interface props {
+   searchParams: {
+     page: number;
+   }
+}
+const CustomerOrders = async({searchParams}:props) => {
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})
-   const result = await getMyOrders({userId:user.user._id})
+   const result = await getMyOrders({userId:user.user._id, page: searchParams.page ? +searchParams.page : 1})
    console.log('ORDERS ARE HERE', result)
   
  
@@ -25,12 +30,12 @@ const CustomerOrders = async() => {
             <ProfileMobileTabs user={user} />
 
              <div className="flex flex-1 flex-col gap-2 lg:mx-0 mx-2">
-                {result.length === 0 ? (
+                {result.orders.length === 0 ? (
                  <Message variant="danger">
                    vous n'avez jamais encore commande
                  </Message>
                 ): (
-                    result.map((order:any )=> (
+                    result.orders.map((order:any )=> (
                         <div className="border border-gray-400 flex flex-col  rounded-[20px]  " key={order._id}>
                              <div className="flex items-center justify-between w-full gap-x-8 bg-[rgb(211,211,211)] rounded-tr-[20px] rounded-tl-[20px]  p-2 ">
                                 <p className="lg:text-sm text-[12px] font-normal text-[#555] whitespace-nowrap lg:block hidden ">N° {order._id} </p>
@@ -104,6 +109,7 @@ const CustomerOrders = async() => {
                 ))}
              </div>
         </div>
+        <PaginateCategories page={result.page} pages={result.pages} url='/sales/history' />
     </div>
   )
 }

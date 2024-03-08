@@ -37,10 +37,15 @@ export async function getOrderById(params:GetOrderByIdParams) {
 
  export async function getMyOrders(params:GetMyOrdersParams) {
      try {
-        const { userId } = params;
+        const { userId , page = 1} = params;
+        const pageSize = 3;
+        const skipAmount = pageSize * (page - 1)
+        const count = await OrderModel.countDocuments({userId: userId})
         await connectToDatabase()
         const orders = await OrderModel.find({userId:userId}).populate("orderItems.product")
-        return orders;
+        .limit(pageSize)
+        .skip(skipAmount)
+        return {orders, page, pages:Math.ceil(count / pageSize)};
      } catch (error) {
         console.log(error)
         throw error

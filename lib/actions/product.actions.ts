@@ -241,10 +241,15 @@ export async function deleteProduct(params:DeleteProductParams) {
 
 export async function getProductsByCategory(params:GetProductsByCategoryParams) {
   try {
-    const { categoryName } = params;
+    const { categoryName, page = 1 } = params;
+    const pageSize = 12;
+    const skipAmount = pageSize * (page - 1)
+    const count = await ProductModel.countDocuments({category:categoryName})
       await connectToDatabase()
       const products = await ProductModel.find({category: { $regex: categoryName, $options: "i"}})
-      return products
+      .limit(pageSize)
+      .skip(skipAmount)
+      return{ products , page , pages: Math.ceil(count / pageSize)}
   } catch (error) {
     console.error('Error in getProductsByCategory:', error);
     throw error;
@@ -272,10 +277,16 @@ export async function getrecommendationProducts(params:GetRecommendedProduct) {
 
 export async function getProductsByBrand(params:GetProductsByBrandParams) {
   try {
-    const { brandName } = params;
+    const { brandName, page = 1 } = params;
+    const pageSize = 12;
+    const skipAmount = pageSize * (page - 1)
+    const count = await ProductModel.countDocuments({brand: { $regex: brandName, $options: "i"}})
      await connectToDatabase()
      const products = await ProductModel.find({brand: { $regex: brandName, $options: "i"}})
-     return products;
+     .limit(pageSize)
+     .skip(skipAmount)
+
+     return {products , page, pages: Math.ceil(count / pageSize)}
   } catch (error) {
      console.log(error)
      throw error;

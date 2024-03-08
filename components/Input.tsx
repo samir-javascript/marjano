@@ -26,7 +26,7 @@ const Input = () => {
              }
            }} value={keyword} onChange={(e)=> setKeyword(e.target.value)}
          className='outline-none bg-transparent w-full flex-1 indent-2 border-none placeholder:text-sm placeholder:font-semibold text-gray-700 capitalize '
-          type="text" placeholder='search for product, brand or category...' />
+          type="text" placeholder='search for product, brand or category name' />
          {keyword ? <FaTimes cursor='pointer' size={18}  onClick={()=> setKeyword('')} /> : <FaSearch size={20} color='#0b4d54' cursor='pointer' />}
     </div>
   )

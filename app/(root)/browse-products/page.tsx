@@ -6,9 +6,11 @@ import Link from 'next/link';
 import SubBrandForClient from '@/components/SubBrandForClient';
 import { auth } from '@clerk/nextjs';
 import { getUserById } from '@/lib/actions/cart.actions';
+import PaginateCategories from '@/components/Paginate';
 interface props {
   searchParams: {
      categoryName: string;
+     page: number;
   }
 }
 
@@ -16,7 +18,7 @@ const Page = async({searchParams}:props) => {
  
   
 
-  const result = await getProductsByCategory({ categoryName: searchParams.categoryName });
+  const result = await getProductsByCategory({ categoryName: searchParams.categoryName , page : searchParams.page ? +searchParams.page: 1});
  
   const { userId } = auth()
    if(!userId) return;
@@ -43,13 +45,13 @@ const Page = async({searchParams}:props) => {
                {searchParams.categoryName}
           </h2>
           <div className="flex flex-wrap md:gap-[15px]  gap-y-[15px] md:mx-[20px] mt-3 lg:items-start justify-center items-center lg:justify-start">
-            {result.map((item:any) => (
+            {result.products.map((item:any) => (
               <ProductCard user={JSON.stringify(user)} key={item._id} product={JSON.stringify(item)} />
             ))}
           </div>
         
         </div>
-      
+      <PaginateCategories page={result.page} pages={result.pages} categoryName={searchParams.categoryName} url="/browse-products" /> 
   </div>
     )
 }

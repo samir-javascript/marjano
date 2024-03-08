@@ -6,7 +6,7 @@ const Brands = ({useBrands}:any) => {
    const brand = useBrands()
   
   return (
-    <div className="max-w-[1400px] mx-auto my-5 lg:block hidden ">
+    <div className="max-w-[1400px] mx-auto mt-2 mb-5 lg:block hidden ">
          <div className="flex items-center gap-x-8  justify-center  gap-y-5  mx-5 ">
                 {brand.map((item:any,index:number)=> (
                     <Link href={`/browse-boutique-brand?brandName=${item.url}`}

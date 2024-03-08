@@ -45,10 +45,10 @@ function RightArrow() {
 const MobileBrands = ({useBrands}:any) => {
     const brand = useBrands()
   return (
-    <div className="max-w-[1400px] mx-auto mt-3 mb-5">
+    <div className="max-w-[1400px] mx-auto  mb-5">
           <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
           {brand.map((item:any,index:number)=> (
-                    <Link href={`/browse-boutique-brand?brandName=${item.url}`} className="rounded-md bg-[#f1f1f1] px-3 py-1 flex items-center justify-center w-[180px] mx-3  h-[70px]   " key={index}>
+                    <Link href={`/browse-boutique-brand?brandName=${item.url}`} className="rounded-md bg-[#f1f1f1] px-3 py-1 flex items-center justify-center w-[140px] mx-3  h-[70px]   " key={index}>
                         <Image alt={item.url} width={120} height={100} className="object-contain w-[120px] h-full" src={item.src}  />
                     </Link>
                 ))}

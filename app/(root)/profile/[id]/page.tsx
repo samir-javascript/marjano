@@ -141,7 +141,7 @@ const ProfilePage = async() => {
         </div>
         </div>
         {/** Orders table */}
-       {result.length === 0 ? (
+       {result.orders.length === 0 ? (
         <>
          <h2 className="text-[#333] font-extrabold text-[20px] my-3 mx-[20px]">Commandes récentes </h2>
            <Message variant="danger">
@@ -167,7 +167,7 @@ const ProfilePage = async() => {
             </tr>
           </thead>
           <tbody>
-            {result.map((order:any) => (
+            {result.orders.map((order:any) => (
     <tr key={order._id}>
     <td className='text-[14px] text-gray-500 font-medium whitespace-nowrap'>
       {order._id}
@@ -206,7 +206,7 @@ const ProfilePage = async() => {
             fifthLine='action'
               isLoading={false}
              user={user}
-              orders={result}  />
+              orders={result.orders}  />
       </div>
     </div>
     </div>

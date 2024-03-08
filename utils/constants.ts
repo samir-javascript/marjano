@@ -214,50 +214,50 @@ export  const bebeUrl = "/browse-products/Bébé%20&%20Jouets";
 
 export const subCategories = [
    {
-      url: "/browse-products/Tv%20-%20Son%20-%20Photo",
+      url: "/browse-products?categoryName=Tv%20-%20Son%20-%20Photo",
       title:"Tv-Son-Photo",
       img:"/images/pc_image-removed.png",
       id:"6659898540000088eee"
  },
  {
-   url: "/browse-products/Electronics",
+   url: "/browse-products?categoryName=Electronics",
    title:"Téléphone & Objets connectés",
    img:"/images/phone_image-removed.png",
    id:"565698900033+698989edf"
 },
 {
-   url: "/browse-products/Electronics",
+   url: "/browse-products?categoryName=Electronics",
    title:"Informatique - Gaming",
    img:"/images/gaming_image-removed.png",
    id:"989454546565666888777555fdfd"
 },
 {
-   url: "/browse-products/Electroménager",
+   url: "/browse-products?categoryName=Electroménager",
    title:"Electroménager",
    img:"/images/electro_image-removed.png",
    id:"998989899zdsdsfdfd"
 },
 {
-   url: "/browse-products/Maison - Cuisine - Deco",
+   url: "/browse-products?categoryName=Maison - Cuisine - Deco",
    title:"Maison - Cuisine - Deco",
    img:"/images/deco_image-removed.png",
    id:"8989ef65656545454545"
 },
 
 {
-   url: "/browse-products/sport",
+   url: "/browse-products?categoryName=sport",
    title:"Sport",
    img:"/images/sport_image.removed.png",
    id:"98568565654532323eeref656"
 },
 {
-   url: "/browse-products/Bébé & Jouets",
+   url: "/browse-products?categoryName=Bébé & Jouets",
    title:"Bébé & Jouets",
    img:"/images/jouet_image-removed.png",
    id:"ddf987875"
 },
 {
-   url: "/browse-products/Brico - Jardin - Animalerie",
+   url: "/browse-products?categoryName=Brico - Jardin - Animalerie",
    title:"Brico - Jardin - Animalerie",
    img:"/images/jardin_image-removed.png",
    id:"zzée8986560033.+6+6"

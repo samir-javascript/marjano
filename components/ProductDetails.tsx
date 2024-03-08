@@ -260,12 +260,12 @@ import Message from './Message';
         <ListGroup variant='flush'>
             {parsedProduct?.reviews.map((item:any) => (
                <ListGroup.Item key={item._id}>
-                   <div className="flex lg:items-center items-start lg:flex-row flex-col">
-                    <div className="flex items-center gap-x-4">
+                   <div className="flex  items-start lg:flex-row flex-col ">
+                    <div className="flex mt-1 items-center gap-x-4">
                         <div className="bg-[#efefef] w-[40px] h-[40px] rounded-full flex items-center justify-center ">
                              <p className="text-base font-medium text-[#0aafaa] ">{item.name.charAt(0)} </p>
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-1">
                               <Rating value={item.rating}  />
                               <p className="font-normal text-base text-[#4c4c4c] ">{item.name} </p>
                         </div>

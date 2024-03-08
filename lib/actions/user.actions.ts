@@ -129,22 +129,65 @@ export async function updateUser(params:UpdateUserParams) {
 
 
 
-export async function getSavedProducts(params:GetSavedProductsParams) {
-    try {
-       const  { clerkId} = params;
-       await connectToDatabase()
-       const user = await User.findOne({clerkId}).populate({
-         path:"saved", model: ProductModel
-       }).sort({createdAt: -1})
-       if(!user) {
-         throw new Error('User not found')
-       }
-          return user;
-    } catch (error) {
-       console.log(error)
-       throw error;
-    }
-}
+  export async function getSavedProducts(params: GetSavedProductsParams) {
+   try {
+     const { clerkId, page } = params;
+     const pageSize = 12;
+     const skipAmount = pageSize * (page! - 1);
+     await connectToDatabase();
+ 
+     const aggregationPipeline = [
+       { $match: { clerkId: clerkId } },
+       {
+         $lookup: {
+           from: 'products',
+           localField: 'saved',
+           foreignField: '_id',
+           as: 'savedProducts',
+         },
+       },
+       { $unwind: '$savedProducts' },
+       {
+         $group: {
+           _id: '$_id',
+           clerkId: { $first: '$clerkId' },
+           savedProducts: { $push: '$savedProducts' },
+           totalProducts: { $sum: 1 },
+         },
+       },
+       {
+         $sort: { 'savedProducts.createdAt': -1 },
+       },
+       {
+         $project: {
+           _id: 0,
+           clerkId: 1,
+           savedProducts: {
+             $slice: ['$savedProducts', skipAmount, pageSize],
+           },
+           totalProducts: 1,
+         },
+       },
+     ];
+ // @ts-ignore
+     const userAggregationResult = await User.aggregate(aggregationPipeline);
+ 
+     if (userAggregationResult.length === 0) {
+       throw new Error('User not found');
+     }
+ 
+     const { savedProducts, totalProducts } = userAggregationResult[0];
+ 
+     const totalPages = Math.ceil(totalProducts / pageSize);
+ 
+     return {  savedProducts, page, pages: totalPages };
+   } catch (error) {
+     console.log(error);
+     throw error;
+   }
+ }
+ 
+ 
 
 
 export async function deleteUserByAdmin(params:DeleteUserByAdminParams) {
