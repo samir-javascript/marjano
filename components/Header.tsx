@@ -39,12 +39,20 @@ const result = user && initials.join('').toUpperCase();
             {user && user?.user?.isAdmin && (
               <AdminDropDown />   
           )}
-                 <Link href='/browse-wishlist_products' className="flex no-underline 
-                  flex-col text-center transition-all gap-1 duration-200 hover:!text-[#80d4dd]
-                   cursor-pointer items-center text-white">
-                     <FaRegHeart size={25} />
-                     <p>Mon favoris </p>
-                 </Link>
+                
+                 <Link href={'/browse-wishlist_products'} 
+             className="flex no-underline flex-col items-center !text-white
+              gap-1 cursor-pointer transition-all duration-150 hover:!text-[#80d4dd]">
+                <div className="relative">
+                   <FaRegHeart size={24} />
+                   {user && user?.user?.saved?.length > 0 && (
+                      <div className="absolute top-[0px] right-[-4px] bg-yellow-500
+                       rounded-full w-[8px] h-[8px] flex justify-center items-center" />
+                   )}
+                </div>
+               
+                <p className="text-base font-normal whitespace-nowrap">Mon favoris</p>
+            </Link>
                  <Link href={`/profile/${user.user.clerkId}`} 
              className="flex no-underline flex-col items-center !text-white
               gap-1 cursor-pointer transition-all duration-150 hover:!text-[#80d4dd]">
