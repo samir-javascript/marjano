@@ -206,4 +206,15 @@ export interface CreateUserParams {
      clerkId:string;
     
   }
+  export interface GetRecommendedProduct {
+    productId: string;
+  }
 
+  export interface CreateReviewParams {
+    comment: string;
+    productId: string;
+    path: string;
+    rating: number;
+    userId: string;
+    name: string;
+  }

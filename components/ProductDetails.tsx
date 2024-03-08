@@ -4,29 +4,40 @@ import { useState, useTransition } from 'react';
 import Link from 'next/link';
 
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaShippingFast } from 'react-icons/fa';
+import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaShippingFast, FaTimes } from 'react-icons/fa';
 import Rating from './Rating';
 
 
-import { addToCart } from '@/lib/actions/product.actions';
+import { addToCart, createReview } from '@/lib/actions/product.actions';
 
 import { usePathname, useRouter } from 'next/navigation';
 import  Image from 'next/image'
 import { toggleSavedProduct } from '@/lib/actions/user.actions';
+import Loader from './Loader';
+import { Col, Form, ListGroup, Modal, Row, Spinner } from 'react-bootstrap';
+import YouMlike from './YouMlike';
+import Message from './Message';
 
 
- function  ProductDetails({ product, user }: any) {
+ function  ProductDetails({ product, user, recommendedProducts }: any) {
   const parsedUser = JSON.parse(user)
   const parsedProduct = JSON.parse(product)
+  const parsedRecommendedProducts = JSON.parse(recommendedProducts)
   const router = useRouter()
-   const pathname = usePathname()
-    const [ isPending, startTransition] = useTransition()
+  const [showModal, setShowModal] = useState(false);
+  const  [comment,setComment] = useState("")
+  const [rating,setRating] = useState(0)
+  const [creatingReview,setCreatingReview] = useState(false)
+  const [modalProduct, setModalProduct] = useState({ image: "", name: "" });
+  
+  const [ isPending, startTransition] = useTransition()
+  const [loading,setIsLoading] = useState(false)
   const [thumbnailImages, setThumbnailImages] = useState<string[]>(parsedProduct?.images || []);
   const [selectedImage, setSelectedImage] = useState<string>(thumbnailImages[0] || "");
   const [quantity, setQuantity] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const pro = parsedUser?.user?.saved?.includes(parsedProduct._id)
-   
+   const pathname = usePathname()
   const handleThumbnailClick = (thumbnail: string) => {
     setSelectedImage(thumbnail);
   };
@@ -54,19 +65,51 @@ import { toggleSavedProduct } from '@/lib/actions/user.actions';
      }
  }
  const handleAddToWishlist = async()=> {
+     setIsLoading(true)
     try {
        await toggleSavedProduct({
          userId: parsedUser?.user?._id,
          path: pathname,
          productId: parsedProduct?._id
        })
-       
+       setIsLoading(false)
+       if (!pro) {
+        setModalProduct({
+          image: parsedProduct?.images[0],
+          name: parsedProduct?.name,
+        });
+        setShowModal(true);
+      }
+        
     } catch (error) {
        console.log(error)
+    }finally {
+       setIsLoading(false)
+    }
+ }
+ const handleCreateReview = async()=> {
+  setCreatingReview(true)
+    try { 
+       await createReview({
+         userId: parsedUser.user._id,
+         productId: parsedProduct._id,
+         name: parsedUser.user.name,
+         comment,
+         rating,
+         path: pathname
+       })
+       setCreatingReview(false)
+    } catch (error) {
+       console.log(error)
+    }finally {
+       setCreatingReview(false)
     }
  }
   return (
     <div className="flex !relative w-full flex-col pb-5">
+       {loading && (
+          <Loader />
+       )}
       <Link className="p-4 mx-6" href="/">
         <p className="text-[#00afaa] text-sm hover:underline max-w-[1400px] mx-auto">Accueil</p>
       </Link>
@@ -177,6 +220,116 @@ import { toggleSavedProduct } from '@/lib/actions/user.actions';
           </div>
         </div>
       </div>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <div onClick={() => setShowModal(false)} className="p-3 ">
+          <FaTimes cursor='pointer' color='gray' size={24} />
+        </div>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-[#333] font-bold text-[16px] w-full flex flex-col gap-1 text-center ">
+            <p>{modalProduct.name} </p>
+            <p>has been added to your wish list</p>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="flex max-w-full mx-auto items-center justify-center w-[150px] h-[150px] bg-[#ddd] ">
+            <Image width={100} height={100} loading="lazy" className="w-[100%] h-[100%] object-contain " src={modalProduct.image} alt={modalProduct.name}  />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Link className="w-full flex justify-center" href='/browse-wishlist_products'>
+            <button className="px-4 py-2 rounded-[15px] w-full font-bold text-[15px] bg-[#00afaa]  text-white transition-all duration-150 hover:bg-[#0b4d54] ">
+              Accedez a votre liste
+            </button>
+          </Link>
+        </Modal.Footer>
+      </Modal>
+      <YouMlike recommendedProducts={parsedRecommendedProducts} user={parsedUser}  />
+      <div className="w-full ">
+
+     
+<Row className='review m-3 max-w-[1400px] mx-auto'>
+    <Col className="lg:mx-6 mx-2 " md={7} >
+      {parsedProduct?.reviews.length === 0 ? (
+<h2 className="mt-5 mb-4"> Reviews</h2>
+      ): (
+        <h2 className="mt-5 mb-4"> {parsedProduct?.reviews.length !== 0 && parsedProduct?.reviews.length} 
+        {parsedProduct?.reviews.length > 1 ? " Reviews" :  " Review" }</h2>
+      )}
+       
+       
+        <ListGroup variant='flush'>
+            {parsedProduct?.reviews.map((item:any) => (
+               <ListGroup.Item key={item._id}>
+                   <div className="flex lg:items-center items-start lg:flex-row flex-col">
+                    <div className="flex items-center gap-x-4">
+                        <div className="bg-[#efefef] w-[40px] h-[40px] rounded-full flex items-center justify-center ">
+                             <p className="text-base font-medium text-[#0aafaa] ">{item.name.charAt(0)} </p>
+                        </div>
+                        <div className="flex flex-col">
+                              <Rating value={item.rating}  />
+                              <p className="font-normal text-base text-[#4c4c4c] ">{item.name} </p>
+                        </div>
+                    </div>
+                        <div className="bg-[#e9e8e8] w-full p-2 lg:mt-0 mt-2.5 lg:ml-10 rounded-xl lg:flex-1 ">
+                            <p className="text-gray-500 text-sm font-normal">{item.comment} </p>
+                            <p className="text-sm text-gray-400 font-normal !pt-1.5">{ item.createdAt.substring(0,10)} </p>
+                        </div>
+                   </div>
+               </ListGroup.Item>
+            ))}
+            <ListGroup.Item>
+               {user ? (
+                <>
+                <h3 className="mt-5 lg:text-[22px] text-[20px] 
+                 lg:whitespace-nowrap mb-3 text-black font-semibold ">Veuillez laisser votre commentaire pour ce produit.</h3>
+                 <Form onSubmit={handleCreateReview}>
+                    <Form.Group controlId='rating' className='my-2'>
+                       <Form.Label className="font-bold text-[22px] font-Roboto text-[#4c4c4c]">Rating</Form.Label>
+                       <Form.Control  required as='select' value={rating}
+                        onChange={(e)=> setRating(Number(e.target.value))} >
+                          <option value="">select...</option>
+                          <option value={1}>1 - poor</option>
+                          <option value={2}>2 - fair</option>
+                          <option value={3}>3 - good</option>
+                          <option value={4}>4 - very good</option>
+                          <option value={5}>5 - excellent</option>
+                       </Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId='comment' className='my-2 mt-4 '>
+                       <Form.Label className="font-bold text-[22px] text-[#4c4c4c] ">Comment</Form.Label>
+                      
+                       <Form.Control required as='textarea' value={comment} rows={4} className="border border-blue-500"
+                       placeholder='Écrire un avis client sur MarjaneMall'
+                        onChange={(e)=> setComment(e.target.value)} >
+                         
+                       </Form.Control>
+                    </Form.Group>
+                    <button
+      disabled={creatingReview}
+      type="submit"
+      className="bg-[#00afaa] mt-2 mx-auto text-white font-bold w-[250px] h-[40px] rounded-[20px] "
+    >
+      {creatingReview ?  <Spinner role='status' animation='border' style={{
+          display:'block',
+          width:'30px',
+          height:'30px',
+          margin:'auto',
+          color:'#fff'
+        }} >
+          </Spinner> : 'valider'}
+    </button>
+                 </Form>
+                 </>
+               ) : (
+                      <Message> <p className="text-black ">
+                        Veuillez <span><Link className="underline text-[#0aaffa] " href='/auth'>vous connecter</Link> </span>  pour rédiger un avis.
+                        </p>  </Message>
+               )}
+            </ListGroup.Item>
+        </ListGroup>
+    </Col>
+ </Row>
+ </div>
     </div>
   );
 }

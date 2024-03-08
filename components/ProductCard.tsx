@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 "use client";
 import { useState } from 'react';
-import { FaHeart, FaRegHeart, FaTimes } from 'react-icons/fa';
+import { FaCheck, FaHeart, FaRegHeart, FaTimes } from 'react-icons/fa';
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useRouter,  usePathname } from "next/navigation";
 import Link from 'next/link';
@@ -21,31 +21,34 @@ const ProductCard = ({product, user}:any) => {
  
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [showProductModel,setShowProductModel] = useState(false)
   const [modalProduct, setModalProduct] = useState({ image: "", name: "" });
   const [isLoading,setIsLoading] = useState(false)
   const [isAdding,setIsAdding] = useState(false)
   const pathname = usePathname()
 
   const pro = parsedUser?.user?.saved?.includes(parsedProduct._id)
-  const handleAddToCart = async()=> {
-   // if(!product._id) return;
-     setIsLoading(true)
-     try {
-        await addToCart({
-            quantity: 1,
-            userId: parsedUser.user._id,
-            productId: parsedProduct._id,
-            name: parsedProduct.name,
-            price: parsedProduct.price,
-            path:pathname
-        })
-       setIsLoading(false)
-     } catch (error) {
-        console.log(error)
-     }finally {
-        setIsLoading(false)
-     }
- }
+  const handleAddToCart = async () => {
+    setIsLoading(true);
+    try {
+      await addToCart({
+        quantity: 1,
+        userId: parsedUser.user._id,
+        productId: parsedProduct._id,
+        name: parsedProduct.name,
+        price: parsedProduct.price,
+        path: pathname,
+      });
+      setIsLoading(false);
+      setShowProductModel(true); // Change this line
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+      setShowProductModel(true);
+    }
+  };
+  
  const loading = false
  const handleAddToWishlist = async()=> {
   setIsAdding(true)
@@ -74,7 +77,10 @@ const ProductCard = ({product, user}:any) => {
     
         <div  className={` sm:w-[200px]  max-sm:w-[161px] max-w-full border mx-2
                  border-[rgba(211,211,211,0.78)] rounded-xl min-h-auto h-[375px]  flex flex-col`}>
-              {isLoading || isAdding && (
+              {isLoading  && (
+                <Loader />
+              )}
+               {isAdding  && (
                 <Loader />
               )}
           <div className="w-full h-[200px] relative flex items-center 
@@ -142,6 +148,48 @@ const ProductCard = ({product, user}:any) => {
           </Link>
         </Modal.Footer>
       </Modal>
+      <Modal show={showProductModel} onHide={() => setShowProductModel(false)}>
+              <div onClick={()=> setShowProductModel(false)} className="p-3 ">
+                 <FaTimes cursor='pointer' color='gray' size={20} />
+              </div>
+              <Modal.Header className="border-none" closeButton>
+                <Modal.Title className="text-[#00afaa] font-bold text-[16px] flex items-center gap-x-2  text-center "> 
+                  <div className='flex items-center justify-center border border-[#00afaa] w-[45px] h-[45px] rounded-full '>
+                      <FaCheck  size={22} color='#00afaa' />
+                  </div> 
+                   <p className="w-full text-[#00afaa] font-normal text-[18px] text-center mx-auto "> Votre produit a été ajouté au panier</p>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body >
+              <div className="flex flex-col gap-2 ">
+ <div>
+             <div className="flex items-start justify-start">
+               <div className="w-[120px] h-[120px] bg-[#efefef] rounded-md flex items-center justify-center m-3 mb-1">
+                  <Image width={100} height={100} alt='' className="w-[100%] h-[100%] object-contain " 
+                   src={parsedProduct.images[0]} />
+               </div>
+               <div className="flex flex-col flex-1">
+                 <div className="m-3 flex items-center gap-2">
+                   <p className="line-clamp-1 font-medium text-[#555] mb-1 text-[15px] ">{parsedProduct.name}</p>
+                 </div>
+                 <p className="font-normal text-[16px] mx-3">Vendu par <span className="text-[#00afaa]">{parsedProduct.brand}</span></p>
+                 <p className="text-[#00afaa] font-semibold mt-3 mx-3 text-[20px]">{parsedProduct.price} Dh</p>
+               </div>
+             </div>
+           </div>
+             
+          
+            </div>
+              </Modal.Body>
+              <Modal.Footer className="border-none"> 
+              <Link className="w-full flex justify-center" href='/cart'>
+            <button className="px-4 py-2 rounded-[15px] w-full font-bold text-[15px] bg-[#00afaa]  text-white transition-all duration-150 hover:bg-[#0b4d54] ">
+              Accedez a votre cart
+            </button>
+          </Link>
+               
+              </Modal.Footer>
+            </Modal>
         </div>
       
     </>

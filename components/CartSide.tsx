@@ -1,7 +1,7 @@
  "use client"
  import { Image, Modal } from "react-bootstrap";
 //import Image from 'next/image'
-import { FaTimes, FaTrash, FaMinus, FaPlus } from "react-icons/fa"
+import { FaTimes, FaTrash, FaMinus, FaPlus, FaCheck } from "react-icons/fa"
 import { useEffect, useState, } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -151,7 +151,7 @@ const CartSide = ({result,user}:any) => {
       >
         Valider
       </button>
-                     <button type="button"   className="px-3 py-2 rounded-[15px] w-full font-bold text-[15px] border border-[#00afaa]  text-[#00afaa] 
+                     <button type="button" onClick={()=> setShowModal(false)}   className="px-3 py-2 rounded-[15px] w-full font-bold text-[15px] border border-[#00afaa]  text-[#00afaa] 
                       ">
                         Annuler
                      </button>
@@ -159,6 +159,7 @@ const CartSide = ({result,user}:any) => {
                
               </Modal.Footer>
             </Modal>
+          
             </div>
          ))}
        

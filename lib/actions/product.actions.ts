@@ -1,7 +1,7 @@
 "use server"
 import { connectToDatabase } from "@/database/mongodb";
 import ProductModel from "@/database/models/productModel";
-import { CreateCartParams, CreateProductParams, DeleteProductParams, GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams, GetProductsParams, UpdateProductParams } from "@/utils/shared";
+import { CreateCartParams, CreateProductParams, CreateReviewParams, DeleteProductParams, GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams, GetProductsParams, GetRecommendedProduct, UpdateProductParams } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
 import cloudinary from "@/utils/cloudinary";
 import User from "@/database/models/userModel";
@@ -251,6 +251,24 @@ export async function getProductsByCategory(params:GetProductsByCategoryParams) 
   }
 }
 
+export async function getrecommendationProducts(params:GetRecommendedProduct) {
+  const {productId }= params;
+
+  const product = await ProductModel.findById(productId);
+  
+  if (!product) {
+    
+    throw new Error('Product Not Found');
+  }
+
+  const recommendedProducts = await ProductModel.find({
+    category: product.category,
+    _id: { $ne: productId },
+   
+    // Exclude the product with the specified ID
+  }).limit(4);
+ return recommendedProducts
+}
 
 export async function getProductsByBrand(params:GetProductsByBrandParams) {
   try {
@@ -261,5 +279,35 @@ export async function getProductsByBrand(params:GetProductsByBrandParams) {
   } catch (error) {
      console.log(error)
      throw error;
+  }
+}
+
+export async function createReview (params:CreateReviewParams) {
+  const {rating, comment,userId, name, productId, path } = params;
+  try {
+    const product = await ProductModel.findById(productId);
+  if(product) {
+     const alreadyReviewed = product.reviews.find((review:any) => review.user.toString() === userId)
+     if(alreadyReviewed) {
+        throw new Error('Product already reviewed')
+     }
+     const review = {
+        user:userId, 
+        rating,
+        comment,
+        name,
+     }
+     product.reviews.push(review)
+     product.numReviews = product.reviews.length;
+     product.rating = product.reviews.reduce((acc:any, review:any) => acc + review.rating,0) / product.reviews.length;
+     await product.save()
+      revalidatePath(path)
+  }else {
+   
+     throw new Error('Product not found')
+  }
+  } catch (error) {
+     console.log(error)
+     throw error
   }
 }
