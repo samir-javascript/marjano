@@ -52,7 +52,7 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={poppins.className}>
+        <body  className={`${poppins.className} h-screen w-full`}>
           <SubHeader />
           <Header qty={qty} user={user} />
           <CartSide user={user} result={JSON.stringify(result)} />
