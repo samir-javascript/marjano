@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/no-unescaped-entities */
+
 
 import {  Col, Row, Table } from "react-bootstrap";
 import Link from 'next/link'
