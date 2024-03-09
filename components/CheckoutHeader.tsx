@@ -12,7 +12,7 @@ const CheckoutHeader = () => {
     <header className="bg-[#0b4d54] border-b border-gray-400 w-full h-[80px]">
       <nav className="flex items-center justify-between max-w-[1600px] mx-auto h-full px-2">
         <Link href='/'>
-          <Image  className=" sm:w-[230px] w-[150px] cursor-pointer object-contain" src="https://www.marjanemall.ma/static/version1706188772/frontend/Marjane/default/fr_FR/images/marjane-logo.svg" title="" alt="" width="218" height="36" />
+          <Image priority  className=" sm:w-[230px] w-[150px] cursor-pointer object-contain" src="https://www.marjanemall.ma/static/version1706188772/frontend/Marjane/default/fr_FR/images/marjane-logo.svg" title="marjanemall Maroc, Marketplace Marocaine | Paiement en ligne ou à la livraison | Livraison partout au Maroc, Produits 100% authentiques, Satisfait ou remboursé, Offre nationale et internationale aux meilleurs prix." alt="marjanemall Maroc, Marketplace Marocaine | Paiement en ligne ou à la livraison | Livraison partout au Maroc, Produits 100% authentiques, Satisfait ou remboursé, Offre nationale et internationale aux meilleurs prix." width="218" height="36" />
         </Link>
         <div className="lg:flex hidden">
           {/* Conditionally render step3 prop based on pathname */}

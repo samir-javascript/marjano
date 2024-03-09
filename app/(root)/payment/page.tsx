@@ -6,10 +6,13 @@ import PaymentForm from "@/components/forms/PaymentForm";
 import {  getUserById, getUserCart } from "@/lib/actions/cart.actions";
 import { getShipping } from "@/lib/actions/shipping.actions";
 import { auth } from "@clerk/nextjs";
+import { Metadata } from "next";
 
 
 
-
+export const metadata: Metadata = {
+  title: "Mode de paiement sur marjanemall maroc",
+};
 const PaymentPage = async() => {
    
     const { userId } = auth()

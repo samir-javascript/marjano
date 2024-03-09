@@ -5,8 +5,12 @@ import EditShippingForm from "@/components/forms/EditShippingForm"
 import { getUserById } from "@/lib/actions/cart.actions"
 import { getShipping } from "@/lib/actions/shipping.actions"
 import { auth } from "@clerk/nextjs"
+import type { Metadata } from "next"
 import { MdOutlinePlace } from "react-icons/md"
 
+export const metadata: Metadata = {
+  title: "Modifier mon compte",
+};
 const ShippingEdit = async() => {
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})

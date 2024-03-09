@@ -10,7 +10,7 @@ const AdminDropDown = () => {
   return (
     <div className="flex flex-col items-center">
                <Image width={35} height={35} className="w-[35px] h-[35px] object-contain cursor-pointer" 
-               src="/images/admin.png" alt="" />
+               src="/images/admin.png" alt="admin profile picture icon on marjanemall maroc" />
             <NavDropdown className="border-none outline-none !text-white" title={'Admin'}>
              
                <button type="button" onClick={()=> router.push('/admin/ordersList')} className="w-full text-left">

@@ -1,25 +1,31 @@
 /* eslint-disable react/no-unescaped-entities */
 import Message from '@/components/Message';
+import PaginateCategories from '@/components/Paginate';
 import ProductCard from '@/components/ProductCard';
 import { getUserById } from '@/lib/actions/cart.actions';
 import { getProducts } from '@/lib/actions/product.actions'
 import { auth } from '@clerk/nextjs';
+
 import Link from 'next/link';
 import React from 'react'
 interface props {
     params: {
         query: string;
+      
+    };
+    searchParams: {
+      page: number;
     }
 }
 
-export async function generateMetadata({ params }:props) {
+export async function generateMetadata({ params}:props) {
   
   return {
-    title: `Résultats de recherche pour : ${params.query}`,
+    title: `Résultats de recherche pour : ${decodeURIComponent(params.query.trim())}`,
   }
 }
-const page = async({params}:props) => { 
-    const result = await getProducts({searchQuery:params.query})
+const page = async({params, searchParams}:props) => { 
+    const result = await getProducts({searchQuery:decodeURIComponent(params.query.trim()), page:searchParams.page ? +searchParams.page : 1 })
     const { userId } = auth()
  
     const user = userId && await getUserById({clerkId:userId})
@@ -34,7 +40,7 @@ const page = async({params}:props) => {
             <p className="font-normal text-sm ">
                &gt;
             </p>
-            <p className="font-normal text-sm ">Résultats de recherche pour : '{params.query}' </p>
+            <p className="font-normal text-sm ">Résultats de recherche pour : '{decodeURIComponent(params.query)}' </p>
           </div>
           <h2 className="text-[#000] sm:font-extrabold font-bold sm:text-[30px] text-[20px]  mt-2 mx-[30px] ">Résultats de recherche pour : '{params.query}' </h2>
           <div className="flex flex-wrap md:gap-[15px]  gap-y-[15px]   my-4
@@ -49,7 +55,9 @@ const page = async({params}:props) => {
                 )}
               </div>
        </div>
-         
+          <div className="my-4">
+              <PaginateCategories page={result.page} pages={result.pages} url={`/catalogsearch/result/${params.query}`}  />
+          </div>
     </div>
   )
 }

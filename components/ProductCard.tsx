@@ -165,7 +165,7 @@ const ProductCard = ({product, user}:any) => {
  <div>
              <div className="flex items-start justify-start">
                <div className="w-[120px] h-[120px] bg-[#efefef] rounded-md flex items-center justify-center m-3 mb-1">
-                  <Image width={100} height={100} alt='' className="w-[100%] h-[100%] object-contain " 
+                  <Image width={100} height={100} alt={parsedProduct.name} className="w-[100%] h-[100%] object-contain " 
                    src={parsedProduct.images[0]} />
                </div>
                <div className="flex flex-col flex-1">

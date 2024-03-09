@@ -5,6 +5,10 @@ import { auth } from "@clerk/nextjs";
 import UpdateCalculator from "@/components/UpdateCalculator";
 import Image from "next/image";
 import { getShipping } from "@/lib/actions/shipping.actions";
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Mon panier",
+};
 const Cart = async() => {
  
 
@@ -34,7 +38,7 @@ const Cart = async() => {
         ) :  (
           <div className="flex lg:flex-row flex-wrap 
            flex-col ">
-          <div className="flex-1 w-full bg-[#efefef] sm:p-5 p-2  flex flex-col gap-3">
+          <div className="flex-1 w-full bg-[#efefef] sm:p-5 p-2 lg:mr-4 flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <h3 className="text-[#333] font-bold text-[20px]  sm:mx-2 ">
                 Expedié depuis le Maroc
@@ -59,7 +63,7 @@ const Cart = async() => {
                       src={item?.productId?.images[0]}
                     />
                   </div>
-                  <div className="flex-1 flex-col justify-between w-full h-full">
+                  <div className="flex-1 flex-col mt-3 justify-between w-full h-full">
                     <p className="line-clamp-1 font-medium text-[#555] text-[15px] lg:mb-4">
                       {item?.productId?.name}
                     </p>
@@ -81,7 +85,7 @@ const Cart = async() => {
             </div>
           </div>
           {/** part 2 or col 2 */}
-          <div className="flex flex-col lg:w-auto w-full mx-3">
+          <div className="flex flex-col lg:w-auto w-full lg:mx-3 mx-auto">
             <div className="flex flex-col gap-5 bg-white border border-[#ddd] rounded-lg
              lg:w-[450px] w-full px-5 py-8 ">
               <div className="flex items-center justify-between border-b border-[#ddd] pb-4">

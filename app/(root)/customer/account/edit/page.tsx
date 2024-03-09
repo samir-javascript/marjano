@@ -1,6 +1,4 @@
 
-
-
 import ProfileMobileTabs from "@/components/ProfileMobileTabs";
 import ProfileTable from "@/components/ProfileTable";
 import UserForm from "@/components/forms/UserForm";

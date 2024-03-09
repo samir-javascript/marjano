@@ -3,9 +3,12 @@ import FormContainer from "@/components/FormContainer"
 import { getUserById } from "@/lib/actions/cart.actions"
 import { getShipping } from "@/lib/actions/shipping.actions"
 import { auth } from "@clerk/nextjs"
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-
+export const metadata: Metadata = {
+  title: "mon shipping adresse",
+};
 const UserShipping = async() => {
    
   const { userId } = auth()

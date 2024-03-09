@@ -8,15 +8,18 @@ import { getAllOrders } from "@/lib/actions/orders.actions";
 import { auth } from "@clerk/nextjs";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getShipping } from "@/lib/actions/shipping.actions";
+import type { Metadata } from "next";
 
-
+export const metadata: Metadata = {
+  title: "marjanemall Maroc Orders List",
+};
 const OrdersList = async() => {
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})
  
   const shipping = await getShipping({userId: user?.user?._id})
   const result = await getAllOrders()
-  console.log('ORDERS ARE HERE', result)
+ 
   
 
   return (

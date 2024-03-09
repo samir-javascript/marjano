@@ -15,7 +15,7 @@ export async function getProducts(params:GetProductsParams) {
      const { searchQuery, page = 1 } = params;
      const pageSize = 12
      const skipAmount = pageSize * (page - 1)
-     const count = await ProductModel.countDocuments()
+    
      const query:FilterQuery<typeof ProductModel> = {}
       if(searchQuery) {
          query.$or =  [
@@ -24,6 +24,7 @@ export async function getProducts(params:GetProductsParams) {
           { category: { $regex: searchQuery, $options: "i" } },
          ]
       }
+      const count = searchQuery ?  await ProductModel.countDocuments(query) :  await ProductModel.countDocuments()
       await connectToDatabase()
       const products = await ProductModel.find(query)
       .limit(pageSize)
@@ -247,11 +248,12 @@ export async function deleteProduct(params:DeleteProductParams) {
 export async function getProductsByCategory(params:GetProductsByCategoryParams) {
   try {
     const { categoryName, page = 1 } = params;
+    
     const pageSize = 12;
     const skipAmount = pageSize * (page - 1)
     const count = await ProductModel.countDocuments({category:categoryName})
       await connectToDatabase()
-      const products = await ProductModel.find({category: { $regex: categoryName, $options: "i"}})
+      const products = await ProductModel.find({ category: { $regex: categoryName, $options: "i" } })
       .limit(pageSize)
       .skip(skipAmount)
       return{ products , page , pages: Math.ceil(count / pageSize)}

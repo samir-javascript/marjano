@@ -4,9 +4,13 @@ import PaginateCategories from "@/components/Paginate";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getProducts } from "@/lib/actions/product.actions";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { Button, Col, Row, Spinner, Table } from "react-bootstrap"
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { Button, Col, Row,  Table } from "react-bootstrap"
+import { FaEdit } from "react-icons/fa";
+export const metadata: Metadata = {
+   title: "marjanemall Maroc Orders List",
+ };
 interface props {
    searchParams: {
       page: number;

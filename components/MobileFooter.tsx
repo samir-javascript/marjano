@@ -1,11 +1,15 @@
+"use client"
 import Link from "next/link"
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa"
 import AccordionPart from "./AccordionPart"
 import React from "react"
 import FooterAccordion from "./Accordion"
+import { usePathname } from "next/navigation"
+
 
 const MobileFooter = () => {
- 
+  const pathname = usePathname()
+   if(pathname === "/shipping" || pathname === "/user-shipping" || pathname === '/payment'  || pathname.startsWith('/orders') || pathname == '/place-order' ||  pathname.startsWith('/success')  || pathname.startsWith("/admin")) return null;
  // if(pathname.startsWith('/success')) return null
   return (
     <footer className='bg-[#1c6c76] p-2 pt-4 flex lg:hidden flex-col w-full '>

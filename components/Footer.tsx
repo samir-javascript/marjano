@@ -5,15 +5,14 @@ import { FaFacebook, FaInstagram, FaYoutube} from 'react-icons/fa'
 import AccordionPart from './AccordionPart'
 import Link from 'next/link'
 import { categories, footerCols2, footercols3 } from '@/utils/constants'
+import { usePathname } from 'next/navigation'
 
 
 const Footer = () => {
-   
+   const pathname = usePathname()
 
-
- 
- //  if(pathname == "/shipping" || pathname =='/payment'  || pathname.startsWith('/order') || pathname == '/place-order' ||  pathname.startsWith('/success') || pathname =='/auth' || pathname == '/register') return null;
-   //if(pathname.startsWith('/success')) return null
+   if(pathname === "/shipping" || pathname === "/user-shipping" || pathname === '/payment'  || pathname.startsWith('/orders') || pathname == '/place-order' ||  pathname.startsWith('/success')  || pathname.startsWith("/admin")) return null;
+  
   return (
     <footer className="w-full lg:flex hidden flex-col ">
         
@@ -39,12 +38,12 @@ const Footer = () => {
          </div>
          <div className='p-[20px]  bg-[#1c6c76] text-white border-b border-slate-400 '>
               <div className='w-full flex flex-wrap 
-          gap-x-[60px] gap-y-10 max-w-[1400px] mx-auto '>
+          gap-x-[40px] gap-y-10 max-w-[1400px] mx-auto '>
                     <ul>
                  <h2 className='font-semibold text-[16px] mb-3 capitalize '>categories</h2>
                  {categories.map((item,index)=> (
                     <li key={index}>
-                       <Link className='text-sm text-slate-50 font-medium hover:underline' href={item.url}>
+                       <Link className='text-sm text-slate-50 font-medium hover:!underline' href={item.url}>
                            {item.title}
                        </Link>
                     </li>
@@ -54,7 +53,7 @@ const Footer = () => {
                  <h2 className='font-semibold text-[16px] mb-3 capitalize '>Découvrez la Marketplace</h2>
                  {footerCols2.map((item,index)=> (
                     <li key={index}>
-                       <Link className='text-sm text-slate-50 font-medium hover:underline' href='/'>
+                       <Link className='text-sm text-slate-50 font-medium hover:!underline' href='/'>
                            {item}
                        </Link>
                     </li>
@@ -64,7 +63,7 @@ const Footer = () => {
               <h2 className='font-semibold text-[16px] mb-3 capitalize '>Informations légales</h2>
               {footercols3.map((item,index)=> (
                     <li key={index}>
-                       <Link className='text-sm text-slate-50 font-medium hover:underline' href="#">
+                       <Link className='text-sm text-slate-50 font-medium hover:!underline' href="#">
                            {item}
                        </Link>
                     </li>

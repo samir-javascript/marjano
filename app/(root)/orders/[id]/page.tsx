@@ -9,10 +9,14 @@ interface props {
      id: string
   }
 }
-
+export async function generateMetadata({ params }:props) {
+  
+  return {
+    title: `marjanemall maroc thanks you for shopping from us | Commande N°${params.id}`,
+  }
+}
 const Page = async({params}:props) => {
    const result = await getOrderById({orderId:params.id})
-  //const order = myOrders?.filter((item) => item.paymentMethod === 'cash-on-delivery');
   const truncate = (string:string, n:number) => {
     return string.length > n ? string.substring(0, n) + '...' : string;
   };

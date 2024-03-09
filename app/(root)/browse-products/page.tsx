@@ -16,7 +16,7 @@ interface props {
 export async function generateMetadata({ searchParams }:props) {
    return {
         title: `${searchParams.categoryName} | marjanemall Maroc`,
-        description: `marjanemall Maroc - Découvrez la gamme de produits ${searchParams.categoryName} | Paiement en ligne ou à la livraison | Livraison partout au Maroc, Produits 100% authentiques, Satisfait ou remboursé, Offre nationale et internationale aux meilleurs prix.`
+        description: `marjanemall Maroc - Découvrez la gamme de produits  ${searchParams.categoryName} | Paiement en ligne ou à la livraison | Livraison partout au Maroc, Produits 100% authentiques, Satisfait ou remboursé, Offre nationale et internationale aux meilleurs prix.`
       }
     }
 
@@ -24,7 +24,7 @@ const Page = async({searchParams}:props) => {
  
   
 
-  const result = await getProductsByCategory({ categoryName: searchParams.categoryName , page : searchParams.page ? +searchParams.page: 1});
+  const result = await getProductsByCategory({ categoryName: decodeURIComponent(searchParams.categoryName) , page : searchParams.page ? +searchParams.page: 1});
  
   const { userId } = auth()
    if(!userId) return;
@@ -40,7 +40,7 @@ const Page = async({searchParams}:props) => {
             <p className="font-normal text-sm ">
                &gt;
             </p>
-            <p className="font-normal text-sm ">{searchParams.categoryName} </p>
+            <p className="font-normal text-sm ">{decodeURIComponent(searchParams.categoryName)} </p>
           </div>
           
        </div>
@@ -59,7 +59,7 @@ const Page = async({searchParams}:props) => {
         </div>
       <div className='my-3'>
              <PaginateCategories page={result.page} pages={result.pages} 
-              categoryName={searchParams.categoryName} url="/browse-products" /> 
+              categoryName={decodeURIComponent(searchParams.categoryName)} url="/browse-products" /> 
        </div>
   </div>
     )

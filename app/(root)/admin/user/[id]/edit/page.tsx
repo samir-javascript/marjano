@@ -1,7 +1,8 @@
 import FormContainer from "@/components/FormContainer"
 import EditUserForm from "@/components/forms/EditUserForm"
-import { getUserById } from "@/lib/actions/cart.actions"
-import { auth } from "@clerk/nextjs"
+
+import { getAllUsers } from "@/lib/actions/user.actions"
+
 import type { Metadata } from "next"
 interface props {
   params: {
@@ -9,13 +10,15 @@ interface props {
   }
 }
 export const metadata: Metadata = {
-  title: "Modifier l'adresse",
+  title: "Modify user by Admin sur marjanemall maroc",
 };
 const EditUserPage = async({params}:props) => {
    
-   const { userId } = auth()
-   const user  = await getUserById({clerkId:userId!})
-    
+
+   
+  const users = await getAllUsers({})
+  const user = users.users.find((user:any)=> user?._id.toString() === params.id)
+
   return (
     <div className="py-5">
 

@@ -84,7 +84,7 @@ const SideBar = ({setMobileOpen}:props) => {
        <List>
        <ListItem className='bg-[#f1f1f1] my-3 '>
                  <ListItemIcon>
-                    <Image width={30} height={30} alt='' loading='lazy' className='w-[30px] h-[30px] object-contain ' 
+                    <Image width={30} height={30} alt='brand icon' loading='lazy' className='w-[30px] h-[30px] object-contain ' 
                     src="/images/marque.png" />
                  </ListItemIcon>
                  <ListItemText  className='text-[#4c4c4c] text-[16px] font-medium  '  primary={"marques"}/> 
@@ -105,7 +105,7 @@ const SideBar = ({setMobileOpen}:props) => {
        <LinkStyles href='/sales/history'>
        <ListItem  className=' mt-3 hover:bg-[#f1f1f1] '>
                  <ListItemIcon>
-                    <Image width={30} height={30} alt='' loading='lazy'
+                    <Image width={30} height={30} alt='sales history icon' loading='lazy'
                      className='w-[30px] h-[30px] object-contain ' src="/images/command.png" />
                  </ListItemIcon>
                  <ListItemText  className='text-[#4c4c4c] text-[16px] font-medium  ' 
@@ -117,7 +117,7 @@ const SideBar = ({setMobileOpen}:props) => {
         <LinkStyles href={`/profile/${userId}`}>
         <ListItem className='hover:bg-[#f1f1f1] '>
                  <ListItemIcon>
-                    <Image width={30} height={30}  alt='' loading='lazy' 
+                    <Image width={30} height={30}  alt='profile icon' loading='lazy' 
                     className='w-[30px] h-[30px] object-contain ' src="/images/map.png" />
                  </ListItemIcon>
                  <ListItemText  className='text-[#4c4c4c] text-[16px] font-medium  '  primary={"Mes Addresses"}/> 

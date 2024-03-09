@@ -8,6 +8,10 @@ import { getCartTotalCount, getUserById } from "@/lib/actions/cart.actions";
 import { auth } from "@clerk/nextjs";
 import ShippingForm from "@/components/forms/ShippingForm";
 import { getShipping } from "@/lib/actions/shipping.actions";
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Mon shipping adresse",
+};
 
 const ShippingPage = async() => {
   const { userId } = auth()
