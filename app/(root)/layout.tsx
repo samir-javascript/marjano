@@ -52,11 +52,13 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body  className={`${poppins.className} h-screen w-full`}>
+        <body className={`${poppins.className} flex flex-col min-h-screen`}>
           <SubHeader />
           <Header qty={qty} user={user} />
           <CartSide user={user} result={JSON.stringify(result)} />
-          {children}
+          <div className="flex-1">
+            {children}
+          </div>
           <SpeedInsights />
           <Analytics />
           <Footer />

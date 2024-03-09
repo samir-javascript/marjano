@@ -45,7 +45,7 @@ const WishlistPage = async({searchParams}:props) => {
   }
   return ( 
     <>
-    <div className="w-full h-full bg-slate-50">
+    <div className="  bg-slate-50">
      
         <div className="max-w-[1400px] mx-auto flex lg:flex-row flex-col lg:justify-start gap-4 lg:py-5">
             <ProfileTable />

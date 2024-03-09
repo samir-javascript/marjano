@@ -42,7 +42,7 @@ const AccordionPart = () => {
                   </li>
                   <li className='flex lg:flex-col flex-wrap lg:items-start items-center lg:space-x-0 space-x-12 '>
                   <h2 className='font-semibold text-[16px] text-slate-50 mb-3 capitalize '>Modes de paiement</h2>
-                  <Image width={320} height={100} className='w-[320px] object-contain ' src={'/images/paiement_x2_1.webp'} alt="payment methods icon" />
+                  <Image width={300} height={100} className='sm:w-[320px] w-[250px] object-contain ' src={'/images/paiement_x2_1.webp'} alt="payment methods icon" />
                   </li>
                   </div>
                   

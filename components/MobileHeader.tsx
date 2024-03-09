@@ -11,7 +11,17 @@ import { useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
+const navtoggle = () => {
+   console.log('I WAS CLICKED')
 
+const menu = document.getElementById('menu-cart');
+
+menu?.classList.toggle('show-menu');
+document.body.classList.add('stop-scrolling');
+console.log('I WAS CLICKED AGAIN')
+// Add click event listener to the body
+
+};
 const MobileHeader = ({result, qty, user}:any) => {
    const pathname = usePathname()
   
@@ -40,7 +50,7 @@ const MobileHeader = ({result, qty, user}:any) => {
                 <Link className="!text-white" href='/browse-wishlist_products'>
                    <FaRegHeart className="w-[25px] h-[25px] object-contain  " />
                 </Link>
-                <Link href='/cart' className="relative !text-white mr-0.5">
+                <div onClick={navtoggle} id='cartSlide-btn' className="relative !text-white mr-0.5">
                    <MdOutlineShoppingCart size={26} />
                   {qty !== 0 && (
                     <div className="absolute top-[-10px] flex items-center justify-center rounded-full right-[-10px]  text-[12px] bg-yellow-500 w-[20px] h-[20px] ">
@@ -51,7 +61,7 @@ const MobileHeader = ({result, qty, user}:any) => {
                         </div>
                   )}
                   
-                </Link>
+                </div>
                  
              </div>
         </div>

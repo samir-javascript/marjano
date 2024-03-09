@@ -3,10 +3,11 @@ import { Image } from 'react-bootstrap';
 
 const PageLoading = () => {
   return (
-    <div className="fixed top-0 left-0 bottom-0 right-0 inset-0 bg-[rgba(0,0,0,0.1)] flex items-center justify-center z-99999">
-      <div className="flex flex-col h-screen w-full items-center gap-8 text-center">
-        <Image src="/images/loader-2.gif" alt="loading..." className="w-[350px] h-[250px] object-contain" />
-      </div>
+    <div className="fixed inset-0 w-full min-h-screen bg-[rgba(0,0,0,0.42)] flex items-center justify-center z-999">
+         <div className="flex flex-col items-center justify-center gap-8 text-center w-full h-full">
+              <Image className='w-[380px] z-[9999] h-[250px] object-contain' 
+              src="/images/loader-2.gif" alt="loading..." fluid />
+         </div>
     </div>
   );
 };

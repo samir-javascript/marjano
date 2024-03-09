@@ -163,7 +163,7 @@ const UserForm = ({user}:any) => {
  </div>
         )}
          <button disabled={isLoading} className={`${isLoading ? '' : ''}w-fit lg:hidden flex  py-2 px-4 rounded-[20px]
-          mt-3 bg-[#0aafaa] text-white font-bold text-base `}>
+          my-3 bg-[#0aafaa] text-white font-bold text-base `}>
                          {isLoading ? (
                           
                                <Spinner role='status' animation='border' style={{
