@@ -6,12 +6,17 @@ import ProfileTable from "@/components/ProfileTable";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getSavedProducts } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
 
 interface props {
   searchParams: {
     page: number;
   }
 }
+
+export const metadata: Metadata = {
+  title: "Ma liste d’envie",
+};
 const WishlistPage = async({searchParams}:props) => {
 
   const { userId } = auth()
@@ -59,8 +64,10 @@ const WishlistPage = async({searchParams}:props) => {
                  </div>
             </div>
         </div>
-      
-        <PaginateCategories page={result.page} pages={result.pages} url='/browse-wishlist_products' />
+        <div className="my-3">
+            <PaginateCategories page={result.page} pages={result.pages}
+             url='/browse-wishlist_products' />
+         </div>
     </div>
     
     </>

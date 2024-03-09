@@ -7,9 +7,13 @@ import { getUserById } from "@/lib/actions/cart.actions";
 import { getMyOrders } from "@/lib/actions/orders.actions";
 import { getShipping } from "@/lib/actions/shipping.actions";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Table } from "react-bootstrap";
 
+export const metadata: Metadata = {
+  title: "Mon compte",
+};
 const ProfilePage = async() => {
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})

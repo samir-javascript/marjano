@@ -6,9 +6,13 @@ import ProfileTable from "@/components/ProfileTable";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getShipping } from "@/lib/actions/shipping.actions";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Table } from "react-bootstrap";
 
+export const metadata: Metadata = {
+  title: "Carnet d’adresses",
+};
 const CustomerAddressPage = async() => {
     const { userId } = auth()
     const user = await getUserById({clerkId:userId!})

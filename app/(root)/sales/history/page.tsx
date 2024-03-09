@@ -7,9 +7,13 @@ import ProfileTable from "@/components/ProfileTable"
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getMyOrders } from "@/lib/actions/orders.actions";
 import { auth } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+   title: "Historique des commandes",
+ };
 interface props {
    searchParams: {
      page: number;
@@ -109,7 +113,9 @@ const CustomerOrders = async({searchParams}:props) => {
                 ))}
              </div>
         </div>
-        <PaginateCategories page={result.page} pages={result.pages} url='/sales/history' />
+        <div className="my-3">
+           <PaginateCategories page={result.page} pages={result.pages} url='/sales/history' />
+        </div>
     </div>
   )
 }

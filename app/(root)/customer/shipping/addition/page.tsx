@@ -2,8 +2,12 @@ import ShippingForm from "@/components/forms/ShippingForm"
 import { getUserById } from "@/lib/actions/cart.actions"
 import { getShipping } from "@/lib/actions/shipping.actions"
 import { auth } from "@clerk/nextjs"
+import type { Metadata } from "next"
 import { MdOutlinePlace } from "react-icons/md"
-
+// <title>Modifier l’adresse</title>
+export const metadata: Metadata = {
+  title: "Ajoutez nouvelle shipping adresse",
+};
 const ShippingAddress = async() => {
   const {userId} = auth()
   const user = await getUserById({clerkId:userId!})

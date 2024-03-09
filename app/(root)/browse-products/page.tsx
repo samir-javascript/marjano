@@ -13,6 +13,12 @@ interface props {
      page: number;
   }
 }
+export async function generateMetadata({ searchParams }:props) {
+   return {
+        title: `${searchParams.categoryName} | marjanemall Maroc`,
+        description: `marjanemall Maroc - Découvrez la gamme de produits ${searchParams.categoryName} | Paiement en ligne ou à la livraison | Livraison partout au Maroc, Produits 100% authentiques, Satisfait ou remboursé, Offre nationale et internationale aux meilleurs prix.`
+      }
+    }
 
 const Page = async({searchParams}:props) => {
  
@@ -51,7 +57,10 @@ const Page = async({searchParams}:props) => {
           </div>
         
         </div>
-      <PaginateCategories page={result.page} pages={result.pages} categoryName={searchParams.categoryName} url="/browse-products" /> 
+      <div className='my-3'>
+             <PaginateCategories page={result.page} pages={result.pages} 
+              categoryName={searchParams.categoryName} url="/browse-products" /> 
+       </div>
   </div>
     )
 }

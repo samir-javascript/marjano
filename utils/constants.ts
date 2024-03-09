@@ -110,6 +110,7 @@ export const useCategoryNames = () => {
          ? 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/BANNIERES-N1_mobile2-gaming.webp'
          : 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/SLIDE-N1-2-gaming.webp',
      },
+     // <source media="(min-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bricolage/output_image_23_.webp">
      // <source media="(max-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/BANNIERES-N1_mobile2-gaming.webp">
      // <source media="(min-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/SLIDE-N1-2-gaming.webp">
      {
@@ -135,10 +136,11 @@ export const useCategoryNames = () => {
       id:"8989ef656565fdfd554dsoand45454545"
     },
     
+    
     {
        id: "0022559694998989dfdfdfd",
        image: 'https://www.marjanemall.ma/media/wysiwyg/category/HOMEPAGE/homepage_desktop_webp/output_image_8__1.webp',
-       name :'Bébé - Jouets',
+       name :"Bébé & Jouets",
        imageBanner: isMobile ? "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/BANNIERES-N1_mobile6-b_b_jouet_image_23_.webp" :  "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bebe/SLIDE-N1-6-b_b_joeut_image_24_.webp"
     },
 
@@ -155,7 +157,14 @@ export const useCategoryNames = () => {
      name :'vetements',
      imageBanner: isMobile ? 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_mode/output_image_26_.webp' : "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_mode/output_image_25_.webp"
   },
+  {
+    id: "002887iiuiuip2559694",
+    image: 'https://www.marjanemall.ma/media/wysiwyg/category/HOMEPAGE/homepage_desktop_webp/output_image_7__1.webp',
+    name :'Brico - Jardin - Animalerie',
+    imageBanner: isMobile ? 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bricolage/output_image_24_.webp' : "https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bricolage/output_image_23_.webp"
+ },
    ];
+   // <source media="(max-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bricolage/output_image_24_.webp">
  
    // Update the imageBanner property for each category based on isMobile
    const updatedCategoryNames = categoryNames.map(category => ({
@@ -199,17 +208,17 @@ export const useCategoryNames = () => {
  ];
 
 export  const maisonSmSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_72_.webp";
-export  const maisonUrl = "/browse-products/Maison%20-%20Cuisine%20-%20Deco";
+export  const maisonUrl = "/browse-products?categoryName=Maison%20-%20Cuisine%20-%20Deco";
 export  const maisonBigSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_72_.webp"
 export  const beautySmSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_69_.webp";
 export const beauryBigSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_69_.webp";
-export  const beauryUrl = "/browse-products/Beauté%20-%20Santé";
+export  const beauryUrl = "/browse-products?categoryName=Beauté%20-%20Santé";
 export  const techSmSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_70__1.webp";
 export const techBigSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_70__1.webp";
-export  const techUrl = "/browse-products/Tv%20-%20Son%20-%20Photo";
+export  const techUrl = "/browse-products?categoryName=Tv%20-%20Son%20-%20Photo";
 export  const bebeSmSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_71_.webp";
 export const bebeBigSrc = "https://www.marjanemall.ma/media/wysiwyg/category/output_image_71_.webp";
-export  const bebeUrl = "/browse-products/Bébé%20&%20Jouets";
+export  const bebeUrl = "/browse-products?categoryName=Bébé%20&%20Jouets";
 // <source media="(min-width:768px)" data-srcset="https://www.marjanemall.ma/media/wysiwyg/category/output_image_71_.webp" srcset="https://www.marjanemall.ma/media/wysiwyg/category/output_image_71_.webp">
 
 export const subCategories = [
@@ -585,7 +594,7 @@ export const useTechBrands = () => {
     id: "545458783212121656565989845454545e4fdfdfdf",
     icon: "/images/game.png",
     name: 'Electronics',
-    url:'/browse/products?categoryName=Electronics'
+    url:'/browse-products?categoryName=Electronics'
     
   },
  

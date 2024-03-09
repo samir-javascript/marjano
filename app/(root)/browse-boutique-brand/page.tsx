@@ -14,6 +14,15 @@ interface Props {
      page: number;
   }
 }
+
+export async function generateMetadata({ searchParams }:Props) {
+  
+  
+      return {
+        title: ` ${searchParams.brandName} | sur marjanemall Maroc`,
+        description: `marjanemall Maroc - Découvrez les produits de la marque ${searchParams.brandName} Maroc | Paiement sécurisé | Livraison partout au Maroc, Produits 100% authentiques, Satisfait ou remboursé, Offre nationale et internationale aux meilleurs prix.` ,
+      }
+    }
 const page = async({searchParams}:Props) => {
   const result = await getProductsByBrand({brandName: searchParams.brandName, page: searchParams.page ? +searchParams.page : 1})
   const { userId } = auth()

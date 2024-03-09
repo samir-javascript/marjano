@@ -12,7 +12,10 @@ import Cart from "@/database/models/cartModel";
 
 export async function getProducts(params:GetProductsParams) {
    try {
-     const { searchQuery } = params;
+     const { searchQuery, page = 1 } = params;
+     const pageSize = 12
+     const skipAmount = pageSize * (page - 1)
+     const count = await ProductModel.countDocuments()
      const query:FilterQuery<typeof ProductModel> = {}
       if(searchQuery) {
          query.$or =  [
@@ -23,11 +26,13 @@ export async function getProducts(params:GetProductsParams) {
       }
       await connectToDatabase()
       const products = await ProductModel.find(query)
+      .limit(pageSize)
+      .skip(skipAmount)
       if(!products) {
         throw new Error('No product was found')
       }
       
-      return {products}
+      return {products, page, pages:Math.ceil(count / pageSize)}
    } catch (error) {
        console.log(error)
        throw error;

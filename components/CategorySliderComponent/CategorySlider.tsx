@@ -67,7 +67,7 @@ const CategorySlider = () => {
     <div onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave} className='category-slider-wrapper max-w-[1400px]  mx-auto z-[99] mt-[-120px] '>
       <ScrollMenu LeftArrow={() => <LeftArrow isMouseOverMenu={isMouseOverMenu} />} RightArrow={() => <RightArrow isMouseOverMenu={isMouseOverMenu} />}>
-        {categories.map((item: Props) => (
+        {categories.slice(0,8).map((item: Props) => (
           <Link
             key={item.id}
             href={`/browse-products?categoryName=${item.name}`}

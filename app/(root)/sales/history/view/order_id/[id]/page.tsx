@@ -4,6 +4,7 @@ import ProfileTable from "@/components/ProfileTable";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getOrderById } from "@/lib/actions/orders.actions";
 import { auth } from "@clerk/nextjs";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
@@ -11,6 +12,13 @@ import { FaChevronLeft } from "react-icons/fa";
 interface props {
   params: {
     id: string
+  }
+}
+
+export async function generateMetadata({ params }:props) {
+  
+  return {
+    title: `Commande N°${params.id} `,
   }
 }
 const OrderDetails = async({params}:props) => {

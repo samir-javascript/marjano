@@ -2,11 +2,15 @@ import FormContainer from "@/components/FormContainer"
 import EditUserForm from "@/components/forms/EditUserForm"
 import { getUserById } from "@/lib/actions/cart.actions"
 import { auth } from "@clerk/nextjs"
+import type { Metadata } from "next"
 interface props {
   params: {
     id: string
   }
 }
+export const metadata: Metadata = {
+  title: "Modifier l'adresse",
+};
 const EditUserPage = async({params}:props) => {
    
    const { userId } = auth()

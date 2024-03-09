@@ -90,7 +90,8 @@ const EditProduct = ({product}:ProductProps) => {
                })
              })
              if(res.ok) {
-                router.push('/admin/productsList')
+                router.back()
+                router.refresh()
              }
         } catch (error) {
            console.log(error)

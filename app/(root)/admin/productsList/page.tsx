@@ -1,21 +1,26 @@
 import Btn from "@/components/Btn";
 import BtnDelete from "@/components/BtnDelete";
+import PaginateCategories from "@/components/Paginate";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getProducts } from "@/lib/actions/product.actions";
 import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button, Col, Row, Spinner, Table } from "react-bootstrap"
 import { FaEdit, FaTrash } from "react-icons/fa";
-
-const ProductsList = async() => {
+interface props {
+   searchParams: {
+      page: number;
+   }
+}
+const ProductsList = async({searchParams}:props) => {
   
+   
   
-  const products  = [] as any
   
   const truncate = (string:string, n:number) => {
     return string.length > n ? string.substring(0, n) + '...' : string;
   };
-  const result = await getProducts({})
+  const result = await getProducts({page: searchParams.page ? +searchParams.page : 1 })
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})
   return (
@@ -85,7 +90,10 @@ const ProductsList = async() => {
              
            </div>
        </Row>
-      
+       <div className='my-3'>
+             <PaginateCategories page={result.page} pages={result.pages} 
+               url="/admin/productsList" /> 
+       </div>
     </div>
   )
 }

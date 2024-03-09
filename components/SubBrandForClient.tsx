@@ -15,7 +15,7 @@ const SubBrandForClient = ({searchParams}:any) => {
   const query = Params.get('categoryName')
   
   const categoryBanner  = categoryNames.find((item:any) => item.name === searchParams.categoryName)
-  const bebeCategoryBanner = categoryNames.find((item:any)=> item.name === "Bébé - Jouets")
+  const bebeCategoryBanner = categoryNames.find((item:any)=> item.name === "Bébé & Jouets")
  
   return (
     <>

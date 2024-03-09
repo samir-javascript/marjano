@@ -8,6 +8,16 @@ interface Props {
     id: string;
   }
 }
+export async function generateMetadata({ params }:Props) {
+
+const result = await getProductDetails({
+  productId: params.id
+})
+    return {
+      title: ` marjanemall Maroc | ${result.products.name}`,
+      description: result.products.description,
+    }
+  }
 const page = async({params}:Props) => {
   const result = await getProductDetails({
     productId: params.id

@@ -4,9 +4,7 @@ import Link from "next/link"
 import Input from "./Input"
 import { FaRegHeart, FaUser } from "react-icons/fa";
 import { SignedIn, UserButton } from "@clerk/nextjs";
-
 import CartIcon from "./CartIcon";
-
 import AdminDropDown from "./AdminDropDown";
 import MobileHeader from "./MobileHeader";
 import MegaMenu from "./Drawer/MegaMenu";
