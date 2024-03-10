@@ -9,18 +9,24 @@ import { auth } from "@clerk/nextjs";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getShipping } from "@/lib/actions/shipping.actions";
 import type { Metadata } from "next";
+import PaginateCategories from "@/components/Paginate";
 
 export const metadata: Metadata = {
   title: "marjanemall Maroc Orders List",
 };
-const OrdersList = async() => {
+interface props {
+  searchParams: {
+    page: number;
+  }
+}
+const OrdersList = async({searchParams}:props) => {
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})
  
   const shipping = await getShipping({userId: user?.user?._id})
-  const result = await getAllOrders()
+  const result = await getAllOrders({page: searchParams.page ? +searchParams.page : 1 })
  
-  
+  console.log('RESULT ORDERS', result)
 
   return (
     <div className='max-w-[1400px] mx-auto '>
@@ -47,29 +53,29 @@ const OrdersList = async() => {
                 </tr>
               </thead>
               <tbody>
-                {result.map((order:any) => (
+                {result.orders.map((order:any) => (
                   <tr key={order._id}>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order._id}</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.userId?.name}</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.shippingAddress.phoneNumber || shipping.phoneNumber}  </td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order?.userId?.email || "" }</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>{order._id}</td>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>{order?.userId?.name}</td>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>{order.shippingAddress.phoneNumber || shipping.phoneNumber}  </td>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>{order?.userId?.email || "" }</td>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>
                       {order.createdAt ? order.createdAt.toISOString().substring(0, 10) : ""}
                       </td>
 
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.itemsPrice >= 400 ? order.itemsPrice + 0 : order.itemsPrice + 30} Dh</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>{order.paymentMethode}</td>
-                    <td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>{order.itemsPrice >= 400 ? order.itemsPrice + 0 : order.itemsPrice + 30} Dh</td>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>{order.paymentMethode}</td>
+                    <td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>
   {order.isPaid ? <FaCheck size={20} className="mx-auto" color="green" /> : <FaTimes size={20} className="mx-auto" color='red' />}
 </td>
-<td className='text-[14px] text-center font-bold text-[#333] whitespace-nowrap'>
+<td className='text-[14px] text-center font-medium text-[#333] whitespace-nowrap'>
   {order.isDelivered ? <FaCheck size={20} className="mx-auto" color="green" /> : <FaTimes size={20} className="mx-auto" color='red' />}
 </td>
 
                     
                        <td className="text-center whitespace-nowrap">
                          <Link className='text-[#00afaa] hover:underline text-[14px] 
-                         text-center font-bold  whitespace-nowrap'
+                         text-center font-medium  whitespace-nowrap'
                           href={`/sales/history/view/order_id/${order._id}`}>
                            View Order
                           </Link>
@@ -83,6 +89,9 @@ const OrdersList = async() => {
           </div>
         </div>
       </Row>
+      <div className="my-4">
+          <PaginateCategories page={result.page} pages={result.pages} url='/admin/ordersList' />
+      </div>
     </div>
   );
 };

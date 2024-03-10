@@ -2,15 +2,23 @@
 import OrderModel from "@/database/models/orderModel";
 import ProductModel from "@/database/models/productModel";
 import { connectToDatabase } from "@/database/mongodb";
-import { GetMyOrdersParams, GetOrderByIdParams } from "@/utils/shared";
+import { GetAllOrdersParams, GetMyOrdersParams, GetOrderByIdParams } from "@/utils/shared";
 import mongoose from "mongoose";
 
-export async function getAllOrders() {
+export async function getAllOrders(params:GetAllOrdersParams) {
+ 
     try {
-        await connectToDatabase()
+      await connectToDatabase()
+      const { page } = params;
+      const pageSize = 12;
+      const skipAmount = pageSize * (page! - 1);
+        const count = await OrderModel.countDocuments()
         const orders = await OrderModel.find({}).populate('userId', 'email name')
         .populate('orderItems.product')
-       return orders 
+        .sort({createdAt: -1})
+        .limit(pageSize)
+        .skip(skipAmount)
+       return  { orders, page , pages: Math.ceil(count / pageSize)}
    } catch (error) {
         console.log(error)
         throw error;

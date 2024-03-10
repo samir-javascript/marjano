@@ -63,6 +63,9 @@ export interface GetProductsParams {
     pageSize?: number;
     searchQuery?: string;
     filter?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    filterRating?: number;
 }
 export interface AddOrderItemsParams {
     paymentMethod: string;
@@ -90,6 +93,9 @@ export interface AddOrderItemsParams {
 
     ]
 
+}
+export interface GetAllOrdersParams {
+   page?: number;
 }
 export interface CreateUserParams {
     clerkId: string;

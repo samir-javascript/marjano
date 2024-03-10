@@ -1,4 +1,5 @@
 "use client"
+import qs from 'query-string'
 import { useEffect, useState } from "react"
 
 
@@ -719,3 +720,216 @@ export const brandsSideBar = [
 },
 
 ];
+
+
+export const filterCategories = [
+   {
+     label: "Maison - Cuisine - Deco",
+     value: "maison - cuisine - deco"
+   },
+   {
+    label: "Sport",
+    value: "sport"
+  },
+  {
+    label: "Electronics",
+    value: "electronics"
+  },
+  {
+    label: "Bébé & Jouets",
+    value: "bébé & jouets"
+  },
+  {
+    label: "Beauté - Santé",
+    value: "beauté - santé"
+  },
+  {
+    label: "vetements",
+    value: "vetements"
+  },
+  {
+    label: "Brico - Jardin - Animalerie",
+    value: "brico - jardin - animalerie"
+  },
+  {
+    label: "Electroménager",
+    value: "electroménager"
+  },
+ 
+]
+
+export const filterBrands = [
+  {
+    label: "Nike",
+    value: "nike"
+  },
+  {
+   label: "Adidas",
+   value: "adidas"
+ },
+ {
+   label: "Puma",
+   value: "puma"
+ },
+ {
+   label: "Marwa",
+   value: "marwa"
+ },
+
+ {
+   label: "Converse",
+   value: "converse"
+ },
+ {
+   label: "vetements",
+   value: "vetements"
+ },
+ {
+   label: "aeg",
+   value: "Aeg"
+ },
+ {
+   label: "Kitea",
+   value: "kitea"
+ },
+ {
+  label: "bosch",
+  value: "bosch"
+},
+{
+  label: "Tefal",
+  value: "tefal"
+},
+{
+  label: "Taurus",
+  value: "taurus"
+},
+{
+  label: "Bella maison",
+  value: "bella maison"
+},
+{
+  label: "Apple",
+  value: "apple"
+},
+{
+  label: "Sumsung",
+  value: "sumsung"
+},
+{
+  label: "Hp",
+  value: "hp"
+},
+{
+  label: "Canon",
+  value: "canon"
+},
+{
+  label: "Bose",
+  value: "bose"
+},
+{
+  label: "Jbl",
+  value: "jbl"
+},
+{
+  label: "Loreal",
+  value: "loreal"
+},
+{
+  label: "LA roche-posay",
+  value: "la roche-posay"
+},
+{
+  label: "Maybelline",
+  value: "maybelline"
+},
+{
+  label: "Uriage",
+  value: "uriage"
+},
+{
+  label: "Vichy",
+  value: "Vichy"
+},
+{
+  label: "Bose",
+  value: "bose"
+},
+{
+  label: "Dodot",
+  value: "dodot"
+},
+{
+  label: "Chicco",
+  value: "chicco"
+},
+{
+  label: "Mustela",
+  value: "mustela"
+},
+{
+  label: "Philips avent",
+  value: "philips avent"
+},
+{
+  label: "Medela",
+  value: "medela"
+},
+{
+  label: "Pampers",
+  value: "pampers"
+},
+
+]
+export const filterRating = [
+    {
+       value: "5",
+       label: "5",
+    },
+    {
+      value: "4",
+      label: "4",
+   },
+    {
+      value: "3",
+      label: "3",
+    },
+    {
+     value: "1",
+     label:"1"
+     }
+]
+interface URlQueryParams {
+  params: string;
+  key: string;
+  value: string | null;
+}
+export const formUrlQuery = ({params, key, value}:URlQueryParams)=> {
+  const currentUrl = qs.parse(params)
+  currentUrl[key] = value;
+  return qs.stringifyUrl({
+    url: window.location.pathname,
+    query: currentUrl
+  }, {
+    skipNull: true
+  })
+}
+
+interface RemoveURlQueryParams {
+params: string;
+keysToRemove: string[];
+
+}
+export const removeKeysFromQuery = ({params, keysToRemove}:RemoveURlQueryParams)=> {
+const currentUrl = qs.parse(params)
+keysToRemove.forEach((key)=> {
+   delete currentUrl[key]
+})
+return qs.stringifyUrl({
+  url: window.location.pathname,
+  query: currentUrl
+}, {
+  skipNull: true
+})
+}

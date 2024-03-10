@@ -4,12 +4,12 @@ import Image from 'next/image'
 
 const AccordionPart = () => {
   return (
-    <ul className='flex-1 lg:mt-0 mt-8'>
+    <ul className='flex-1 lg:mt-0 mt-8 mr-5'>
                  
                   <div className='flex lg:flex-col space-y-8 flex-wrap lg:gap-x-0 gap-x-4'>
-                  <h2 className='font-semibold text-[16px] mb-3 capitalize lg:block hidden '>Nos engagements</h2>
+                  <h2 className='font-semibold text-[16px]  mb-3 capitalize lg:block hidden '>Nos engagements</h2>
                   <li className='flex items-center gap-x-[40px] '>
-                      <div className='flex items-center space-x-2'>
+                      <div className='flex items-center space-x-2 mr-3'>
                            <Image  width={45} height={30}  className='w-[45px] h-auto object-contain ' src={'/images/badge1.png'} alt="product authentication 100% guaranteed in marjanemall maroc" />
                            <div className='flex flex-col gap-1'>
                               <p className='font-semibold text-slate-50 text-sm '>Produits 100%</p>
@@ -25,7 +25,7 @@ const AccordionPart = () => {
                       </div>
                   </li>
                   <li className='flex items-center gap-x-[40px]  '>
-                      <div className='flex items-center space-x-2'>
+                      <div className='flex items-center space-x-2 mr-3'>
                            <Image width={45} height={30}  className='w-[45px] h-auto object-contain ' src={'/images/badge2.png'} alt="client satisfaction icon" />
                            <div className='flex flex-col gap-1'>
                               <p className='font-semibold text-slate-50 text-sm '>Satisfait ou</p>

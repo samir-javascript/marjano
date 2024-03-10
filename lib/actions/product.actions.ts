@@ -1,44 +1,61 @@
 "use server"
 import { connectToDatabase } from "@/database/mongodb";
 import ProductModel from "@/database/models/productModel";
-import { CreateCartParams, CreateProductParams, CreateReviewParams, DeleteProductParams, GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams, GetProductsParams, GetRecommendedProduct, UpdateProductParams } from "@/utils/shared";
+import { CreateCartParams, CreateProductParams, CreateReviewParams, DeleteProductParams,
+   GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams,
+    GetProductsParams, GetRecommendedProduct, UpdateProductParams } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
 import cloudinary from "@/utils/cloudinary";
 import User from "@/database/models/userModel";
 import { FilterQuery } from "mongoose";
-
 import { NextResponse } from "next/server";
 import Cart from "@/database/models/cartModel";
 
-export async function getProducts(params:GetProductsParams) {
-   try {
-     const { searchQuery, page = 1 } = params;
-     const pageSize = 12
-     const skipAmount = pageSize * (page - 1)
+
+
+export async function getProducts(params: GetProductsParams) {
+  try {
+    const { searchQuery, page = 1, filter, filterRating } = params;
+    const pageSize = 12;
+    const skipAmount = pageSize * (page - 1);
+
+    const query: FilterQuery<typeof ProductModel> = {};
+
+    if (searchQuery || filter) {
+      query.$or = [
+        { name: { $regex: searchQuery || filter, $options: 'i' } },
+        { brand: { $regex: searchQuery || filter, $options: 'i' } },
+        { category: { $regex: searchQuery || filter, $options: 'i' } },
+      ];
+    }
+
+    if (filterRating) {
+      query.rating = Number(filterRating);
+    }
+
     
-     const query:FilterQuery<typeof ProductModel> = {}
-      if(searchQuery) {
-         query.$or =  [
-          { name: { $regex: searchQuery, $options: "i" } } ,
-           { brand: { $regex: searchQuery, $options: "i" } } ,
-          { category: { $regex: searchQuery, $options: "i" } },
-         ]
-      }
-      const count = searchQuery ?  await ProductModel.countDocuments(query) :  await ProductModel.countDocuments()
-      await connectToDatabase()
-      const products = await ProductModel.find(query)
+
+    const count = (searchQuery || filter)
+  ? await ProductModel.countDocuments(query)
+  : (filterRating
+    ? await ProductModel.countDocuments({ rating: Number(filterRating) })
+    : await ProductModel.countDocuments());
+
+    await connectToDatabase();
+
+    const products = await ProductModel.find(query)
       .limit(pageSize)
-      .skip(skipAmount)
-      if(!products) {
-        throw new Error('No product was found')
-      }
-      
-      return {products, page, pages:Math.ceil(count / pageSize)}
-   } catch (error) {
-       console.log(error)
-       throw error;
-   }
+      .skip(skipAmount);
+
+    return { products, page, pages: Math.ceil(count / pageSize) };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
+
+
+
 export async function getProductDetails(params:GetProductDetailsParams) {
      try {
        const { productId } = params;
