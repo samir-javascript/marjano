@@ -17,7 +17,7 @@ export default function Error({
   return (
     <html>
        <body>
-       <div className='h-full w-full flex flex-col items-center justify-center text-center'>
+       <div className='h-full w-full flex flex-col items-center pt-20 justify-center text-center'>
       <h2 className='sm:text-[30px] text-[22px] text-black font-medium mb-1 '>Something went wrong!</h2>
       <button
       className='outline-none border-none px-4 py-2.5 rounded-[20px] text-white bg-[#00affa] 

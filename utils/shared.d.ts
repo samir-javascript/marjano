@@ -1,5 +1,5 @@
 import { IUser } from "@/database/models/userModel";
-import mongoose, { ObjectId, mongo } from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 export interface GetAllUsersProps {
    page?: number;
    pageSize?:number;

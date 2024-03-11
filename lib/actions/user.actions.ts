@@ -1,5 +1,5 @@
 "use server"
-import ProductModel from "@/database/models/productModel";
+
 import User from "@/database/models/userModel";
 
 import { connectToDatabase } from "@/database/mongodb";
@@ -52,10 +52,16 @@ export async function updateUser(params:UpdateUserParams) {
   }
   export async function getAllUsers(params:GetAllUsersProps) {
      try {
-      const { page, pageSize } = params;
       await connectToDatabase()
+      const { page } = params;
+      const pageSize = 12;
+      const skipAmount = pageSize * (page! - 1)
+      const count = await User.countDocuments()
+      
       const users = await User.find({})
-      return { users }
+      .limit(pageSize)
+      .skip(skipAmount)
+      return { users, page, pages: Math.ceil(count / pageSize) }
        
      } catch (error) {
          console.log(error)

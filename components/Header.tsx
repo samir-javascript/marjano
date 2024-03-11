@@ -78,7 +78,7 @@ const result = user && initials.join('').toUpperCase();
                             avatarBox: 'h-10 w-10'
                         }, 
                         variables: {
-                            colorPrimary: '#ff7000'
+                            colorPrimary: '#00afaa'
                         }
                     }}
                    afterSignOutUrl="/"/>

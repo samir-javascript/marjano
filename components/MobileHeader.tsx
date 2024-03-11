@@ -12,14 +12,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navtoggle = () => {
-   console.log('I WAS CLICKED')
+   
 
 const menu = document.getElementById('menu-cart');
 
 menu?.classList.toggle('show-menu');
 document.body.classList.add('stop-scrolling');
-console.log('I WAS CLICKED AGAIN')
-// Add click event listener to the body
+
+
 
 };
 const MobileHeader = ({result, qty, user}:any) => {
@@ -29,7 +29,7 @@ const MobileHeader = ({result, qty, user}:any) => {
      const [mobileOpen,setMobileOpen] = useState(false)
      if(pathname === '/shipping' || pathname === '/payment') return null;
   return (
-    <header className="lg:hidden  flex flex-col  bg-[#0b4d54] !text-white pt-2 px-2 !overflow-hidden ">
+    <header className="lg:hidden  flex flex-col  bg-[#0b4d54] !text-white pt-2 px-2 !overflow-x-hidden ">
         <div className="flex items-center justify-between">
              <div className="flex items-center space-x-2">
                  <IoMenu onClick={()=> setMobileOpen(true)}   size={40} color='white' cursor='pointer' />

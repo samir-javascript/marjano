@@ -111,9 +111,6 @@ export const useCategoryNames = () => {
          ? 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/BANNIERES-N1_mobile2-gaming.webp'
          : 'https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/SLIDE-N1-2-gaming.webp',
      },
-     // <source media="(min-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_bricolage/output_image_23_.webp">
-     // <source media="(max-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/BANNIERES-N1_mobile2-gaming.webp">
-     // <source media="(min-width:768px)" srcset="https://www.marjanemall.ma/media/wysiwyg/offre_vedd/N1_informatique/SLIDE-N1-2-gaming.webp">
      {
        id: "45554489663333660000zzdsdsd9890",
        image: 'https://www.marjanemall.ma/media/wysiwyg/category/HOMEPAGE/homepage_desktop_webp/output_image_6__1.webp',
