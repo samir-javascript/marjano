@@ -79,7 +79,7 @@ const PaymentForm = ({shipping,user,result}:any) => {
   const handleCheckout = async()=> {
     setIsLoading(true)
      try {
-        const res = await fetch('/api/checkout', {
+        const res = await fetch('/api/handleStripeOrder', {
            method: 'POST',
            body: JSON.stringify({cartId: parsedResult?.cart?._id}),
 

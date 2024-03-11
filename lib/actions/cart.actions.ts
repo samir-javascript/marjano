@@ -1,18 +1,14 @@
 "use server"
 import Cart from "@/database/models/cartModel";
 import { connectToDatabase } from "@/database/mongodb";
-import { ClearCartParams, CreateCartParams, DeleteUserParams, GetTotalCartCount, GetUserByIdParams, GetUserCart } from "@/utils/shared";
-
+import { ClearCartParams, GetTotalCartCount, GetUserByIdParams, GetUserCart } from "@/utils/shared";
 import User from "@/database/models/userModel";
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import mongoose from "mongoose";
 export async function getUserById(params:GetUserByIdParams) {
   try {
      const { clerkId } = params;
      const user = await User.findOne({clerkId: clerkId})
-    
-    
      return{ user};
   } catch (error) {
     console.log(error)

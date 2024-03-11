@@ -3,9 +3,9 @@ import { connectToDatabase } from "@/database/mongodb";
 import ProductModel from "@/database/models/productModel";
 import { CreateCartParams, CreateProductParams, CreateReviewParams, DeleteProductParams,
    GetProductDetailsParams, GetProductsByBrandParams, GetProductsByCategoryParams,
-    GetProductsParams, GetRecommendedProduct, UpdateProductParams } from "@/utils/shared";
+    GetProductsParams, GetRecommendedProduct } from "@/utils/shared";
 import { revalidatePath } from "next/cache";
-import cloudinary from "@/utils/cloudinary";
+
 import User from "@/database/models/userModel";
 import { FilterQuery } from "mongoose";
 import { NextResponse } from "next/server";
@@ -143,67 +143,6 @@ export async function addToCart(params: CreateCartParams) {
      throw error;
    }
  }
-
-
- export async function editProduct(params: UpdateProductParams) {
-  try {
-    const {
-      productId, name, description,
-      price, prevPrice, path,
-      category, brand, productType,
-      position, countInStock, images
-    } = params;
-
-    await connectToDatabase(); // Replace with your implementation
-
-    // Get the product that you want to update
-    const product = await ProductModel.findById(productId);
-
-    if (product) {
-      let uploadedImages = [] as any;
-      if (images.length > 0) {
-        // Use Promise.all to handle multiple image uploads concurrently
-        uploadedImages = await Promise.all(images.map(async (image) => {
-          const result = await cloudinary.uploader.upload(image, {
-            upload_preset: 'marjane-mall',
-            transformation: [
-              {crop: "scale"},
-              {quality: "auto"},
-              {fetch_format: "auto"},
-            ]
-          });
-          return result.secure_url;
-        }));
-      }
-
-      // Update product properties
-      product.name = name;
-      product.description = description;
-      product.countInStock = countInStock;
-      product.price = price;
-      product.category = category;
-      product.brand = brand;
-      product.position = position;
-      product.prevPrice = prevPrice;
-      product.productType = productType;
-      product.images = uploadedImages;
-
-//  MONGODB_URL = mongodb+srv://soso:f5ZNG6Xo03ycgHEd@cluster0.dg5pqdw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-      
-      const updatedProduct = await product.save();
-      revalidatePath(path); 
-
-     return  {
-      product:updatedProduct
-     }
-    } else {
-      throw new Error('Product not found');
-    }
-  } catch (error) {
-    console.error('Error editing product:', error);
-    throw error;
-  }
-}
 
 export async function getNosCoupsDeCoursProducts() {
    try {

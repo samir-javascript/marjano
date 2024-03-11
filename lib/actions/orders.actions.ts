@@ -1,9 +1,9 @@
 "use server"
 import OrderModel from "@/database/models/orderModel";
-import ProductModel from "@/database/models/productModel";
+
 import { connectToDatabase } from "@/database/mongodb";
 import { GetAllOrdersParams, GetMyOrdersParams, GetOrderByIdParams } from "@/utils/shared";
-import mongoose from "mongoose";
+
 
 export async function getAllOrders(params:GetAllOrdersParams) {
  
@@ -34,7 +34,7 @@ export async function getOrderById(params:GetOrderByIdParams) {
       .populate('orderItems.product')
       
 
-    console.log('Order:', order);
+  
 
     return order;
   } catch (error) {
