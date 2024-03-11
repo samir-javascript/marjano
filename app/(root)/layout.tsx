@@ -46,7 +46,7 @@ export default async function RootLayout({
     userId: user?.user?._id
   });
   const result =  await getUserCart({
-    userId: user.user._id
+    userId: user?.user?._id
   })
   
   return (

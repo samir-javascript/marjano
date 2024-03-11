@@ -20,7 +20,7 @@ const UpdateCalculator = ({item,user}:any) => {
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
             
-            userId: parsedUser.user._id,
+            userId: parsedUser?.user?._id,
             productId: parsedItem.productId._id,
             path:pathname
         })
@@ -30,7 +30,7 @@ const UpdateCalculator = ({item,user}:any) => {
           }
           await addToCart({
             quantity: -1,
-            userId: parsedUser.user._id,
+            userId: parsedUser?.user?._id,
             productId: parsedItem.productId._id,
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
@@ -40,7 +40,7 @@ const UpdateCalculator = ({item,user}:any) => {
         }else if(type === 'remove') {
           await addToCart({
             quantity: -parsedItem.quantity,
-            userId: parsedUser.user._id,
+            userId: parsedUser?.user?._id,
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
             

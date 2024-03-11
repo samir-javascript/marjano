@@ -38,9 +38,9 @@ const UsersList = async() => {
               </thead>
               <tbody>
                    {result.users.map((user)=> (
-                      <tr key={user._id}>
+                      <tr key={user?._id}>
                           <td className='text-center whitespace-nowrap text-[15px] font-medium '>
-                             {user._id}
+                             {user?._id}
                           </td>
                           <td className='text-center whitespace-nowrap text-[15px] font-medium'>
                              {user.email}
@@ -56,7 +56,7 @@ const UsersList = async() => {
                              )}
                           </td>
                            <td className='text-center whitespace-nowrap text-[15px] font-medium'>
-                           <Link href={`/admin/user/${user._id}/edit`}>
+                           <Link href={`/admin/user/${user?._id}/edit`}>
                            <Button type='button' variant='light' className='btn-sm'>
                               <FaEdit color='green' />
                            </Button>
@@ -64,7 +64,7 @@ const UsersList = async() => {
                            
                          </td>
                          <td className='text-center whitespace-nowrap text-[15px] font-medium'>
-                            <BtnDeleteUser isAdmin={user.isAdmin} userId={user._id} />
+                            <BtnDeleteUser isAdmin={user?.isAdmin} userId={user?._id} />
                          </td>
                       </tr>
                    ))}

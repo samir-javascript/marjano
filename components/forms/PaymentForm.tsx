@@ -67,7 +67,7 @@ const PaymentForm = ({shipping,user,result}:any) => {
 
         await clearCart({
           path: pathname,
-          userId: parsedUser.user._id,
+          userId: parsedUser?.user?._id,
         });
 
         router.push(`/orders/${orderId}`);

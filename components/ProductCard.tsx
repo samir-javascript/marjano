@@ -33,7 +33,7 @@ const ProductCard = ({product, user}:any) => {
     try {
       await addToCart({
         quantity: 1,
-        userId: parsedUser.user._id,
+        userId: parsedUser?.user?._id,
         productId: parsedProduct._id,
         name: parsedProduct.name,
         price: parsedProduct.price,

@@ -22,7 +22,7 @@ interface props {
 const CustomerOrders = async({searchParams}:props) => {
   const { userId } = auth()
   const user = await getUserById({clerkId:userId!})
-   const result = await getMyOrders({userId:user.user._id, page: searchParams.page ? +searchParams.page : 1})
+   const result = await getMyOrders({userId:user.user?._id, page: searchParams.page ? +searchParams.page : 1})
    console.log('ORDERS ARE HERE', result)
   
  

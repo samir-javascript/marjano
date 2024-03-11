@@ -91,9 +91,9 @@ import Message from './Message';
   setCreatingReview(true)
     try { 
        await createReview({
-         userId: parsedUser.user._id,
+         userId: parsedUser?.user?._id,
          productId: parsedProduct._id,
-         name: parsedUser.user.name,
+         name: parsedUser?.user?.name,
          comment,
          rating,
          path: pathname
