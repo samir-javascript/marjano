@@ -3,7 +3,7 @@ import { connectToDatabase } from '@/database/mongodb'
 import OrderModel from '@/database/models/orderModel'
 import Stripe from 'stripe'
 
-import { clearCart, getUserById, getUserCart } from '@/lib/actions/cart.actions'
+import {  getUserById, getUserCart } from '@/lib/actions/cart.actions'
 import ProductModel from '@/database/models/productModel'
 import Cart from '@/database/models/cartModel'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -11,8 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 export const POST = async(req:Request)=> {
   await connectToDatabase()
- // const currentUrl = req.url;
- // const pathname = new URL(currentUrl, 'http://localhost:3000').pathname;
+ 
     
    
    try {

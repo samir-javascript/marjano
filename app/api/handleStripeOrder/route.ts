@@ -4,10 +4,10 @@ import { isValidObjectId } from 'mongoose';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2023-10-16',
   timeout:820000,
-});
+}): null;
 
 export const POST = async (req: Request) => {
   try {
@@ -44,7 +44,7 @@ export const POST = async (req: Request) => {
     if (!isValidObjectId(cartId)) {
       return NextResponse.json({ error: 'Invalid cart ID' }, { status: 401 });
     }
-       const customer = await stripe.customers.create({
+       const customer = await stripe?.customers.create({
           metadata:  {
               userId: user.user._id,
               clerkId: user.user.clerkId,
@@ -58,12 +58,12 @@ export const POST = async (req: Request) => {
       line_items,
       success_url: process.env.STRIPE_SUCCESS_URL,
       cancel_url: process.env.STRIPE_CANCEL_URL,
-      customer: customer.id
+      customer: customer?.id
     };
 
-    const checkoutSession = await stripe.checkout.sessions.create(params);
+    const checkoutSession = await stripe?.checkout.sessions.create(params);
     console.log('CHECKOUT SESSION')
-    return NextResponse.json({ url: checkoutSession.url });
+    return NextResponse.json({ url: checkoutSession?.url });
   } catch (error) {
     console.error('Error during checkout:', error);
     // Add additional error handling or return an error response to the client
