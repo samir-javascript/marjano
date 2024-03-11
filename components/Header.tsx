@@ -53,7 +53,7 @@ const result = user && initials.join('').toUpperCase();
                
                 <p className="text-base font-normal whitespace-nowrap">Mon favoris</p>
             </Link>
-                 <Link href={`/profile/${user.user.clerkId}`} 
+                 <Link href={`/profile/${user?.user?.clerkId}`} 
              className="flex no-underline flex-col items-center !text-white
               gap-1 cursor-pointer transition-all duration-150 hover:!text-[#80d4dd]">
                 <div className="relative">

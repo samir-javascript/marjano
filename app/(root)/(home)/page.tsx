@@ -39,7 +39,7 @@ export default async function Home() {
   const bonPlansProducts = await getBonPlansProducts()
 
   const { userId } = auth()
-  const user = userId && await getUserById({clerkId:userId});
+  const user =  await getUserById({clerkId:userId!});
   
  
   

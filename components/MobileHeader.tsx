@@ -38,7 +38,7 @@ const MobileHeader = ({result, qty, user}:any) => {
                  </Link>
              </div>
              <div  className="flex items-center space-x-3">
-             <Link href={`/profile/${user.user.clerkId}`} className="relative !text-white">
+             <Link href={`/profile/${user?.user?.clerkId}`} className="relative !text-white">
                    <FaUser size={24} />
                    {user && (
                       <div className="absolute top-[-10px] right-[-10px] bg-yellow-500
