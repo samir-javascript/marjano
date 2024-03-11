@@ -4,8 +4,9 @@ import { createShippingAddress } from "@/lib/actions/shipping.actions";
 import { countryOptions } from "@/utils/constants";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Select, { SingleValue } from 'react-select';
+import { useToast } from "../ui/use-toast";
 const ShippingForm = ({user, shipping,type}:any) => {
   const parsedUser = JSON.parse(user)
   const parsedShipping = JSON.parse(shipping) 
@@ -15,7 +16,7 @@ const ShippingForm = ({user, shipping,type}:any) => {
     const [postalCode, setPostalCode] = useState(parsedShipping?.postalCode || "")
     const [address, setAddress] = useState(parsedShipping?.address || '')
     const [loading,setLoading] = useState(false)
-   
+    const {toast} = useToast()
      const pathname = usePathname()
      const router = useRouter()
     
@@ -42,7 +43,9 @@ const ShippingForm = ({user, shipping,type}:any) => {
            }else {
             router.push('/payment')
            }
-         
+           return toast({
+            title: "Your shipping address has been created",
+          })
         } catch (error) {
             console.log(error)
         }

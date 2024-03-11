@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation"
  import { useState } from "react"
  import Select, { SingleValue } from 'react-select';
 import { editShipping } from "@/lib/actions/shipping.actions";
+import { useToast } from "../ui/use-toast";
 const EditShippingForm = ({shipping, user, type}:any) => {
     const parsedUser = JSON.parse(user)
  const parsedShipping = JSON.parse(shipping)
@@ -13,7 +14,7 @@ const EditShippingForm = ({shipping, user, type}:any) => {
    const [postalCode, setPostalCode] = useState( parsedShipping.postalCode || "")
    const [address, setAddress] = useState(parsedShipping.address || '')
    const [isLoading,setIsLoading] = useState(false)
-  
+    const { toast } = useToast()
     const pathname = usePathname()
     const router = useRouter()
     const handleCountryChange = (selectedOption: SingleValue<{ value: string; label: string; } | null>) => {
@@ -34,13 +35,16 @@ const EditShippingForm = ({shipping, user, type}:any) => {
                 phoneNumber,
                 userId: parsedUser.user._id
              })
+           
              if(type === 'payment') {
               router.push(`/payment`)
              } else {
               router.push(`/profile/${parsedUser.user.clerkId}`)
              }
-           
             setIsLoading(false)
+            return toast({
+              title: "Your shipping address has been updated",
+            })
          } catch (error) {
              console.log(error)
          }finally {

@@ -2,19 +2,21 @@
 import { usePathname, useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import { Spinner } from "react-bootstrap"
+import { useToast } from "../ui/use-toast"
+
 interface props {
     user: any,
     userId: string
 }
 
 const EditUserForm = ({user, userId}:props) => {
-    //const parsedUser = JSON.parse(user)
+   
   
     const [name, setName] = useState( user?.name || '')
     const [email, setEmail] = useState(user?.email || '')
     const [isAdmin, setIsAdmin] = useState( user?.isAdmin || false)
     const [editing, setEditing] = useState(false)
-     
+     const { toast } = useToast()
    
     const router = useRouter()
     const pathname = usePathname()
@@ -37,6 +39,9 @@ const EditUserForm = ({user, userId}:props) => {
             setEditing(false)
             router.push('/admin/usersList')
             router.refresh()
+            return toast({
+              title: "user info has been updated successfuly",
+            })
            }
            
         } catch (error) {

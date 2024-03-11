@@ -3,6 +3,7 @@ import { addToCart } from '@/lib/actions/product.actions';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { FaMinus, FaPlus, FaTrash } from 'react-icons/fa'
+import Loader from './Loader';
 
 const UpdateCalculator = ({item,user}:any) => {
  const pathname = usePathname()
@@ -10,24 +11,28 @@ const UpdateCalculator = ({item,user}:any) => {
    const parsedItem = JSON.parse(item)
   
     const parsedUser = JSON.parse(user)
+    const [ loading, setLoading] = useState(false)
     //const [quantity, setQuantity] = useState(parsedItem.quantity);
    
     const handleUpdateCart = async(type:string)=> {
       try {
+        setLoading(true)
         if(type === 'increase') {
           await addToCart({
             quantity: 1,
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
-            
             userId: parsedUser?.user?._id,
             productId: parsedItem.productId._id,
             path:pathname
         })
+          setLoading(false)
         }else if(type === 'decrease') {
+          
           if(parsedItem.quantity <= 1) {
             return;
           }
+          setLoading(true)
           await addToCart({
             quantity: -1,
             userId: parsedUser?.user?._id,
@@ -37,7 +42,9 @@ const UpdateCalculator = ({item,user}:any) => {
             
             path:pathname
         })
+        setLoading(false)
         }else if(type === 'remove') {
+          setLoading(true)
           await addToCart({
             quantity: -parsedItem.quantity,
             userId: parsedUser?.user?._id,
@@ -47,19 +54,25 @@ const UpdateCalculator = ({item,user}:any) => {
             productId: parsedItem.productId._id,
             path:pathname
         })
+        setLoading(false)
         }
        
        
        
      } catch (error) {
         console.log(error)
+     }finally {
+        setLoading(false)
      }
      
         
     }
   return (
     <>
-    <div className="sm:flex hidden flex-col justify-end items-end gap-2">
+    <div className="sm:flex hidden  flex-col justify-end items-end gap-2">
+        {loading && (
+           <Loader />
+        )}
     <FaTrash  onClick={()=> handleUpdateCart('remove')}  color="red" size={26} className="mx-3 cursor-pointer" />
     <div className="flex items-center justify-between mx-3 mb-2 border border-[#ddd] px-3 py-1 rounded-xl w-[140px]">
       <FaMinus

@@ -28,18 +28,6 @@ const PaymentForm = ({shipping,user,result}:any) => {
   ).toFixed(2);
  
 
-  
-
-  const totalBeforeAdjustment = parsedResult?.cart?.cartItems.reduce(
-    (acc: any, item: any) => acc + item.quantity * item.productId.price,
-    0
-  );
-
-  const adjustedTotal =
-    totalBeforeAdjustment < 400
-      ? totalBeforeAdjustment + 30
-      : totalBeforeAdjustment;
-
   const handlePaymentMethodChange = (method: string) => {
     setPaymentMethode(method);
   };
@@ -98,10 +86,11 @@ const PaymentForm = ({shipping,user,result}:any) => {
         })
         const  {error,url}  = await res.json()
         if(!res.ok) {
-            console.log(error)
+          throw error;
         }else {
            window.location.href = url
-        }
+           console.log(url)
+          }
         setIsLoading(false)
      } catch (error) {
         console.log(error)

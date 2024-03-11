@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react';
 import Link from 'next/link';
-
+import { useToast } from './ui/use-toast';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaShippingFast, FaTimes } from 'react-icons/fa';
 import Rating from './Rating';
@@ -29,7 +29,7 @@ import Message from './Message';
   const [rating,setRating] = useState(0)
   const [creatingReview,setCreatingReview] = useState(false)
   const [modalProduct, setModalProduct] = useState({ image: "", name: "" });
-  
+   const { toast } = useToast()
   const [ isPending, startTransition] = useTransition()
   const [loading,setIsLoading] = useState(false)
   const [thumbnailImages, setThumbnailImages] = useState<string[]>(parsedProduct?.images || []);
@@ -99,6 +99,11 @@ import Message from './Message';
          path: pathname
        })
        setCreatingReview(false)
+      
+       toast({
+        title: "your review has been added",
+      })
+      router.refresh()
     } catch (error) {
        console.log(error)
     }finally {

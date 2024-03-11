@@ -53,13 +53,12 @@ const CartSide = ({result,user}:any) => {
             userId: user.user._id,
             name: parsedItem.productId.name,
             price: parsedItem.productId.price,
-            
             productId: parsedItem.productId._id,
             path:pathname
         })
         setLoading(false)
-        setShowModal(false)
         router.refresh()
+        setShowModal(false)
         }
      } catch (error) {
         console.log(error)
@@ -172,10 +171,10 @@ const CartSide = ({result,user}:any) => {
       {Parsedresult?.cart?.cartItems.length !== 0 &&  <div className="sticky overflow-x-hidden bottom-0 z-[10] w-[400px]
        max-sm:w-[300px]  flex flex-col bg-white  right-0">
             <div className="flex justify-between p-4 bg-[#e3e3e3] ">
-                 <p className="font-bold text-base ">{Parsedresult?.cart?.cartItems.reduce((acc:any,item:any)=> acc + item.quantity, 0)} produits</p>
+                 <p className="font-bold sm:text-base text-sm ">{Parsedresult?.cart?.cartItems.reduce((acc:any,item:any)=> acc + item.quantity, 0)} produits</p>
                   <div className="flex flex-col items-center">
-                      <p className="font-bold text-base">Sous-total du panier</p>
-                      <p className="text-[#00afaa] font-semibold text-[20px]">
+                      <p className="font-bold sm:text-base text-sm">Sous-total du panier</p>
+                      <p className="text-[#00afaa] font-semibold sm:text-[20px] text-[14px] ">
                          {Parsedresult?.cart?.cartItems.reduce((acc:any, pro:any)=> acc + pro.quantity * parseFloat(pro.price), 0).toFixed(2)} Dh
                       </p>
                   </div>

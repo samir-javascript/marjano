@@ -11,6 +11,7 @@ import { getCartTotalCount, getUserById, getUserCart } from "@/lib/actions/cart.
 import Footer from "@/components/Footer";
 import MobileFooter from "@/components/MobileFooter";
 import CartSide from "@/components/CartSide";
+import { Toaster } from "@/components/ui/toaster";
 
 
 
@@ -63,6 +64,7 @@ export default async function RootLayout({
           <Analytics />
           <Footer />
           <MobileFooter />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

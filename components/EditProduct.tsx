@@ -3,6 +3,7 @@ import { ProductProps } from "@/utils/shared";
 import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState, useTransition } from "react";
 import Spinner from 'react-bootstrap/Spinner'
+import { useToast } from "./ui/use-toast";
 
 
 
@@ -25,7 +26,7 @@ const EditProduct = ({product}:ProductProps) => {
   const [category, setCategory] = useState("");
   const [productImages, setProductImages] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
- 
+  const { toast } = useToast()
  
  useEffect(() => {
     if (product) {
@@ -92,6 +93,9 @@ const EditProduct = ({product}:ProductProps) => {
              if(res.ok) {
                 router.back()
                 router.refresh()
+                return toast({
+                  title: "Product has been updated successfuly",
+                })
              }
         } catch (error) {
            console.log(error)

@@ -7,13 +7,14 @@ import { RiLockPasswordFill } from 'react-icons/ri'
 
 import Spinner from 'react-bootstrap/Spinner'
 import { editUserProfile } from '@/lib/actions/user.actions'
+import { useToast } from '../ui/use-toast'
 const UserForm = ({user}:any) => {
   const parsedUser = JSON.parse(user);
 
   const pathname = usePathname();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
+  const { toast } = useToast()
   // Initialize state with user data
   const [email, setEmail] = useState(parsedUser?.user?.email || '');
   const [name, setName] = useState(parsedUser?.user?.name || '');
@@ -40,23 +41,18 @@ const UserForm = ({user}:any) => {
        
       });
       router.push(`/profile/${parsedUser.user.clerkId}`)
+
       setIsLoading(false);
+      return toast({
+        title: "Your info had been updated",
+      })
     } catch (error) {
       console.error(error);
       setIsLoading(false);
     }
   };
 
- /* useEffect(() => {
-    // Update state when user prop changes
-    if (parsedUser) {
-      setName(parsedUser.user.name || '');
-      setEmail(parsedUser.user.email || '');
-      setUsername(parsedUser.user.username || '');
-    }
-  }, [parsedUser]);*/
-
-    
+ 
   return (
     <>
          <form onSubmit={handleSubmit} className="flex lg:flex-row  lg:mx-auto mx-3 lg:space-y-0 space-y-3 flex-col flex-1 w-full">
