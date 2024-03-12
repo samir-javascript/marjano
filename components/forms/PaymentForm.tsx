@@ -81,6 +81,9 @@ const PaymentForm = ({shipping,user,result}:any) => {
      try {
         const res = await fetch('/api/handleStripeOrder', {
            method: 'POST',
+           headers : {
+            'Content-Type': 'application/json',
+           },
            body: JSON.stringify({cartId: parsedResult?.cart?._id, clerkId: parsedUser.user.clerkId}),
 
         })

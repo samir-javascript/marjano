@@ -1,4 +1,4 @@
-import EditProduct from "@/components/EditProduct"
+import EditProduct from "@/components/forms/EditProduct"
 import FormContainer from "@/components/FormContainer"
 import { getProductDetails } from "@/lib/actions/product.actions"
 import Link from "next/link"

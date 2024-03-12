@@ -1,16 +1,16 @@
 "use client"
 import { ProductProps } from "@/utils/shared";
 import { usePathname, useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState, useTransition } from "react";
+import { FormEvent, useEffect, useState,  } from "react";
 import Spinner from 'react-bootstrap/Spinner'
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../ui/use-toast";
 
 
 
 
 
 const EditProduct = ({product}:ProductProps) => {
-    console.log('PRODUCT FOR EDIT', product)
+    
  
  const router = useRouter()
  const pathname = usePathname()
@@ -24,7 +24,7 @@ const EditProduct = ({product}:ProductProps) => {
   const [productType, setProductType] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
-  const [productImages, setProductImages] = useState([]);
+  const [productImages, setProductImages] = useState<string[]>([]);
   const [countInStock, setCountInStock] = useState(0);
   const { toast } = useToast()
  
@@ -35,13 +35,13 @@ const EditProduct = ({product}:ProductProps) => {
       setPrevPrice(product.prevPrice);
       setPosition(product.position);
 
-      //@ts-ignore
-      setProductType(product?.productType);
+      // @ts-ignore
+      setProductType(product.productType);
       setCategory(product.category);
       setPrice(product.price);
       setDescription(product.description);
       setCountInStock(product.countInStock);
-      // @ts-ignore
+     
       setProductImages(product.images);
     }
   }, [product]);
