@@ -2,7 +2,9 @@ import { getUserById, getUserCart } from '@/lib/actions/cart.actions';
 import { auth } from '@clerk/nextjs';
 import { isValidObjectId } from 'mongoose';
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
+
+
+import Stripe  from 'stripe';
 export const maxDuration = 300;
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-10-16',
@@ -12,7 +14,7 @@ export const POST = async (req: Request) => {
   const data = await req.json();
   try {
    // const { userId } = auth();
-    const user = await getUserById({ clerkId: data?.userId! });
+    const user = await getUserById({ clerkId: data?.clerkId! });
    console.log('USER FROM CHECKOUT HERE HERE ', user)
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized request' }, { status: 401 });
