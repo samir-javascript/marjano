@@ -1,7 +1,7 @@
 "use client"
 
 import { useCategoryNames, useClothesBrands } from "@/utils/constants"
-import { usePathname, useSearchParams } from "next/navigation"
+import {  useSearchParams } from "next/navigation"
 
 import MobileBrands from "./MobileBrands"
 import Brands from "./Brands"

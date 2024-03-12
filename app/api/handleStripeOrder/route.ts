@@ -4,9 +4,8 @@ import { isValidObjectId } from 'mongoose';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-10-16',
-  timeout:820000,
 }): null;
 
 export const POST = async (req: Request) => {
@@ -67,7 +66,7 @@ export const POST = async (req: Request) => {
   } catch (error) {
     console.error('Error during checkout:', error);
     // Add additional error handling or return an error response to the client
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(error, { status: 500 });
 
   }
 };
