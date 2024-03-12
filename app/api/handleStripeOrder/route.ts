@@ -65,8 +65,15 @@ export const POST = async (req: Request) => {
     return NextResponse.json({ url: checkoutSession?.url });
   } catch (error) {
     console.error('Error during checkout:', error);
-    // Add additional error handling or return an error response to the client
-    return NextResponse.json(error, { status: 500 });
-
+  
+    // Extract relevant information from the error object
+    // @ts-ignore
+    const errorMessage = error.message  || 'An error occurred during checkout.';
+  
+    // Log a more informative message
+    console.error(errorMessage);
+  
+    // Return a more user-friendly error response
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 };
