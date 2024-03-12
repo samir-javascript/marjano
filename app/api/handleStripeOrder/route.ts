@@ -9,9 +9,10 @@ const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SEC
 }): null;
 
 export const POST = async (req: Request) => {
+  const data = await req.json();
   try {
-    const { userId } = auth();
-    const user = await getUserById({ clerkId: userId! });
+   // const { userId } = auth();
+    const user = await getUserById({ clerkId: data?.userId! });
    console.log('USER FROM CHECKOUT HERE HERE ', user)
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized request' }, { status: 401 });
@@ -37,7 +38,7 @@ export const POST = async (req: Request) => {
       quantity: item.quantity,
     }));
     
-    const data = await req.json();
+   
     const cartId = data?.cartId as string;
 
     if (!isValidObjectId(cartId)) {
