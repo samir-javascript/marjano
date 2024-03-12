@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs';
 import { isValidObjectId } from 'mongoose';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-
+export const maxDuration = 300;
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-10-16',
 }): null;
