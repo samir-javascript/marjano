@@ -57,8 +57,11 @@ export async function clearCart(params:ClearCartParams) {
      const { userId , path } = params;
      await connectToDatabase()
     const cart = await Cart.findOne({userId}) 
-     cart.cartItems = [];
-     await cart.save()
+      if(cart) {
+         await Cart.findByIdAndDelete(cart._id)
+      }else {
+        throw new Error('Cart not found')
+      }
      revalidatePath(path)
 
    } catch (error) {

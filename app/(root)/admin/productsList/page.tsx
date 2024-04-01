@@ -10,7 +10,7 @@ import { Button, Col, Row,  Table } from "react-bootstrap"
 import { FaEdit } from "react-icons/fa";
 export const metadata: Metadata = {
    title: "marjanemall Maroc Orders List",
- };
+};
 interface props {
    searchParams: {
       page: number;

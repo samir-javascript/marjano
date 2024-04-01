@@ -3,6 +3,7 @@ import ProfileMobileTabs from "@/components/ProfileMobileTabs";
 import ProfileTable from "@/components/ProfileTable";
 import { getUserById } from "@/lib/actions/cart.actions";
 import { getOrderById } from "@/lib/actions/orders.actions";
+import { getShipping } from "@/lib/actions/shipping.actions";
 import { auth } from "@clerk/nextjs";
 
 import Image from "next/image";
@@ -29,7 +30,7 @@ const OrderDetails = async({params}:props) => {
   console.log('ORDER BY ID FROM ROUTE ID ', result)
   const user = await getUserById({clerkId:userId!})
   // Display loading message while data is being fetched
- 
+ const shipping = await getShipping({userId: user?.user?._id})
   const truncate = (string:string, n:number) => {
     return string.length > n ? string.substring(0, n) + '...' : string;
   };
@@ -129,9 +130,9 @@ const OrderDetails = async({params}:props) => {
                     <div  className="flex flex-col ">
                         <h4 className="font-bold text-[#4c4c4c] text-[15px] mb-2 ">Adresse de livraison</h4>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">Mr. {user.user.name}  </p>
-                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">{result.shippingAddress.city}, {result.shippingAddress.address}</p>
-                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result.shippingAddress.city}, </span>{result.shippingAddress.postalCode} {result.shippingAddress.country} </p>
-                        <p className="font-semibold text-[#00afaa] underline  text-[15px] mb-0.5 ">{result.shippingAddress.phoneNumber} </p>
+                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">{result.shippingAddress.city || shipping.city}, {result.shippingAddress.address || shipping.address}</p>
+                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result.shippingAddress.city || shipping.city}, </span>{result.shippingAddress.postalCode || shipping.postalCode} {result.shippingAddress.country || shipping.country} </p>
+                        <p className="font-semibold text-[#00afaa] underline  text-[15px] mb-0.5 ">{result.shippingAddress.phoneNumber || shipping.phoneNumber} </p>
                     </div>
                     <div  className="flex flex-col ">
                         <h4 className="font-bold text-[#4c4c4c] text-[15px] mb-2 ">Mode de livraison</h4>
@@ -141,9 +142,9 @@ const OrderDetails = async({params}:props) => {
                     <div  className="flex flex-col ">
                         <h4 className="font-bold text-[#4c4c4c] text-[15px] mb-2 ">Adresse de facturation</h4>
                         <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">Mr. {user.user.name} </p>
-                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">{result.shippingAddress.city}, {result.shippingAddress.address}</p>
-                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result?.shippingAddress?.city}, </span>{result.shippingAddress.postalCode} {result.shippingAddress.country} </p>
-                        <p className="font-semibold text-[#00afaa] underline  text-[15px] mb-0.5 ">{result.shippingAddress.phoneNumber} </p>
+                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 ">{result.shippingAddress.city || shipping.city}, {result.shippingAddress.address || shipping.address}</p>
+                        <p className="font-normal text-[#4c4c4c] text-[15px] mb-0.5 "><span className="uppercase">{result.shippingAddress.city || shipping.city}, </span>{result.shippingAddress.postalCode || shipping.postalCode} {result.shippingAddress.country || shipping.country} </p>
+                        <p className="font-semibold text-[#00afaa] underline  text-[15px] mb-0.5 ">{result.shippingAddress.phoneNumber || shipping.phoneNumber} </p>
                     </div>
                     <div  className="flex flex-col mr-3">
                         <h4 className="font-bold text-[#4c4c4c] text-[15px] mb-2 ">Informations de paiement</h4>

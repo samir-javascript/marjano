@@ -3,9 +3,12 @@ import { connectToDatabase } from '@/database/mongodb'
 import OrderModel from '@/database/models/orderModel'
 import Stripe from 'stripe'
 
-import {  getUserById, getUserCart } from '@/lib/actions/cart.actions'
+import {  clearCart, getUserById, getUserCart } from '@/lib/actions/cart.actions'
 import ProductModel from '@/database/models/productModel'
 import Cart from '@/database/models/cartModel'
+if(!process.env.STRIPE_SECRET_KEY) {
+   throw new Error('Stripe api key missing')
+}
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: "2023-10-16"
 })
@@ -66,20 +69,21 @@ export const POST = async(req:Request)=> {
                 product: order.productId._id,
             }))
           })
-         const updateProductPromises = result?.cart.cartItems.map(async(product:any)=> {
-            return await ProductModel.findByIdAndUpdate(product.productId._id, { $inc: { quantity: -product.quantity}})
+          console.log('PLEASE DELETE DATA CART NOW FOR ME')
+        //  const updateProductPromises = result?.cart.cartItems.map(async(product:any)=> {
+        //     return await ProductModel.findByIdAndUpdate(product.productId._id, { $inc: { quantity: -product.quantity}})
 
-          })
-          await Promise.all(updateProductPromises)
-         await Cart.findByIdAndDelete(customer.metadata.cartId)
+        //   })
+        //   await Promise.all(updateProductPromises)
+         await clearCart({userId: user?.user?._id,path:"/success"})
       }
      }
    } catch (error) {
     console.error(error)
     throw error;
-     return NextResponse.json({error:error}, {status: 500})
+    
    }
  
    
-   return NextResponse.json({})
+   return NextResponse.json({message:"Order compeleted"})
 }

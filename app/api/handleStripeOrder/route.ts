@@ -1,20 +1,22 @@
 import { getUserById, getUserCart } from '@/lib/actions/cart.actions';
-import { auth } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
+
 import { isValidObjectId } from 'mongoose';
 import { NextResponse } from 'next/server';
 
 
 import Stripe  from 'stripe';
-export const maxDuration = 300;
+
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-10-16',
 }): null;
 
 export const POST = async (req: Request) => {
   const data = await req.json();
+  const userFromClerk = await currentUser()
   try {
    // const { userId } = auth();
-    const user = await getUserById({ clerkId: data?.clerkId! });
+    const user = await getUserById({ clerkId: userFromClerk?.id! });
    console.log('USER FROM CHECKOUT HERE HERE ', user)
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized request' }, { status: 401 });
@@ -41,15 +43,15 @@ export const POST = async (req: Request) => {
     }));
     
    
-    const cartId = data?.cartId as string;
+    const cartId = result?.cart?._id;
 
     if (!isValidObjectId(cartId)) {
       return NextResponse.json({ error: 'Invalid cart ID' }, { status: 401 });
     }
        const customer = await stripe?.customers.create({
           metadata:  {
-              userId: user.user._id,
-              clerkId: user.user.clerkId,
+              userId: user?.user?._id,
+              clerkId: user?.user?.clerkId,
               cartId: cartId,
               type: "checkout"
           }

@@ -41,16 +41,17 @@ const CustomerOrders = async({searchParams}:props) => {
                 ): (
                     result.orders.map((order:any )=> (
                         <div className="border border-gray-400 flex flex-col  rounded-[20px]  " key={order._id}>
-                             <div className="flex items-center justify-between w-full gap-x-8 bg-[rgb(211,211,211)] rounded-tr-[20px] rounded-tl-[20px]  p-2 ">
+                             <div className="flex items-center justify-between w-full gap-x-8 bg-[rgb(211,211,211)]
+                              rounded-tr-[20px] rounded-tl-[20px]  p-2 ">
                                 <p className="lg:text-sm text-[12px] font-normal text-[#555] whitespace-nowrap lg:block hidden ">N° {order._id} </p>
                                 <div className=" flex flex-row w-full  items-center justify-between">
                                     <div className="flex lg:flex-row flex-1 justify-between flex-col">
-                                    <p className="font-extrabold text-[#4c4c4c] text-base text-[14px] ">Effectuée le  {order.createdAt ? order.createdAt.toISOString().substring(0, 10) : ""}</p>
-                                    <p className="font-normal text-sm lg:hidden block  ">Total: {(order?.itemsPrice).toFixed(2)} Dh </p>
+                                        <p className="font-extrabold text-[#4c4c4c] text-base text-[14px] ">Effectuée le  {order.createdAt ? order.createdAt.toISOString().substring(0, 10) : ""}</p>
+                                        <p className="font-normal text-sm lg:hidden block  ">Total: {(order?.itemsPrice).toFixed(2)} Dh </p>
                                     </div>
                                    {/* btn */}
                                      <div className="flex items-center gap-4">
-                                        <p className="font-normal text-sm lg:block hidden  ">Total: {(order?.itemsPrice).toFixed(2)} Dh </p>
+                                        <p className="font-normal text-sm lg:block hidden">Total: {(order?.itemsPrice).toFixed(2)} Dh </p>
                                         <Link href={`/sales/history/view/order_id/${order._id}`}>
                                            <button className="px-4 py-1.5 rounded-[15px] whitespace-nowrap text-white font-bold text-base bg-[#00afaa]  ">Detail</button>
                                         </Link>
