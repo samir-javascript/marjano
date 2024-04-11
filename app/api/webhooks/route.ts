@@ -69,14 +69,13 @@ export const POST = async(req:Request)=> {
                 product: order.productId._id,
             }))
           })
-          console.log('PLEASE DELETE DATA CART NOW FOR ME')
-        //  const updateProductPromises = result?.cart.cartItems.map(async(product:any)=> {
-        //     return await ProductModel.findByIdAndUpdate(product.productId._id, { $inc: { quantity: -product.quantity}})
-
-        //   })
-        //   await Promise.all(updateProductPromises)
-         await clearCart({userId: user?.user?._id,path:"/success"})
+        //   if (result?.cart?._id) {
+        //     await Cart.findOneAndDelete({ _id: result.cart._id });
+        // } else {
+        //     console.error("Cart not found for user:", user);
+        // }
       }
+    
      }
    } catch (error) {
     console.error(error)
@@ -85,5 +84,5 @@ export const POST = async(req:Request)=> {
    }
  
    
-   return NextResponse.json({message:"Order compeleted"})
+
 }

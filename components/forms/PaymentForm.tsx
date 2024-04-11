@@ -64,7 +64,7 @@ const PaymentForm = ({shipping,user,result}:any) => {
 
         await clearCart({
           path: pathname,
-          userId: parsedUser.user._id,
+          userId: parsedUser?.user?._id,
         });
 
         router.push(`/success/${orderId}`);
@@ -84,7 +84,7 @@ const PaymentForm = ({shipping,user,result}:any) => {
            headers : {
             'Content-Type': 'application/json',
            },
-           body: JSON.stringify({cartId: parsedResult?.cart?._id, clerkId: parsedUser.user.clerkId}),
+           body: JSON.stringify({cartId: parsedResult?.cart?._id, clerkId: parsedUser?.user?.clerkId}),
 
         })
         const  {error,url}  = await res.json()
